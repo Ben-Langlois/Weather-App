@@ -5,14 +5,26 @@ import $ from 'jquery';
 
 class App extends Component {
 
+  componentDidMount(){
+    
+
+
+    $('#submit').addEventListener("keyup", e =>{
+      if(e.key === "Enter" && $('#submit').value !== ""){
+          // handleSubmit(inputField.value);
+          console.log('submitted');
+      }
+  });
+  }
+
   handleSubmit = () => {
-    let location = $('#form=control').val();
+    let location = $('#form=control').val().trim();
 
     $.ajax({
       url: `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=ad46bca0cb15937504da590a8559bbae"`,
       type: 'GET',
       success: function (result){
-        
+        console.log('');
       },
       error: function (error){
 
@@ -40,7 +52,7 @@ class App extends Component {
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-sm">Location</span>
           </div>
-          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='eg. Toronto, Ontario'></input>
+          <input id='submit' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='eg. Toronto, Ontario'></input>
         </div>  
       </div>
     );
