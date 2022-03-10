@@ -1,48 +1,78 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './style.scss';
 import React, { Component } from 'react';
 import $ from 'jquery';
 
+/*
+  - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
+  - Recode keypress event l21
+  - Find other way to call apis, so error handling works
+*/
+
 class App extends Component {
+  constructor(props){
+    super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRetrieval = this.handleRetrieval.bind(this);
+  }
+
 
   componentDidMount(){
-    
-
-
-    $('#submit').addEventListener("keyup", e =>{
-      if(e.key === "Enter" && $('#submit').value !== ""){
-          // handleSubmit(inputField.value);
-          console.log('submitted');
+    $('#submit').keypress((event) => {
+      var keycode = (event.keyCode ? event.keyCode : event.which);    // **** seeing if its the enter key??? I gotta do somthn
+      if(keycode == '13'){
+        let location = $('#submit').val();                            // gather input
+        this.handleSubmit(location);                                  // find lat & long
+        console.log('asasd');                                          
       }
-  });
+    });
   }
 
-  handleSubmit = () => {
-    let location = $('#form=control').val().trim();
 
+  handleSubmit = (location) => {
+
+    // passing input through api to find coords
     $.ajax({
-      url: `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=ad46bca0cb15937504da590a8559bbae"`,
+      url: `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=ad46bca0cb15937504da590a8559bbae`,
       type: 'GET',
-      success: function (result){
-        console.log('');
-      },
-      error: function (error){
+      success: function (result){     // Retrieves object
+        console.log(result);
 
-      }
-    })
-  }
+        // gather needed values
 
-  onRetrieval = (coords) => {
-    $.ajax({
-      url: 'http://api.openweathermap.org/geo/1.0/direct?q={city name}&limit={limit}&appid=ad46bca0cb15937504da590a8559bbae',
-      type: 'GET',
-      success: function (result){
+        let obj = {
+          country: result[0].country,
+          state: result[0].state,
+          city: result[0].city,
+          lat: result[0].lat,
+          lon: result[0].lon
+        };
         
+        this.handleRetrieval(obj);      // pass through
       },
-      error: function (error){
-
+      error: function (error){        // Error handling **** doesn't really work yet
+        console.log('didnt work');
+        console.log(error);
       }
     })
+  }
+
+  handleRetrieval = (obj) => {
+    // store values for easy access
+    console.log(obj);
+
+
+    // $.ajax({
+    //   url: 'http://api.openweathermap.org/geo/1.0/direct?q={city name}&limit={limit}&appid=ad46bca0cb15937504da590a8559bbae',
+    //   type: 'GET',
+    //   success: function (result){
+        
+    //   },
+    //   error: function (error){
+
+    //   }
+    // })
   }
 
   render(){
@@ -52,7 +82,7 @@ class App extends Component {
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-sm">Location</span>
           </div>
-          <input id='submit' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='eg. Toronto, Ontario'></input>
+          <input id='submit' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='eg. Toronto, New York, Paris'></input>
         </div>  
       </div>
     );
