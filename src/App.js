@@ -33,6 +33,7 @@ class App extends Component {
   handleSubmit = (location) => {
 
     // passing input through api to find coords
+    // using jquery to make call
     $.ajax({
       url: `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=ad46bca0cb15937504da590a8559bbae`,
       type: 'GET',
@@ -40,16 +41,12 @@ class App extends Component {
         console.log(result);
 
         // gather needed values
-
-        let obj = {
+        this.handleRetrieval({          
           country: result[0].country,
           state: result[0].state,
           city: result[0].city,
           lat: result[0].lat,
-          lon: result[0].lon
-        };
-        
-        this.handleRetrieval(obj);      // pass through
+          lon: result[0].lon});      // pass through
       },
       error: function (error){        // Error handling **** doesn't really work yet
         console.log('didnt work');
@@ -58,7 +55,7 @@ class App extends Component {
     })
   }
 
-  handleRetrieval = (obj) => {
+  handleRetrieval = function (obj) {
     // store values for easy access
     console.log(obj);
 
