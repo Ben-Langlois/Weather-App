@@ -1,86 +1,103 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss';
-import React, { Component } from 'react';
+import React from 'react';
 import $ from 'jquery';
 
 /*
   - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
-  - Recode keypress event l21
-  - Find other way to call apis, so error handling works
+  - Recode keypress event
 */
 
-class App extends Component {
+class Dashboard extends React.Component {
+  // constructor(props){
+  //   super(props);
+
+  // }
+
+
+  render() {
+    return (
+      <div id='Dashboard'>
+        <div id='daily'>        
+          {this.props.city}
+        </div>
+        <div id='weekly'>
+          
+        </div>
+      </div>
+    );
+  }
+
+}
+
+
+class App extends React.Component {
   constructor(props){
     super(props);
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleRetrieval = this.handleRetrieval.bind(this);
-  }
+    this.state = {
+      city: '',
+      country: '',
+      current: [],
+      daily: [],
+      hourly: []
+    };
 
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
   componentDidMount(){
     $('#submit').keypress((event) => {
-      var keycode = (event.keyCode ? event.keyCode : event.which);    // **** seeing if its the enter key??? I gotta do somthn
+      var keycode = (event.keyCode ? event.keyCode : event.which);    // **** seeing if its the enter key??? I gotta do somthn diff
       if(keycode == '13'){
-        let location = $('#submit').val();                            // gather input
-        this.handleSubmit(location);                                  // find lat & long
-        console.log('asasd');                                          
+        this.handleSubmit();                                  // find lat & long
       }
     });
   }
 
+  handleSubmit = () => {
+    // Gather input
+    let location = $('#submit').val();                            // gather input
 
-  handleSubmit = (location) => {
+    // handling first API call
+    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=ad46bca0cb15937504da590a8559bbae`)
+      .then(response => response.json())
+      .then(data => {     // storing desired API data in state
+          this.setState({
+            city: data[0].name,
+            country: data[0].country,
+          })
 
-    // passing input through api to find coords
-    // using jquery to make call
-    $.ajax({
-      url: `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=ad46bca0cb15937504da590a8559bbae`,
-      type: 'GET',
-      success: function (result){     // Retrieves object
-        console.log(result);
+          return fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${data[0].lat}&lon=${data[0].lon}&exclude=alerts&appid=ad46bca0cb15937504da590a8559bbae`)
+      }) // Handling second API call
+      .catch(err => {
+        console.error('Call Failed', err)
+      })
+      .then(response => response.json())
+      .then(data => {     // storing desired API data in state
+        this.setState({
+          current: data.current,
+          daily: data.daily,
+          hourly: data.hourly
+        })
 
-        // gather needed values
-        this.handleRetrieval({          
-          country: result[0].country,
-          state: result[0].state,
-          city: result[0].city,
-          lat: result[0].lat,
-          lon: result[0].lon});      // pass through
-      },
-      error: function (error){        // Error handling **** doesn't really work yet
-        console.log('didnt work');
-        console.log(error);
-      }
-    })
-  }
-
-  handleRetrieval = function (obj) {
-    // store values for easy access
-    console.log(obj);
-
-
-    // $.ajax({
-    //   url: 'http://api.openweathermap.org/geo/1.0/direct?q={city name}&limit={limit}&appid=ad46bca0cb15937504da590a8559bbae',
-    //   type: 'GET',
-    //   success: function (result){
-        
-    //   },
-    //   error: function (error){
-
-    //   }
-    // })
-  }
+        console.log(this.state)
+      })
+      .catch(err => {
+        console.error('Call Failed', err)
+      })
+  };
 
   render(){
     return (
       <div>
-        <div class="input-group input-group-sm w-50 mb-3 mx-auto my-5">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Location</span>
+        <div id='input-box' className="input-group input-group-sm w-50 mb-3 mx-auto my-5">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="inputGroup-sizing-sm">Location</span>
           </div>
-          <input id='submit' type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='eg. Toronto, New York, Paris'></input>
+          <input id='submit' type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='eg. Toronto, New York, Paris'></input>
         </div>  
+        <Dashboard {...this.state}/>
       </div>
     );
   }
