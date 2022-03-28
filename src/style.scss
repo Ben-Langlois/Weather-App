@@ -1,21 +1,33 @@
-.App {
-    text-align: center;
+#Dashboard{
 
-    #Dashboard{
-        border: 5px red;    
-
-        #daily{
-           
-            
-        }
-
-        #weekly{
-
-
-        }
+    #daily{
+        width: 45vw;
+        height: 40vh;
+        margin: 5vh auto 0;
+        
+        // testing
+        border: 2px solid red;
     }
 
+    #weekly{
+        display: flex;
+        margin: 5vh 10vw;
+        
+        justify-content: space-between;
+
+        .card{
+            display: inline-flex;
+            width: clamp(20vw, 300px, 25vw);
+            
+
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+    }
 }
+
+
 
 #submit{
     font: bold 2.3vh/1.5vh Arial;
