@@ -11,13 +11,15 @@
 
     #weekly{
         display: flex;
-        margin: 5vh 10vw;
+        margin: 5vh auto 0;
 
         justify-content: space-between;
 
         .card{
             display: inline-flex;
             width: clamp(20vw, 300px, 25vw);
+            height: 35vh;
+            margin: 0 0.5vw;
             
 
             flex-direction: row;
