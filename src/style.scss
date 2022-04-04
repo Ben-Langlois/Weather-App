@@ -7,6 +7,16 @@
         
         // testing
         border: 2px solid red;
+
+        #icon{
+            display: inline-flex;
+            width: 50%;
+        }
+
+        #stats{
+            display: inline-flex;
+            width: 50%;
+        }
     }
 
     #weekly{

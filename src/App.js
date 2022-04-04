@@ -9,26 +9,36 @@ import $ from 'jquery';
 */
 
 class Dashboard extends React.Component {
-  // constructor(props){
-  //   super(props);
+  constructor(props){
+    super(props);
 
-  // }
+  }
+
+  componentDidUpdate(prevProps){
+    if(prevProps.city != this.props.city){
+      console.log('changed');
+    }
+  }
 
   render() {
     return (
       <div id='Dashboard'>
-        <div id='daily'>        
-          {this.props.city}
+        <div id='daily'>  
+          <div id='icon'>
+            &nbsp;
+          </div>      
+          <div id='stats'>  
+            <h2><b>{this.props.city}</b>&nbsp;{this.props.country}</h2>
+          </div>
         </div>
         <div id='weekly'>
-          {
-            // find way to loop through the first 7 instead of all 8
-            this.props.daily.map(() => {
+          { // use the currElement to get the object values
+            this.props.daily.map((currElement, index) => {
               return( // using a bootstrap card
                 <div class="card">
                   <img class="card-img-top" src="..." alt="Card image cap"></img>
                   <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">{index}</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                   </div>
@@ -81,7 +91,7 @@ class App extends React.Component {
             country: data[0].country,
           })
 
-          return fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${data[0].lat}&lon=${data[0].lon}&exclude=alerts&appid=ad46bca0cb15937504da590a8559bbae`)
+          return fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${data[0].lat}&lon=${data[0].lon}&units=metric&exclude=alerts&appid=ad46bca0cb15937504da590a8559bbae`)
       }) // Handling second API call
       .catch(err => {
         console.error('Call Failed', err)
