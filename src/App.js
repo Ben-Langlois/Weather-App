@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss';
 import React from 'react';
 import $ from 'jquery';
+// import svgs from './icons/icons';
 
 /*
   - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
