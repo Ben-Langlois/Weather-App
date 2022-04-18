@@ -10,13 +10,13 @@ import $ from 'jquery';
 */
 
 class Dashboard extends React.Component {
-  constructor(props){
-    super(props);
-
-  }
+  // constructor(props){
+  //   super(props);
+    
+  // }
 
   componentDidUpdate(prevProps){
-    if(prevProps.city != this.props.city){
+    if(prevProps.city !== this.props.city){  // logic determining what weather icon to use
       console.log('changed');
     }
   }
@@ -37,7 +37,7 @@ class Dashboard extends React.Component {
             this.props.daily.map((currElement, index) => {
               return( // using a bootstrap card
                 <div class="card">
-                  <img class="card-img-top" src="..." alt="Card image cap"></img>
+                  <img class="card-img-top" src="..." alt=''></img>
                   <div class="card-body">
                     <h5 class="card-title">{index}</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -53,7 +53,6 @@ class Dashboard extends React.Component {
   }
 
 }
-
 
 class App extends React.Component {
   constructor(props){
