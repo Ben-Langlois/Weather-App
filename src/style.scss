@@ -1,12 +1,15 @@
-#Dashboard{
+body{
+    background-color: rgb(249 250 251);
+}
 
+#Dashboard{
     #daily{
+        background-color: rgb(255, 255, 255);
         width: 45vw;
         height: 40vh;
         margin: 5vh auto 0;
-        
-        // testing
-        border: 2px solid red;
+        border: 1px solid rgba(0,0,0,.125);
+        border-radius: 0.25rem;
 
         #icon{
             display: inline-flex;
@@ -20,6 +23,7 @@
     }
 
     #weekly{
+        background-color: rgb(255, 255, 255);
         display: flex;
         margin: 5vh auto 0;
 

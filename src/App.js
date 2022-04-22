@@ -73,7 +73,7 @@ class App extends React.Component {
     $('#submit').keypress((event) => {
       var keycode = (event.keyCode ? event.keyCode : event.which);    // **** seeing if its the enter key??? I gotta do somthn diff
       if(keycode == '13'){
-        this.handleSubmit();                                  // find lat & long
+        this.handleSubmit();                                          // find lat & long
       }
     });
   }
@@ -113,7 +113,7 @@ class App extends React.Component {
 
   render(){
     return (
-      <div>
+      <div>  
         <div id='input-box' className="input-group input-group-sm w-50 mb-3 mx-auto my-5">
           <div className="input-group-prepend">
             <span className="input-group-text" id="inputGroup-sizing-sm">Location</span>
