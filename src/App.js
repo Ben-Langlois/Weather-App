@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss';
 import React from 'react';
 import $ from 'jquery';
+import * as icons from './icons/icons.js';
 // import svgs from './icons/icons';
 
 /*
@@ -26,10 +27,12 @@ class Dashboard extends React.Component {
       <div id='Dashboard'>
         <div id='daily'>  
           <div id='icon'>
-            &nbsp;
+            <img id='main' src={icons.clearDay} alt=''></img>
+
           </div>      
           <div id='stats'>  
             <h2><b>{this.props.city}</b>&nbsp;{this.props.country}</h2>
+
           </div>
         </div>
         <div id='weekly'>
@@ -37,7 +40,7 @@ class Dashboard extends React.Component {
             this.props.daily.map((currElement, index) => {
               return( // using a bootstrap card
                 <div class="card">
-                  <img class="card-img-top" src="..." alt=''></img>
+                  <img class="card-img-top" src='...' alt=''></img>
                   <div class="card-body">
                     <h5 class="card-title">{index}</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
