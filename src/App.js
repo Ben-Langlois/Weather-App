@@ -5,21 +5,54 @@ import $ from 'jquery';
 import * as icons from './icons/icons.js';
 // import svgs from './icons/icons';
 
+var ReactDOM = require('react-dom');
+
+
 /*
   - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
   - Recode keypress event
 */
 
 class Dashboard extends React.Component {
-  // constructor(props){
-  //   super(props);
-    
-  // }
+  constructor(props){
+    super(props);
+    this.weatherCheck = this.weatherCheck.bind(this);    
+  }
 
   componentDidUpdate(prevProps){
-    if(prevProps.city !== this.props.city){  // logic determining what weather icon to use
-      console.log('changed');
+    if(prevProps.city !== this.props.city){  // When city is input
+      // console.log('changed');
+      // this.weatherCheck();
     }
+  }
+  
+
+
+
+
+  // Determining weather for icons
+  weatherCheck(){
+    console.log('check');
+
+    // What time (day/night)
+    
+      // If sunny
+      if(this.state['current']['clouds'] <= 50){
+
+        ReactDOM.render(
+          <img id='main' src={icons.clearDay} alt=''/>,
+          document.getElementById('icon')
+        );
+      }
+        // change svg 
+
+      // If raining/snowing
+
+      // If windy
+
+      // If hot ??
+
+      //
   }
 
   render() {
@@ -27,7 +60,6 @@ class Dashboard extends React.Component {
       <div id='Dashboard'>
         <div id='daily'>  
           <div id='icon'>
-            <img id='main' src={icons.clearDay} alt=''></img>
 
           </div>      
           <div id='stats'>  
@@ -107,7 +139,7 @@ class App extends React.Component {
           hourly: data.hourly
         })
 
-        console.log(this.state)
+        console.log(this.state);
       })
       .catch(err => {
         console.error('Call Failed', err)
