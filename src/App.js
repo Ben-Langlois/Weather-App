@@ -23,6 +23,7 @@ class Dashboard extends React.Component {
     if(prevProps.city !== this.props.city){  // When city is input
       // console.log('changed');
       // this.weatherCheck();
+      console.log(this.props);
     }
   }
   
@@ -32,17 +33,17 @@ class Dashboard extends React.Component {
 
   // Determining weather for icons
   weatherCheck(){
-    console.log('check');
 
     // What time (day/night)
     
       // If sunny
-      if(this.state['current']['clouds'] <= 50){
+      if(this.props.current.clouds <= 50){
+        console.log('check');
 
-        ReactDOM.render(
-          <img id='main' src={icons.clearDay} alt=''/>,
-          document.getElementById('icon')
-        );
+        // ReactDOM.render(
+        //   <img id='main' src={icons.clearDay} alt=''/>,
+        //   document.getElementById('icon')
+        // );
       }
         // change svg 
 
@@ -60,7 +61,10 @@ class Dashboard extends React.Component {
       <div id='Dashboard'>
         <div id='daily'>  
           <div id='icon'>
-
+            {
+              // Create component OR just inline function to return??
+            }
+          
           </div>      
           <div id='stats'>  
             <h2><b>{this.props.city}</b>&nbsp;{this.props.country}</h2>
