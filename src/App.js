@@ -32,19 +32,22 @@ class Dashboard extends React.Component {
 
 
   // Determining weather for icons
-  weatherCheck(){
+  weatherCheck(current, daily){
+
+    console.log('check');
+    console.log(current.clouds);
 
     // What time (day/night)
     
       // If sunny
-      if(this.props.current.clouds <= 50){
-        console.log('check');
+      // if(this.props.current.clouds <= 50){
+      //   console.log('check');
 
-        // ReactDOM.render(
-        //   <img id='main' src={icons.clearDay} alt=''/>,
-        //   document.getElementById('icon')
-        // );
-      }
+      //   // ReactDOM.render(
+      //   //   <img id='main' src={icons.clearDay} alt=''/>,
+      //   //   document.getElementById('icon')
+      //   // );
+      // }
         // change svg 
 
       // If raining/snowing
@@ -63,6 +66,13 @@ class Dashboard extends React.Component {
           <div id='icon'>
             {
               // Create component OR just inline function to return??
+
+
+              this.weatherCheck(this.props.current, this.props.daily).then(
+                () => {
+                  console.log('then');
+                }
+              )
             }
           
           </div>      
@@ -75,12 +85,12 @@ class Dashboard extends React.Component {
           { // use the currElement to get the object values
             this.props.daily.map((currElement, index) => {
               return( // using a bootstrap card
-                <div class="card">
-                  <img class="card-img-top" src='...' alt=''></img>
-                  <div class="card-body">
-                    <h5 class="card-title">{index}</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <div className="card">
+                  <img className="card-img-top" src='...' alt=''></img>
+                  <div className="card-body">
+                    <h5 className="card-title">{index}</h5>
+                    <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
                   </div>
                 </div>
               )
@@ -100,7 +110,7 @@ class App extends React.Component {
     this.state = {
       city: '',
       country: '',
-      current: [],
+      current: {},
       daily: [],
       hourly: []
     };
@@ -143,7 +153,7 @@ class App extends React.Component {
           hourly: data.hourly
         })
 
-        console.log(this.state);
+        // console.log(this.state);
       })
       .catch(err => {
         console.error('Call Failed', err)
