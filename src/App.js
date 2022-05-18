@@ -13,6 +13,39 @@ var ReactDOM = require('react-dom');
   - Recode keypress event
 */
 
+
+class DailyIcon extends React.Component {
+  constructor(props){
+    super(props);
+
+  }
+
+  // componentDidUpdate(prevProps){
+  //   if(prevProps !== this.props){
+  //     console.log(this.props)
+
+  //   }
+  // }
+
+  render() {
+    return (
+      <div id='daily'>  
+        <div id='icon'>
+
+        &nbsp;
+        </div>      
+        <div id='stats'>  
+          <h2><b>{this.props.clouds}</b>&nbsp;{this.props.country}</h2>
+
+        </div>
+      </div>
+    );
+  }
+
+
+
+}
+
 class Dashboard extends React.Component {
   constructor(props){
     super(props);
@@ -62,25 +95,7 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div id='Dashboard'>
-        <div id='daily'>  
-          <div id='icon'>
-            {
-              // Create component OR just inline function to return??
-
-
-              this.weatherCheck(this.props.current, this.props.daily).then(
-                () => {
-                  console.log('then');
-                }
-              )
-            }
-          
-          </div>      
-          <div id='stats'>  
-            <h2><b>{this.props.city}</b>&nbsp;{this.props.country}</h2>
-
-          </div>
-        </div>
+        <DailyIcon current={this.props.current}/>
         <div id='weekly'>
           { // use the currElement to get the object values
             this.props.daily.map((currElement, index) => {
