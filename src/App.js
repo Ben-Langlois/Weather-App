@@ -2,10 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss';
 import React from 'react';
 import $ from 'jquery';
-import * as icons from './icons/icons.js';
-// import svgs from './icons/icons';
-
-var ReactDOM = require('react-dom');
+// import * as icons from './icons/icons.js';
+// var ReactDOM = require('react-dom');
 
 
 /*
@@ -17,16 +15,31 @@ var ReactDOM = require('react-dom');
 class DailyIcon extends React.Component {
   constructor(props){
     super(props);
-
+    this.state = {
+      current: this.props.current
+    };
   }
 
-  // componentDidUpdate(prevProps){
-  //   if(prevProps !== this.props){
-  //     console.log(this.props)
+  componentDidUpdate(prevProps){
+    if(prevProps !== this.props){
+      console.log(this.props.current) // values are in prop storage
 
-  //   }
+      console.log(this.state.current) // but not in state??
+
+    }
+  }
+
+  // componentDidMount(){
+  //   $('#submit').keypress((event) => {
+  //     var keycode = (event.keyCode ? event.keyCode : event.which);    // **** seeing if its the enter key??? I gotta do somthn diff
+  //     if(keycode == '13'){
+  //       // this.handleSubmit();                                          // find lat & long
+
+  //       // to test if state is being passed properly
+  //       console.log(this.props.city)
+  //     }
+  //   });
   // }
-
   render() {
     return (
       <div id='daily'>  
@@ -35,7 +48,7 @@ class DailyIcon extends React.Component {
         &nbsp;
         </div>      
         <div id='stats'>  
-          <h2><b>{this.props.clouds}</b>&nbsp;{this.props.country}</h2>
+          <h2><b>{this.props.city}</b>&nbsp;{this.props.country}</h2>
 
         </div>
       </div>
@@ -52,13 +65,13 @@ class Dashboard extends React.Component {
     this.weatherCheck = this.weatherCheck.bind(this);    
   }
 
-  componentDidUpdate(prevProps){
-    if(prevProps.city !== this.props.city){  // When city is input
-      // console.log('changed');
-      // this.weatherCheck();
-      console.log(this.props);
-    }
-  }
+  // componentDidUpdate(prevProps){
+  //   if(prevProps.city !== this.props.city){  // When city is input
+  //     // console.log('changed');
+  //     // this.weatherCheck();
+  //     console.log(this.props);
+  //   }
+  // }
   
 
 
@@ -93,9 +106,12 @@ class Dashboard extends React.Component {
   }
 
   render() {
+
+    const props = {current: this.props.current, city: this.props.city, country: this.props.country}
+
     return (
-      <div id='Dashboard'>
-        <DailyIcon current={this.props.current}/>
+      <div id='Dashboard'>{/*current={this.props.current} city={this.props.city} country={this.props.country}*/}    
+        <DailyIcon {...props} />
         <div id='weekly'>
           { // use the currElement to get the object values
             this.props.daily.map((currElement, index) => {
