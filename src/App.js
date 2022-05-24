@@ -22,9 +22,25 @@ class DailyIcon extends React.Component {
 
   componentDidUpdate(prevProps){
     if(prevProps !== this.props){
-      console.log(this.props.current) // values are in prop storage
+      // console.log(this.props.current) // values are in prop storage
 
-      console.log(this.state.current) // but not in state??
+      const current = this.props.current,        // trying to get weather object from within the [0] in the weather sub obj
+            weather = current.weather,           // currently throws error saying unreadable
+            weatherObj = weather[0].id;
+      console.log(weatherObj);
+      // this.setState({                         // All temps C°
+      //   time: current.dt,                     // current time
+      //   clouds: current.clouds,               
+      //   feelsLike: current.feels_like,        
+      //   humidity: current.humidity,
+      //   pressure: current.pressure,
+      //   sunrise: current.sunrise,
+      //   sunset: current.sunset,
+      //   temp: current.temp,        
+
+      // });
+
+      // console.log(this.state.current) // but not in state??
 
     }
   }
@@ -32,7 +48,7 @@ class DailyIcon extends React.Component {
   // componentDidMount(){
   //   $('#submit').keypress((event) => {
   //     var keycode = (event.keyCode ? event.keyCode : event.which);    // **** seeing if its the enter key??? I gotta do somthn diff
-  //     if(keycode == '13'){
+  //     if(keycode == '13'){s
   //       // this.handleSubmit();                                          // find lat & long
 
   //       // to test if state is being passed properly
@@ -107,7 +123,7 @@ class Dashboard extends React.Component {
 
   render() {
 
-    const props = {current: this.props.current, city: this.props.city, country: this.props.country}
+    const props = {current: {...this.props.current}, city: this.props.city, country: this.props.country}
 
     return (
       <div id='Dashboard'>{/*current={this.props.current} city={this.props.city} country={this.props.country}*/}    
