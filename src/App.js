@@ -5,6 +5,10 @@ import $ from 'jquery';
 // import * as icons from './icons/icons.js';
 // var ReactDOM = require('react-dom');
 
+/* APIs Used
+  https://openweathermap.org/api/one-call-api 
+
+*/
 
 /*
   - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
@@ -13,21 +17,29 @@ import $ from 'jquery';
 
 
 class DailyIcon extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      current: this.props.current
-    };
-  }
+  // constructor(props){
+  //   super(props);
+  //   this.state = {
+  //     current: this.props.current
+  //   };
+  // }
 
   componentDidUpdate(prevProps){
     if(prevProps !== this.props){
       // console.log(this.props.current) // values are in prop storage
 
-      const current = this.props.current,        // trying to get weather object from within the [0] in the weather sub obj
-            weather = current.weather,           // currently throws error saying unreadable
-            weatherObj = weather[0].id;
-      console.log(weatherObj);
+      // const current = this.props.current,        // trying to get weather object from within the [0] in the weather sub obj
+      //       weather = current.weather,           // currently throws error saying unreadable
+      //       weatherObj = weather[0].id;
+
+      // parse w JSON
+      const obj = this.props.current,             // thought it would allow to search multi level                                      // for some reason the given arr isnt iterable???
+            weather = obj.weather;      
+
+      // flatten JSON
+
+
+      console.log(this.props);
       // this.setState({                         // All temps C°
       //   time: current.dt,                     // current time
       //   clouds: current.clouds,               
@@ -81,13 +93,13 @@ class Dashboard extends React.Component {
     this.weatherCheck = this.weatherCheck.bind(this);    
   }
 
-  // componentDidUpdate(prevProps){
-  //   if(prevProps.city !== this.props.city){  // When city is input
-  //     // console.log('changed');
-  //     // this.weatherCheck();
-  //     console.log(this.props);
-  //   }
-  // }
+  componentDidUpdate(prevProps){
+    if(prevProps.city !== this.props.city){  // When city is input
+      // console.log('changed');
+      // this.weatherCheck();
+      console.log(this.props.current);
+    }
+  }
   
 
 
@@ -127,8 +139,17 @@ class Dashboard extends React.Component {
 
     return (
       <div id='Dashboard'>{/*current={this.props.current} city={this.props.city} country={this.props.country}*/}    
-        <DailyIcon {...props} />
-        <div id='weekly'>
+      <div id='daily'>  
+        <div id='icon'>
+
+        &nbsp;
+        </div>      
+        <div id='stats'>  
+          <h2><b>{this.props.city}</b>&nbsp;{this.props.country}</h2>
+
+        </div>
+      </div>        
+      <div id='weekly'>
           { // use the currElement to get the object values
             this.props.daily.map((currElement, index) => {
               return( // using a bootstrap card
@@ -176,7 +197,7 @@ class App extends React.Component {
 
   handleSubmit = () => {
     // Gather input
-    let location = $('#submit').val();                            // gather input
+    let location = $('#submit').val();                            // gather inputted city
 
     // handling first API call
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=ad46bca0cb15937504da590a8559bbae`)
@@ -195,7 +216,7 @@ class App extends React.Component {
       .then(response => response.json())
       .then(data => {     // storing desired API data in state
         this.setState({
-          current: data.current,
+          current: {...data.current},
           daily: data.daily,
           hourly: data.hourly
         })

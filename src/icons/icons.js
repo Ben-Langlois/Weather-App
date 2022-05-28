@@ -1,3 +1,7 @@
+/*
+    https://github.com/basmilius/weather-icons
+*/
+
 // Dynamic icons
 import clearDay from './Dynamic/clear-day.svg';                 // pls sort these eventually
 import clearNight from './Dynamic/clear-night.svg';
