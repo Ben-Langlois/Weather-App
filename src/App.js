@@ -82,9 +82,6 @@ class DailyIcon extends React.Component {
       </div>
     );
   }
-
-
-
 }
 
 class Dashboard extends React.Component {
@@ -97,13 +94,9 @@ class Dashboard extends React.Component {
     if(prevProps.city !== this.props.city){  // When city is input
       // console.log('changed');
       // this.weatherCheck();
-      console.log(this.props.current);
+      console.log(this.props.id);
     }
   }
-  
-
-
-
 
   // Determining weather for icons
   weatherCheck(current, daily){
@@ -178,9 +171,19 @@ class App extends React.Component {
     this.state = {
       city: '',
       country: '',
-      current: {},
       daily: [],
-      hourly: []
+      hourly: [],
+      // main: '',
+      // desc: '',
+      // dt: '',
+      // feels_like: '',
+      // humidity: '',
+      // pressure: '',
+      // sunrise: '',
+      // sunset: '',
+      // temp: '',
+      // uvi: '',
+      // windspeed: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -215,13 +218,47 @@ class App extends React.Component {
       })
       .then(response => response.json())
       .then(data => {     // storing desired API data in state
+
+        // pooling values in an object so they're readable and state isnt just a top level eval 
+        const propObj = {current: {...data.current}, daily: [...data.daily], hourly: [...data.hourly]};
+
+        // Should pull individual values here and pass them as raw props to avoid empty values
+        /*
+          main (from weather obj)
+          desc (from weather obj)
+          dt
+          feels_like
+          humidity
+          pressure
+          sunrise
+          sunset
+          temp
+          uvi?
+          windspeed
+
+          daily
+          hourly
+        */
+        
+
         this.setState({
-          current: {...data.current},
-          daily: data.daily,
-          hourly: data.hourly
+          main: propObj.current.weather[0].main,
+          desc: propObj.current.weather[0].desc,
+          dt: propObj.current.dt,
+          feelsLike: propObj.current.feels_like,
+          humidity: propObj.current.humidity,
+          pressure: propObj.current.pressure,
+          sunrise: propObj.current.sunrise,
+          sunset: propObj.current.sunset,
+          temp: propObj.current.temp,
+          uvi: propObj.current.uvi,
+          windspeed: propObj.current.windspeed,
+
+          daily: propObj.daily,
+          hourly: propObj.hourly
         })
 
-        // console.log(this.state);
+        console.log(this.state.id);        // state is successfully stored with complete values
       })
       .catch(err => {
         console.error('Call Failed', err)
