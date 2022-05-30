@@ -5,84 +5,21 @@ import $ from 'jquery';
 // import * as icons from './icons/icons.js';
 // var ReactDOM = require('react-dom');
 
-/* APIs Used
-  https://openweathermap.org/api/one-call-api 
+/*  React Weather App
 
+    A react app, styled with mostly my own CSS/SASS, some Bootstrap components, and an open-source SVG library to display statistics of inputted city. Once city is inputted
+    the API is called and returns on object which we pull our desired values from for determination of the icons and display of said values.
+
+    APIs Used
+    https://openweathermap.org/api/one-call-api    
+
+    Must Do
+    - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
+    - Recode keypress event
+
+    Want To Do
+    - find way to be more specific in input, ie allow Paris, Texas instead of always getting Paris, France
 */
-
-/*
-  - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
-  - Recode keypress event
-*/
-
-
-class DailyIcon extends React.Component {
-  // constructor(props){
-  //   super(props);
-  //   this.state = {
-  //     current: this.props.current
-  //   };
-  // }
-
-  componentDidUpdate(prevProps){
-    if(prevProps !== this.props){
-      // console.log(this.props.current) // values are in prop storage
-
-      // const current = this.props.current,        // trying to get weather object from within the [0] in the weather sub obj
-      //       weather = current.weather,           // currently throws error saying unreadable
-      //       weatherObj = weather[0].id;
-
-      // parse w JSON
-      const obj = this.props.current,             // thought it would allow to search multi level                                      // for some reason the given arr isnt iterable???
-            weather = obj.weather;      
-
-      // flatten JSON
-
-
-      console.log(this.props);
-      // this.setState({                         // All temps C°
-      //   time: current.dt,                     // current time
-      //   clouds: current.clouds,               
-      //   feelsLike: current.feels_like,        
-      //   humidity: current.humidity,
-      //   pressure: current.pressure,
-      //   sunrise: current.sunrise,
-      //   sunset: current.sunset,
-      //   temp: current.temp,        
-
-      // });
-
-      // console.log(this.state.current) // but not in state??
-
-    }
-  }
-
-  // componentDidMount(){
-  //   $('#submit').keypress((event) => {
-  //     var keycode = (event.keyCode ? event.keyCode : event.which);    // **** seeing if its the enter key??? I gotta do somthn diff
-  //     if(keycode == '13'){s
-  //       // this.handleSubmit();                                          // find lat & long
-
-  //       // to test if state is being passed properly
-  //       console.log(this.props.city)
-  //     }
-  //   });
-  // }
-  render() {
-    return (
-      <div id='daily'>  
-        <div id='icon'>
-
-        &nbsp;
-        </div>      
-        <div id='stats'>  
-          <h2><b>{this.props.city}</b>&nbsp;{this.props.country}</h2>
-
-        </div>
-      </div>
-    );
-  }
-}
 
 class Dashboard extends React.Component {
   constructor(props){
@@ -94,41 +31,18 @@ class Dashboard extends React.Component {
     if(prevProps.city !== this.props.city){  // When city is input
       // console.log('changed');
       // this.weatherCheck();
-      console.log(this.props.id);
+      console.log(this.props.daily);
     }
   }
 
   // Determining weather for icons
   weatherCheck(current, daily){
+    // Switch case to check props.main ('cloudy', 'rainy', etc)
 
-    console.log('check');
-    console.log(current.clouds);
-
-    // What time (day/night)
-    
-      // If sunny
-      // if(this.props.current.clouds <= 50){
-      //   console.log('check');
-
-      //   // ReactDOM.render(
-      //   //   <img id='main' src={icons.clearDay} alt=''/>,
-      //   //   document.getElementById('icon')
-      //   // );
-      // }
-        // change svg 
-
-      // If raining/snowing
-
-      // If windy
-
-      // If hot ??
-
-      //
   }
 
   render() {
-
-    const props = {current: {...this.props.current}, city: this.props.city, country: this.props.country}
+    // const props = {current: {...this.props.current}, city: this.props.city, country: this.props.country}
 
     return (
       <div id='Dashboard'>{/*current={this.props.current} city={this.props.city} country={this.props.country}*/}    
@@ -138,7 +52,12 @@ class Dashboard extends React.Component {
         &nbsp;
         </div>      
         <div id='stats'>  
-          <h2><b>{this.props.city}</b>&nbsp;{this.props.country}</h2>
+          <div id=''>
+            <h2><b>{this.props.city}</b>&nbsp;{this.props.country}</h2><br/><br/>
+
+          </div>
+  
+          asasd
 
         </div>
       </div>        
@@ -168,7 +87,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {
+    this.state = {    // is it necessary to init these values if i dont have to for main etc...
       city: '',
       country: '',
       daily: [],
@@ -217,31 +136,12 @@ class App extends React.Component {
         console.error('Call Failed', err)
       })
       .then(response => response.json())
-      .then(data => {     // storing desired API data in state
+      .then(data => {     // store desired API data in state
 
         // pooling values in an object so they're readable and state isnt just a top level eval 
         const propObj = {current: {...data.current}, daily: [...data.daily], hourly: [...data.hourly]};
 
-        // Should pull individual values here and pass them as raw props to avoid empty values
-        /*
-          main (from weather obj)
-          desc (from weather obj)
-          dt
-          feels_like
-          humidity
-          pressure
-          sunrise
-          sunset
-          temp
-          uvi?
-          windspeed
-
-          daily
-          hourly
-        */
-        
-
-        this.setState({
+        this.setState({     // pulling from obj above 
           main: propObj.current.weather[0].main,
           desc: propObj.current.weather[0].desc,
           dt: propObj.current.dt,
@@ -258,7 +158,7 @@ class App extends React.Component {
           hourly: propObj.hourly
         })
 
-        console.log(this.state.id);        // state is successfully stored with complete values
+        console.log(this.state.main);        // state is successfully stored with complete values
       })
       .catch(err => {
         console.error('Call Failed', err)
