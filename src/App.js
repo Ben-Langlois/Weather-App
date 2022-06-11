@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss';
 import React from 'react';
 import $ from 'jquery';
-// import * as icons from './icons/icons.js';
+import * as icons from './icons/icons.js';
 // var ReactDOM = require('react-dom');
 
 /*  React Weather App
@@ -38,7 +38,7 @@ class Dashboard extends React.Component {
   // Determining weather for icons
   weatherCheck(current, daily){
     // Switch case to check props.main ('cloudy', 'rainy', etc)
-
+    return 
   }
 
   render() {
@@ -48,7 +48,7 @@ class Dashboard extends React.Component {
       <div id='Dashboard'>{/*current={this.props.current} city={this.props.city} country={this.props.country}*/}    
       <div id='daily'>  
         <div id='icon'>
-
+          <img src={this.weatherCheck()} alt=''></img>
         &nbsp;
         </div>      
         <div id='stats'>  
