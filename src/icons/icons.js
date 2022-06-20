@@ -11,6 +11,7 @@ import cloudy from './Dynamic/cloudy.svg';
 import drizzle from './Dynamic/drizzle.svg';
 import rain from './Dynamic/rain.svg';
 import thunderstorms from './Dynamic/thunderstorms.svg';
+import snow from './Dynamic/snow.svg';
 
 import fogDay from './Dynamic/fog-day.svg';
 import fogNight from './Dynamic/fog-night.svg';
@@ -18,4 +19,4 @@ import fogNight from './Dynamic/fog-night.svg';
 
 // Static icons
 
-export {clearDay, clearNight, overcast, cloudy, drizzle, rain, thunderstorms, fogDay, fogNight};
+export {clearDay, clearNight, overcast, cloudy, drizzle, rain, thunderstorms, snow, fogDay, fogNight};

@@ -14,6 +14,13 @@ body{
         #icon{
             display: inline-flex;
             width: 50%;
+            height: 100%;
+            border: 5px solid red;
+
+            img{
+                height: 35%;
+                width: 35%;
+            }
         }
 
         #stats{

@@ -19,7 +19,10 @@ import * as icons from './icons/icons.js';
 
     Want To Do
     - find way to be more specific in input, ie allow Paris, Texas instead of always getting Paris, France
-*/
+    - find different API to do whole process in 1 call != 2
+    - replace card with https://github.com/Yevgenium/weather-chart-card 
+
+  */
 
 class Dashboard extends React.Component {
   constructor(props){
@@ -27,28 +30,62 @@ class Dashboard extends React.Component {
     this.weatherCheck = this.weatherCheck.bind(this);    
   }
 
+  // componentDidMount(){
+  //   console.log(this.props.main);
+  // }
+
   componentDidUpdate(prevProps){
-    if(prevProps.city !== this.props.city){  // When city is input
+    if(prevProps.dt !== this.props.dt){  // When time changes
       // console.log('changed');
       // this.weatherCheck();
-      console.log(this.props.daily);
+      console.log(this.props.id);
+
+      // JQ the icon
+      $('#Dashboard #daily #icon img').prop('src', this.weatherCheck(this.props.id));    // change src to returned svg
+
     }
   }
 
   // Determining weather for icons
-  weatherCheck(current, daily){
-    // Switch case to check props.main ('cloudy', 'rainy', etc)
-    return 
+  weatherCheck(daily){
+    // Switch case to check props.id ('cloudy', 'rainy', etc)
+    switch(daily) {
+      case /[2][0-9][0-9]/g:
+        // code block
+        return icons.thunderstorms;
+      case /[3][0-9][0-9]/g:
+        // code block
+        return icons.drizzle;
+      case /[4][0-9][0-9]/g:          // not needed?
+        // code block
+        return icons.fogNight;
+      case /[5][0-9][0-9]/g:
+        // code block
+        return icons.rain;
+      case /[6][0-9][0-9]/g:
+        // code block
+        return icons.snow;
+      case /[7][0-9][0-9]/g:
+        // code block
+        return icons.fogDay;
+      case /[8][0-9][0-9]/g:
+        // code block
+        return icons.clearDay;
+      case /[8][0][0-9]/g:
+        // code block
+        return icons.cloudy;       
+      default:
+        // code block
+        break
+    }
   }
 
   render() {
-    // const props = {current: {...this.props.current}, city: this.props.city, country: this.props.country}
-
     return (
       <div id='Dashboard'>{/*current={this.props.current} city={this.props.city} country={this.props.country}*/}    
       <div id='daily'>  
         <div id='icon'>
-          <img src={this.weatherCheck()} alt=''></img>
+          <img src='...' alt='...'></img>
         &nbsp;
         </div>      
         <div id='stats'>  
@@ -87,7 +124,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {    // is it necessary to init these values if i dont have to for main etc...
+    this.state = {    // is it necessary to init these values?? if i dont have to for main etc...
       city: '',
       country: '',
       daily: [],
@@ -144,6 +181,7 @@ class App extends React.Component {
         this.setState({     // pulling from obj above 
           main: propObj.current.weather[0].main,
           desc: propObj.current.weather[0].desc,
+          id: propObj.current.weather[0].id,
           dt: propObj.current.dt,
           feelsLike: propObj.current.feels_like,
           humidity: propObj.current.humidity,
@@ -158,7 +196,7 @@ class App extends React.Component {
           hourly: propObj.hourly
         })
 
-        console.log(this.state.main);        // state is successfully stored with complete values
+        // console.log(this.state);        // state is successfully stored with complete values
       })
       .catch(err => {
         console.error('Call Failed', err)
