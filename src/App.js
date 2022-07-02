@@ -48,32 +48,41 @@ class Dashboard extends React.Component {
 
   // Determining weather for icons
   weatherCheck(daily){
+    console.log('weather check');
+
     // Switch case to check props.id ('cloudy', 'rainy', etc)
     switch(daily) {
-      case /[2][0-9][0-9]/g:
+      case /[2]\d\d/.test(daily):
         // code block
         return icons.thunderstorms;
-      case /[3][0-9][0-9]/g:
+      case /[3]\d\d/g.test(daily):
         // code block
         return icons.drizzle;
-      case /[4][0-9][0-9]/g:          // not needed?
+        break
+      case /[4]\d\d/g.test(daily):          // not needed?
         // code block
         return icons.fogNight;
-      case /[5][0-9][0-9]/g:
+        break
+      case /[5]\d\d/g.test(daily):
         // code block
         return icons.rain;
-      case /[6][0-9][0-9]/g:
+        break
+      case /[6]\d\d/g.test(daily):
         // code block
         return icons.snow;
-      case /[7][0-9][0-9]/g:
+        break
+      case /[7]\d\d/g.test(daily):   
         // code block
         return icons.fogDay;
-      case /[8][0-9][0-9]/g:
+      case /[8]\d\d/g.test(daily):
         // code block
         return icons.clearDay;
-      case /[8][0][0-9]/g:
+        break
+      case /[8][0]\d/.test(daily):
         // code block
-        return icons.cloudy;       
+        console.log('cloudy');
+        return icons.cloudy;
+        break       
       default:
         // code block
         break
