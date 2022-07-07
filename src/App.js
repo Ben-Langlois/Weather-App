@@ -48,45 +48,43 @@ class Dashboard extends React.Component {
 
   // Determining weather for icons
   weatherCheck(daily){
-    console.log('weather check');
+    // console.log('weather check');
 
     // Switch case to check props.id ('cloudy', 'rainy', etc)
-    switch(daily) {
-      case /[2]\d\d/.test(daily):
+    switch(daily.toString()) {
+      case '802':                             // seems to work instead of regex BUT need to be very specific/cant really scale later for 202, 205 etc etc
+        return icons.clearNight;
+      case /2\d\d/.test(daily.toString()):
         // code block
         return icons.thunderstorms;
-      case /[3]\d\d/g.test(daily):
+      case /3\d\d/.test(daily.toString()):
         // code block
         return icons.drizzle;
-        break
-      case /[4]\d\d/g.test(daily):          // not needed?
+      case /4\d\d/.test(daily.toString()):          // not needed?
         // code block
         return icons.fogNight;
-        break
-      case /[5]\d\d/g.test(daily):
+      case /5\d\d/.test(daily.toString()):
         // code block
         return icons.rain;
-        break
-      case /[6]\d\d/g.test(daily):
+      case /6\d\d/.test(daily.toString()):
         // code block
         return icons.snow;
-        break
-      case /[7]\d\d/g.test(daily):   
+      case /7\d\d/.test(daily.toString()):   
         // code block
         return icons.fogDay;
-      case /[8]\d\d/g.test(daily):
+      case /8\d\d/.test(daily.toString()):
         // code block
         return icons.clearDay;
-        break
-      case /[8][0]\d/.test(daily):
+      case /802/.test(daily.toString()):
         // code block
-        console.log('cloudy');
         return icons.cloudy;
-        break       
       default:
         // code block
+        console.log('nah');
         break
     }
+
+    return icons.clearDay;
   }
 
   render() {
