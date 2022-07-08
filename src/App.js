@@ -49,15 +49,18 @@ class Dashboard extends React.Component {
   // Determining weather for icons
   weatherCheck(daily){
     // console.log('weather check');
+    // console.log(daily.toString());
+
+    let clearNigt = /^8/;
 
     // Switch case to check props.id ('cloudy', 'rainy', etc)
-    switch(daily.toString()) {
-      case '802':                             // seems to work instead of regex BUT need to be very specific/cant really scale later for 202, 205 etc etc
+    switch(daily) {
+      case daily >= 800 && daily < 900:                             
         return icons.clearNight;
-      case /2\d\d/.test(daily.toString()):
+      case 200: 
         // code block
         return icons.thunderstorms;
-      case /3\d\d/.test(daily.toString()):
+      case 300:
         // code block
         return icons.drizzle;
       case /4\d\d/.test(daily.toString()):          // not needed?
@@ -80,7 +83,7 @@ class Dashboard extends React.Component {
         return icons.cloudy;
       default:
         // code block
-        console.log('nah');
+        console.log(daily.toString());
         break
     }
 
