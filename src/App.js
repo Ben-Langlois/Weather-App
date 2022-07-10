@@ -6,7 +6,6 @@ import * as icons from './icons/icons.js';
 // var ReactDOM = require('react-dom');
 
 /*  React Weather App
-
     A react app, styled with mostly my own CSS/SASS, some Bootstrap components, and an open-source SVG library to display statistics of inputted city. Once city is inputted
     the API is called and returns on object which we pull our desired values from for determination of the icons and display of said values.
 
@@ -27,67 +26,44 @@ import * as icons from './icons/icons.js';
 class Dashboard extends React.Component {
   constructor(props){
     super(props);
-    this.weatherCheck = this.weatherCheck.bind(this);    
+    this.weatherCheck = this.weatherCheck.bind(this);   
   }
-
-  // componentDidMount(){
-  //   console.log(this.props.main);
-  // }
 
   componentDidUpdate(prevProps){
     if(prevProps.dt !== this.props.dt){  // When time changes
-      // console.log('changed');
-      // this.weatherCheck();
       console.log(this.props.id);
 
       // JQ the icon
       $('#Dashboard #daily #icon img').prop('src', this.weatherCheck(this.props.id));    // change src to returned svg
-
     }
   }
 
-  // Determining weather for icons
-  weatherCheck(daily){
-    // console.log('weather check');
-    // console.log(daily.toString());
-
-    let clearNigt = /^8/;
-
-    // Switch case to check props.id ('cloudy', 'rainy', etc)
-    switch(daily) {
-      case daily >= 800 && daily < 900:                             
-        return icons.clearNight;
-      case 200: 
-        // code block
-        return icons.thunderstorms;
-      case 300:
-        // code block
-        return icons.drizzle;
-      case /4\d\d/.test(daily.toString()):          // not needed?
-        // code block
-        return icons.fogNight;
-      case /5\d\d/.test(daily.toString()):
-        // code block
-        return icons.rain;
-      case /6\d\d/.test(daily.toString()):
-        // code block
-        return icons.snow;
-      case /7\d\d/.test(daily.toString()):   
-        // code block
-        return icons.fogDay;
-      case /8\d\d/.test(daily.toString()):
-        // code block
-        return icons.clearDay;
-      case /802/.test(daily.toString()):
-        // code block
-        return icons.cloudy;
-      default:
-        // code block
-        console.log(daily.toString());
-        break
+  /*  weatherCheck(number)
+      param 
+        {number}: props.main, >=1 digit number
+      returns  
+        {svg}: icons.xxxxx
+      
+      determines svg to return based on inputted number
+  */
+  weatherCheck(daily){        // for some reason case switches dont like regex??? it only works with if/else????
+    if(/^2/.test(daily.toString())){              // use regex to determine what number daily starts with
+      return icons.thunderstorms;                 // return icon.xxx
+    } else if (/^2/.test(daily.toString())){
+      return icons.thunderstorms;
+    } else if (/^3/.test(daily.toString())){
+      return icons.drizzle;
+    } else if (/^4/.test(daily.toString())){
+      return icons.fogNight;
+    } else if (/^5/.test(daily.toString())){
+      return icons.rain;
+    } else if (/^6/.test(daily.toString())){
+      return icons.snow;
+    } else if (/^7/.test(daily.toString())){
+      return icons.fogDay;
+    } else if (/^8/.test(daily.toString())){
+      return icons.clearDay;
     }
-
-    return icons.clearDay;
   }
 
   render() {
