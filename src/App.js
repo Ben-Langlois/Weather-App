@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss';
 import React from 'react';
-import $ from 'jquery';
+import $, { map } from 'jquery';
 import * as icons from './icons/icons.js';
 // var ReactDOM = require('react-dom');
 
@@ -45,12 +45,27 @@ class Dashboard extends React.Component {
         {svg}: icons.xxxxx
       
       determines svg to return based on inputted number
-  */
-  weatherCheck(daily){        // for some reason case switches dont like regex??? it only works with if/else????
-    if(/^2/.test(daily.toString())){              // use regex to determine what number daily starts with
-      return icons.thunderstorms;                 // return icon.xxx
-    } else if (/^2/.test(daily.toString())){
-      return icons.thunderstorms;
+  */ 
+  weatherCheck(daily){        
+    /*
+      - for some reason case switches dont like regex??? it only works with if/else????
+      
+      - is there a better way than this 'two-tiered' 
+    */
+    // objects to hold each categories ids and respective icons
+    let thunderstorms = {},
+        drizzle = {},
+        rain = {},
+        snow = {},
+        atmosphere = {},
+        clouds = {};
+
+    // use regex to determine what number daily starts with
+    if(/^2/.test(daily.toString())){              // Thunderstorms  
+      // Object.keys(thunderstorms).map(() => {      // Loop through category obj  
+      //   if (thunderstorms[index])                 // if id matches any in obj
+      //                                             // return matching icon 
+      // });
     } else if (/^3/.test(daily.toString())){
       return icons.drizzle;
     } else if (/^4/.test(daily.toString())){

@@ -10,11 +10,20 @@ import overcast from './Dynamic/overcast.svg';
 import cloudy from './Dynamic/cloudy.svg';
 import drizzle from './Dynamic/drizzle.svg';
 import rain from './Dynamic/rain.svg';
-import thunderstorms from './Dynamic/thunderstorms.svg';
 import snow from './Dynamic/snow.svg';
 
 import fogDay from './Dynamic/fog-day.svg';
 import fogNight from './Dynamic/fog-night.svg';
+
+
+// 2xx Thunderstorm
+import thunderstorms from './Dynamic/thunderstorms.svg';        // 211 default
+// 201 Thunderstorm with rain
+// 210 Light Thunderstorm
+// 221 Ragged thunderstorm
+
+// 3xx Drizzle
+// 300 Default
 
 
 // Static icons
