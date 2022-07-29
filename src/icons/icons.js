@@ -1,37 +1,45 @@
 /*
     Icons           https://github.com/basmilius/weather-icons
-    ID Codes        https://openweathermap.org/api/one-call-api 
+    ID Codes        https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2 
+
+    - There are some pointless-potential additions, but for now I think having more than the basics is enough
+
 */
-
-// Dynamic icons
-import clearDay from './Dynamic/clear-day.svg';                 // pls sort these eventually
-import clearNight from './Dynamic/clear-night.svg';
-
-import overcast from './Dynamic/overcast.svg';
-import cloudy from './Dynamic/cloudy.svg';
-import drizzle from './Dynamic/drizzle.svg';
-import rain from './Dynamic/rain.svg';
-import snow from './Dynamic/snow.svg';
-
-import fogDay from './Dynamic/fog-day.svg';
-import fogNight from './Dynamic/fog-night.svg';
-
 // (id)
 // 2xx Thunderstorm
-import thunderstorms from './Dynamic/thunderstorms.svg';        // 211 default
-// 201 Thunderstorm with rain
-// 210 Light Thunderstorm
-// 221 Ragged thunderstorm
+import thunderstormsDefault from './Dynamic/thunderstorms.svg';                     // 211 default
+import rainThunderstorm from './Dynamic/thunderstorms-overcast-rain.svg';           // 201 Thunderstorm with rain
+import overcastThunderstorm from './Dynamic/thunderstorms-overcast.svg';            // 221 Ragged thunderstorm
 
 // 3xx Drizzle
-// 300 Default
+import drizzle from './Dynamic/drizzle.svg';                    // 300 Default
 
-// 5xx Rain
-// 500 (default)
-// 502 Heavy Rain
-// 521 Showers
+// 5xx Rain 
+import rainDefault from './Dynamic/rain.svg';           // 500 Default
+import heavyRain from './Dynamic/extreme-rain.svg';     // 502 Heavy Rain
 
+// 6xx Snow
+import snowDefault from './Dynamic/snow.svg';           // 601 Default
+// 600 Light Snow
+// 602 Heavy Snow
+// 616 Rain and Snow
+
+// 7xx Atmosphere 
+import fogDay from './Dynamic/fog-day.svg';             // 701 Fog Day
+import fogNight from './Dynamic/fog-night.svg';         // 701 Fog Night
+
+
+// 800 Clear
+import clearDay from './Dynamic/clear-day.svg';             // Day    
+import clearNight from './Dynamic/clear-night.svg';         // Night
+
+
+// 80x Clouds
+import cloudyDefault from './Dynamic/cloudy.svg';                  // 803 Clouds Default
+// 801 Few Clouds
+// 802 Scattered Clouds
+// 804 Overcast
 
 // Static icons
 
-export {clearDay, clearNight, overcast, cloudy, drizzle, rain, thunderstorms, snow, fogDay, fogNight};
+export {clearDay, clearNight, cloudyDefault, drizzle, rainDefault, heavyRain, thunderstormsDefault, rainThunderstorm, overcastThunderstorm, snowDefault, fogDay, fogNight};

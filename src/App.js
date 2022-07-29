@@ -3,6 +3,7 @@ import './style.scss';
 import React from 'react';
 import $, { map } from 'jquery';
 import * as icons from './icons/icons.js';
+import { clear } from '@testing-library/user-event/dist/clear';
 // var ReactDOM = require('react-dom');
 
 /*  React Weather App
@@ -18,7 +19,7 @@ import * as icons from './icons/icons.js';
 
     Want To Do
     - find way to be more specific in input, ie allow Paris, Texas instead of always getting Paris, France
-    - find different API to do whole process in 1 call != 2
+    - find different API to do whole process in 1 call !2
     - replace card with https://github.com/Yevgenium/weather-chart-card 
 
   */
@@ -51,33 +52,35 @@ class Dashboard extends React.Component {
       - for some reason case switches dont like regex??? it only works with if/else????
       
       - is there a better way than this 'two-tiered' 
+        (id, idObjects) => {
+          if(idObjects.map(() => {
+            
+          }))
+        }
     */
-    // objects to hold each categories ids and respective icons
-    let thunderstorms = {},
-        drizzle = {},
-        rain = {},
-        snow = {},
-        atmosphere = {},
-        clouds = {};
-
     // use regex to determine what number daily starts with
     if(/^2/.test(daily.toString())){              // Thunderstorms  
-      // Object.keys(thunderstorms).map(() => {      // Loop through category obj  
-      //   if (thunderstorms[index])                 // if id matches any in obj
-      //                                             // return matching icon 
-      // });
+      if(daily == 201){
+        return icons.rainThunderstorm;
+      } else {
+        return icons.thunderstormsDefault;
+      }
     } else if (/^3/.test(daily.toString())){
       return icons.drizzle;
-    } else if (/^4/.test(daily.toString())){
-      return icons.fogNight;
     } else if (/^5/.test(daily.toString())){
-      return icons.rain;
+      if(daily == 502){
+        return icons.heavyRain;
+      } else {
+        return icons.rainDefault;
+      }
     } else if (/^6/.test(daily.toString())){
-      return icons.snow;
-    } else if (/^7/.test(daily.toString())){
+      return icons.snowDefault;
+    } else if (/^7/.test(daily.toString())){    // need to incorporate time check to differentiate
       return icons.fogDay;
-    } else if (/^8/.test(daily.toString())){
+    } else if (daily == 800){
       return icons.clearDay;
+    } else if (/^8/.test(daily.toString())){
+      return icons.cloudyDefault;
     }
   }
 
