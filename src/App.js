@@ -22,6 +22,8 @@ import { clear } from '@testing-library/user-event/dist/clear';
     - find different API to do whole process in 1 call !2
     - replace card with https://github.com/Yevgenium/weather-chart-card 
 
+    Current Task
+    - creating timeCheck function to determine icons based on time
   */
 
 class Dashboard extends React.Component {
