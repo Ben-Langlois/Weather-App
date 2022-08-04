@@ -1,9 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.scss';
 import React from 'react';
-import $, { map } from 'jquery';
+import $ from 'jquery';
 import * as icons from './icons/icons.js';
-import { clear } from '@testing-library/user-event/dist/clear';
 // var ReactDOM = require('react-dom');
 
 /*  React Weather App
@@ -24,6 +23,13 @@ import { clear } from '@testing-library/user-event/dist/clear';
 
     Current Task
     - creating timeCheck function to determine icons based on time
+        trying to hoist timezone_offset to determine time of location
+          let time = (dt + timezone_offset).convert to real time
+          if(time >= 6am && time <= 7pm){
+            return day
+          } else {
+            return night
+          }
   */
 
 class Dashboard extends React.Component {
@@ -34,12 +40,17 @@ class Dashboard extends React.Component {
 
   componentDidUpdate(prevProps){
     if(prevProps.dt !== this.props.dt){  // When time changes
-      console.log(this.props.id);
+      console.log(this.props.timezone_offset);
 
       // JQ the icon
       $('#Dashboard #daily #icon img').prop('src', this.weatherCheck(this.props.id));    // change src to returned svg
     }
   }
+
+  timeCheck(dt){
+
+  }
+
 
   /*  weatherCheck(number)
       param 
@@ -50,8 +61,9 @@ class Dashboard extends React.Component {
       determines svg to return based on inputted number
   */ 
   weatherCheck(daily){        
-    /*
-      - for some reason case switches dont like regex??? it only works with if/else????
+    /* 
+      - Since there aren't many options for each category, I decided to use if statementes 
+        as a placeholder
       
       - is there a better way than this 'two-tiered' 
         (id, idObjects) => {
@@ -59,10 +71,10 @@ class Dashboard extends React.Component {
             
           }))
         }
-    */
+    */ 
     // use regex to determine what number daily starts with
     if(/^2/.test(daily.toString())){              // Thunderstorms  
-      if(daily == 201){
+      if(daily === 201){
         return icons.rainThunderstorm;
       } else {
         return icons.thunderstormsDefault;
@@ -70,7 +82,7 @@ class Dashboard extends React.Component {
     } else if (/^3/.test(daily.toString())){
       return icons.drizzle;
     } else if (/^5/.test(daily.toString())){
-      if(daily == 502){
+      if(daily === 502){
         return icons.heavyRain;
       } else {
         return icons.rainDefault;
@@ -79,7 +91,7 @@ class Dashboard extends React.Component {
       return icons.snowDefault;
     } else if (/^7/.test(daily.toString())){    // need to incorporate time check to differentiate
       return icons.fogDay;
-    } else if (daily == 800){
+    } else if (daily === 800){
       return icons.clearDay;
     } else if (/^8/.test(daily.toString())){
       return icons.cloudyDefault;
@@ -134,18 +146,7 @@ class App extends React.Component {
       city: '',
       country: '',
       daily: [],
-      hourly: [],
-      // main: '',
-      // desc: '',
-      // dt: '',
-      // feels_like: '',
-      // humidity: '',
-      // pressure: '',
-      // sunrise: '',
-      // sunset: '',
-      // temp: '',
-      // uvi: '',
-      // windspeed: ''
+      hourly: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -171,6 +172,7 @@ class App extends React.Component {
           this.setState({
             city: data[0].name,
             country: data[0].country,
+            zoneShift: data[0]["timezone_offset"]
           })
 
           return fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${data[0].lat}&lon=${data[0].lon}&units=metric&exclude=alerts&appid=ad46bca0cb15937504da590a8559bbae`)
