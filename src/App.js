@@ -30,27 +30,43 @@ import * as icons from './icons/icons.js';
           } else {
             return night
           }
+
+      - trying to hoist dt from API response to  component YURP
+      https://www.epochconverter.com/programming/#javascript 
   */
 
+// Perhaps should be function since no state
 class Dashboard extends React.Component {
   constructor(props){
     super(props);
     this.weatherCheck = this.weatherCheck.bind(this);   
+    this.timeCheck = this.timeCheck.bind(this);
   }
 
   componentDidUpdate(prevProps){
     if(prevProps.dt !== this.props.dt){  // When time changes
-      console.log(this.props.timezone_offset);
+      // console.log(this.props);
 
       // JQ the icon
       $('#Dashboard #daily #icon img').prop('src', this.weatherCheck(this.props.id));    // change src to returned svg
     }
   }
 
-  timeCheck(dt){
+  /*  timeCheck(dt)
+      params
+        {dt}: unix time thingy
+      returns
+        {bool}: true = day/false = night
 
+      determines if its day or night based on dt
+
+      - for some reason, the times arent accurate???
+  */
+  timeCheck(dt, shift){
+    var time = dt + shift;
+    var date = new Date(time * 1000);
+    console.log(date);
   }
-
 
   /*  weatherCheck(number)
       param 
@@ -60,7 +76,8 @@ class Dashboard extends React.Component {
       
       determines svg to return based on inputted number
   */ 
-  weatherCheck(daily){        
+  weatherCheck(daily){   
+    this.timeCheck(this.props.dt, this.props.zoneShift);     
     /* 
       - Since there aren't many options for each category, I decided to use if statementes 
         as a placeholder
@@ -171,8 +188,8 @@ class App extends React.Component {
       .then(data => {     // storing desired API data in state
           this.setState({
             city: data[0].name,
-            country: data[0].country,
-            zoneShift: data[0]["timezone_offset"]
+            country: data[0].country
+
           })
 
           return fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${data[0].lat}&lon=${data[0].lon}&units=metric&exclude=alerts&appid=ad46bca0cb15937504da590a8559bbae`)
@@ -199,6 +216,7 @@ class App extends React.Component {
           temp: propObj.current.temp,
           uvi: propObj.current.uvi,
           windspeed: propObj.current.windspeed,
+          zoneShift: data.timezone_offset,          
 
           daily: propObj.daily,
           hourly: propObj.hourly
