@@ -13,16 +13,8 @@ import * as icons from './icons/icons.js';
     https://openweathermap.org/api/one-call-api    
 
     Must Do
-    - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
-    - Recode keypress event
 
-    Want To Do
-    - find way to be more specific in input, ie allow Paris, Texas instead of always getting Paris, France
-    - find different API to do whole process in 1 call !2
-    - replace card with https://github.com/Yevgenium/weather-chart-card 
-
-    Current Task
-    - creating timeCheck function to determine icons based on time
+    - creating timeCheck function to determine icons based on time (Dashboard/timeCheck())
         trying to hoist timezone_offset to determine time of location
           let time = (dt + timezone_offset).convert to real time
           if(time >= 6am && time <= 7pm){
@@ -30,9 +22,20 @@ import * as icons from './icons/icons.js';
           } else {
             return night
           }
-
-      - trying to hoist dt from API response to  component YURP
       https://www.epochconverter.com/programming/#javascript 
+
+    Want To Do
+    - find way to be more specific in input, ie allow Paris, Texas instead of always getting Paris, France
+    - find different API to do whole process in 1 call !2
+    - replace card with https://github.com/Yevgenium/weather-chart-card 
+    - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
+
+
+    Current Task
+    - style current and daily cards
+      - cuurent cards
+        - for hourly div 
+        https://stackoverflow.com/questions/443700/div-with-horizontal-scrolling-only 
   */
 
 // Perhaps should be function since no state
@@ -45,10 +48,10 @@ class Dashboard extends React.Component {
 
   componentDidUpdate(prevProps){
     if(prevProps.dt !== this.props.dt){  // When time changes
-      // console.log(this.props);
+      console.log(this.props);
 
       // JQ the icon
-      $('#Dashboard #daily #icon img').prop('src', this.weatherCheck(this.props.id));    // change src to returned svg
+      $('#Dashboard #daily #icon-cont #icon img').prop('src', this.weatherCheck(this.props.id));    // change src to returned svg
     }
   }
 
@@ -65,7 +68,7 @@ class Dashboard extends React.Component {
   timeCheck(dt, shift){
     var time = dt + shift;
     var date = new Date(time * 1000);
-    console.log(date);
+    // console.loge(date);
   }
 
   /*  weatherCheck(number)
@@ -119,18 +122,20 @@ class Dashboard extends React.Component {
     return (
       <div id='Dashboard'>{/*current={this.props.current} city={this.props.city} country={this.props.country}*/}    
       <div id='daily'>  
-        <div id='icon'>
-          <img src='...' alt='...'></img>
-        &nbsp;
+        <div id='icon-cont'>    {/* Need to update componentDidUpdate with changes to DOM */}
+          <div id='icon'>
+            <img src='...' alt=''/>
+            <p id='temp'>{this.props.temp}</p>
+            <p id='feelsLike'>{this.props.feelsLike}</p> {/* Need to include 'Feels Like: ' w/o showing to early */}
+          </div>
         </div>      
         <div id='stats'>  
           <div id=''>
             <h2><b>{this.props.city}</b>&nbsp;{this.props.country}</h2><br/><br/>
-
           </div>
-  
-          asasd
-
+        </div>
+        <div id='hourly'>
+        &nbsp;
         </div>
       </div>        
       <div id='weekly'>
@@ -189,7 +194,6 @@ class App extends React.Component {
           this.setState({
             city: data[0].name,
             country: data[0].country
-
           })
 
           return fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${data[0].lat}&lon=${data[0].lon}&units=metric&exclude=alerts&appid=ad46bca0cb15937504da590a8559bbae`)
@@ -208,12 +212,12 @@ class App extends React.Component {
           desc: propObj.current.weather[0].desc,
           id: propObj.current.weather[0].id,
           dt: propObj.current.dt,
-          feelsLike: propObj.current.feels_like,
+          feelsLike: Math.round(propObj.current.feels_like),
           humidity: propObj.current.humidity,
           pressure: propObj.current.pressure,
           sunrise: propObj.current.sunrise,
           sunset: propObj.current.sunset,
-          temp: propObj.current.temp,
+          temp: Math.round(propObj.current.temp),
           uvi: propObj.current.uvi,
           windspeed: propObj.current.windspeed,
           zoneShift: data.timezone_offset,          

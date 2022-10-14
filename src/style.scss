@@ -8,24 +8,67 @@ body{
         width: 45vw;
         height: 40vh;
         margin: 5vh auto 0;
-        border: 1px solid rgba(0,0,0,.125);
-        border-radius: 0.25rem;
+        border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
+        border-radius: 1rem;
 
-        #icon{
-            display: inline-flex;
-            width: 50%;
-            height: 100%;
-            border: 5px solid red;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: auto;
+        grid-template-areas: 
+            "icon stats" 
+            "hourly hourly";
 
-            img{
-                height: 35%;
-                width: 35%;
+        #icon-cont{
+            // display: block;
+            // width: 35%;
+            // height: 35%;
+            border: 1px solid red;
+            position: relative;
+            grid-area: icon;
+
+            #icon{
+                height: 100%;
+                margin: auto 5vw;
+
+                display: grid;
+                grid-template-columns: 75% 25%;
+                grid-template-rows: auto;
+                grid-template-areas: 
+                    "icon temp" 
+                    "feelsLike feelsLike";
+
+                img{
+                    grid-area: icon;
+                    place-self: center;
+                }
+
+                #temp{
+                    grid-area: temp;
+                    place-self: center;
+                    margin: 0; // cant disable 'user agent ss' for some reason
+                    font-size: 8vh;
+
+                }      
+                
+                #feelsLike{
+                    grid-area: feelsLike;
+                    place-self: center;
+                    margin: 0;
+                }
+                
             }
         }
 
         #stats{
-            display: inline-flex;
-            width: 50%;
+            // display: inline-flex;
+            // width: 50%;
+            border: 1px solid red;
+            grid-area: stats;
+        }
+
+        #hourly{
+            border: 1px solid red;
+            grid-area: hourly;
         }
     }
 
