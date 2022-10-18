@@ -33,7 +33,14 @@ import * as icons from './icons/icons.js';
 
     Current Task
     - style current and daily cards
-      - cuurent cards
+      - append/prepending degree symbol 
+          PROBLEMS
+          - if in didUpdate it adds extra symbols each submit, in didMount it adds it before anything is update
+            - need to somehow determine first input 
+
+
+      RESOURCES    
+      - curent cards
         - for hourly div 
         https://stackoverflow.com/questions/443700/div-with-horizontal-scrolling-only 
   */
@@ -50,9 +57,16 @@ class Dashboard extends React.Component {
     if(prevProps.dt !== this.props.dt){  // When time changes
       console.log(this.props);
 
-      // JQ the icon
+      // Assorted JQ
       $('#Dashboard #daily #icon-cont #icon img').prop('src', this.weatherCheck(this.props.id));    // change src to returned svg
+
     }
+  }
+
+  componentDidMount(){
+      
+      $('#Dashboard #daily #icon-cont #icon #feelsLike').prepend('Feels Like ');           // continues to prepend/append (feels like feels like feels like)
+      $('#degree').append(' &#8451;')
   }
 
   /*  timeCheck(dt)
@@ -125,8 +139,8 @@ class Dashboard extends React.Component {
         <div id='icon-cont'>    {/* Need to update componentDidUpdate with changes to DOM */}
           <div id='icon'>
             <img src='...' alt=''/>
-            <p id='temp'>{this.props.temp}</p>
-            <p id='feelsLike'>{this.props.feelsLike}</p> {/* Need to include 'Feels Like: ' w/o showing to early */}
+            <p id='temp'>{this.props.temp}<p id='degree'></p></p>
+            <p id='feelsLike'>{this.props.feelsLike}<p id='degree'></p></p> {/* Need to include 'Feels Like: ' w/o showing to early */}
           </div>
         </div>      
         <div id='stats'>  

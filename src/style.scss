@@ -1,5 +1,11 @@
 body{
     background-color: rgb(249 250 251);
+    font-family: Didact;
+}
+
+/* to allow degree symbol to be dynamically set */
+#degree{
+    
 }
 
 #Dashboard{
@@ -19,12 +25,10 @@ body{
             "hourly hourly";
 
         #icon-cont{
-            // display: block;
-            // width: 35%;
-            // height: 35%;
             border: 1px solid red;
             position: relative;
             grid-area: icon;
+            font
 
             #icon{
                 height: 100%;
@@ -47,6 +51,8 @@ body{
                     place-self: center;
                     margin: 0; // cant disable 'user agent ss' for some reason
                     font-size: 8vh;
+
+
 
                 }      
                 
@@ -96,6 +102,11 @@ body{
 
 
 #submit{
-    font: bold 2.3vh/1.5vh Arial;
+    font: bold 2.3vh/1.5vh;
 }
 
+/* Fonts */
+@font-face {
+    font-family: Didact;
+    src: url(./fonts/DidactGothic-Regular.ttf);
+ }
