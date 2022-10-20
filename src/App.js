@@ -33,11 +33,7 @@ import * as icons from './icons/icons.js';
 
     Current Task
     - style current and daily cards
-      - append/prepending degree symbol 
-          PROBLEMS
-          - if in didUpdate it adds extra symbols each submit, in didMount it adds it before anything is update
-            - need to somehow determine first input 
-
+      - removing whitespace of SVGS to allow bottom row to be full sized, in componentDidUpdate
 
       RESOURCES    
       - curent cards
@@ -57,16 +53,25 @@ class Dashboard extends React.Component {
     if(prevProps.dt !== this.props.dt){  // When time changes
       console.log(this.props);
 
-      // Assorted JQ
-      $('#Dashboard #daily #icon-cont #icon img').prop('src', this.weatherCheck(this.props.id));    // change src to returned svg
+      // Determining proper SVG
+      let id = this.props.id,
+          mySVG = this.weatherCheck(id);
 
+      //removing whitespace from svg
+        // mySVG.setAttribute("viewBox", "0 0 100 100");
+
+      // Assorted JQ
+      $('#Dashboard #daily #icon-cont #icon img').prop('src', mySVG);    // change src to returned svg
+
+      // $('#Dashboard #daily #icon-cont #icon #feelsLike').text('Feels Like ');           // continues to prepend/append (feels like feels like feels like)
+      // $('#degree').text(' &#8451;');
     }
   }
 
   componentDidMount(){
       
-      $('#Dashboard #daily #icon-cont #icon #feelsLike').prepend('Feels Like ');           // continues to prepend/append (feels like feels like feels like)
-      $('#degree').append(' &#8451;')
+      // $('#Dashboard #daily #icon-cont #icon #feelsLike').prepend('Feels Like ');           // continues to prepend/append (feels like feels like feels like)
+      // $('#degree').append(' &#8451;')
   }
 
   /*  timeCheck(dt)
@@ -139,8 +144,8 @@ class Dashboard extends React.Component {
         <div id='icon-cont'>    {/* Need to update componentDidUpdate with changes to DOM */}
           <div id='icon'>
             <img src='...' alt=''/>
-            <p id='temp'>{this.props.temp}<p id='degree'></p></p>
-            <p id='feelsLike'>{this.props.feelsLike}<p id='degree'></p></p> {/* Need to include 'Feels Like: ' w/o showing to early */}
+            <p id='temp'>{this.props.temp}<p id='degree'>&#8451;</p></p>
+            <p id='feelsLike'>Feels Like {this.props.feelsLike}<p id='degree'>&#8451;</p></p> {/* Need to include 'Feels Like: ' w/o showing to early */}
           </div>
         </div>      
         <div id='stats'>  
