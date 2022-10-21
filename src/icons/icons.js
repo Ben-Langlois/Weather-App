@@ -40,6 +40,12 @@ import cloudyDefault from './Dynamic/cloudy.svg';                  // 803 Clouds
 // 802 Scattered Clouds
 // 804 Overcast
 
+// For stats section
+import UVI from './stats/uv-index.svg';
+import humidity from './stats/humidity.svg';
+import sunrise from './stats/sunrise.svg';
+import sunset from './stats/sunset.svg';
+
 // Static icons
 
-export {clearDay, clearNight, cloudyDefault, drizzle, rainDefault, heavyRain, thunderstormsDefault, rainThunderstorm, overcastThunderstorm, snowDefault, fogDay, fogNight};
+export {clearDay, clearNight, cloudyDefault, drizzle, rainDefault, heavyRain, thunderstormsDefault, rainThunderstorm, overcastThunderstorm, snowDefault, fogDay, fogNight, UVI, humidity, sunrise, sunset};

@@ -12,20 +12,20 @@ body{
     #daily{
         background-color: rgb(255, 255, 255);
         width: 45vw;
-        height: 40vh;
+        height: 45vh;
         margin: 5vh auto 0;
         border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
         border-radius: 1rem;
 
         display: grid;
         grid-template-columns: 50% 50%;
-        grid-template-rows: auto;
+        grid-template-rows: 65% 35%;
         grid-template-areas: 
             "icon stats" 
             "hourly hourly";
 
         #icon-cont{
-            border: 1px solid red;
+            // border: 1px solid red;
             position: relative;
             grid-area: icon;
             
@@ -87,8 +87,58 @@ body{
         #stats{
             // display: inline-flex;
             // width: 50%;
-            border: 1px solid red;
+            // border: 1px solid red;
             grid-area: stats;
+            margin: auto 3vw;
+            height: 75%;
+
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-template-rows: 50% 25% 25%;
+            grid-template-areas: 
+                "location location" 
+                "UVI hum"
+                "sunr suns";
+
+            #location{
+                grid-area: location;
+                display: inline-block;
+                place-self: center;
+                text-align: justify;
+
+                h2{
+                    font-size: 5vh;
+                    // font-weight: bold;
+                    margin: 0;
+                }
+            }
+
+            #uvi{
+                grid-area: UVI;
+            }
+
+            #hum{
+                grid-area: hum;
+            }
+
+            #sunr{
+                grid-area: sunr;
+            }
+
+            #suns{
+                grid-area: suns;
+            }
+
+            .etc{
+                font-weight: bold;
+                display: inline-block;
+
+                position: relative;
+                top: 3vh;
+                img{
+                    height: 100%;
+                }
+            }
         }
 
         #hourly{

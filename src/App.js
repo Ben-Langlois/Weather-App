@@ -33,7 +33,7 @@ import * as icons from './icons/icons.js';
 
     Current Task
     - style current and daily cards
-      - removing whitespace of SVGS to allow bottom row to be full sized, in componentDidUpdate
+      - styling stats section 
 
       RESOURCES    
       - curent cards
@@ -56,9 +56,6 @@ class Dashboard extends React.Component {
       // Determining proper SVG
       let id = this.props.id,
           mySVG = this.weatherCheck(id);
-
-      //removing whitespace from svg
-        // mySVG.setAttribute("viewBox", "0 0 100 100");
 
       // Assorted JQ
       $('#Dashboard #daily #icon-cont #icon img').prop('src', mySVG);    // change src to returned svg
@@ -149,9 +146,21 @@ class Dashboard extends React.Component {
           </div>
         </div>      
         <div id='stats'>  
-          <div id=''>
-            <h2><b>{this.props.city}</b>&nbsp;{this.props.country}</h2><br/><br/>
+          <div id='location'>
+            <h2>{this.props.city}&nbsp;<br/><b>{this.props.country}</b></h2>
           </div>
+          <div id='uvi' class='etc'>
+            <img src={icons.UVI} alt='...' /> {this.props.uvi}
+          </div>
+          <div id='hum' class='etc' >
+            <img src={icons.humidity} alt='...'/>{this.props.humidity}  
+          </div>      
+          <div id='sunr' class='etc' >
+            <img src={icons.sunrise} alt='...'/>{this.props.sunrise}
+          </div>
+          <div id='suns' class='etc' >
+            <img src={icons.sunset} alt='...'/>{this.props.sunset}
+          </div>  
         </div>
         <div id='hourly'>
         &nbsp;
