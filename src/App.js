@@ -33,7 +33,7 @@ import * as icons from './icons/icons.js';
 
     Current Task
     - style current and daily cards
-      - styling stats section 
+      - styling hourly section 
 
       RESOURCES    
       - curent cards
@@ -163,7 +163,15 @@ class Dashboard extends React.Component {
           </div>  
         </div>
         <div id='hourly'>
-        &nbsp;
+          {
+            this.props.hourly.map((currElement) => {
+              return(
+                <div className='hourlyCard'>
+                  {currElement.temp}
+                </div>
+              )
+            })
+          }
         </div>
       </div>        
       <div id='weekly'>
@@ -251,7 +259,7 @@ class App extends React.Component {
           zoneShift: data.timezone_offset,          
 
           daily: propObj.daily,
-          hourly: propObj.hourly
+          hourly: propObj.hourly.slice(0, 23)                   // limiting to 24 hours
         })
 
         // console.log(this.state);        // state is successfully stored with complete values
