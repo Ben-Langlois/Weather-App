@@ -144,15 +144,17 @@ body{
         #hourly{
             border: 1px solid red;
             grid-area: hourly;
-            height: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
 
             .hourlyCard{
                 border: 1px solid red;
-                display: inline-block;
-                height: 100%;
+                display: inline-flex;
+                height: 90%;
                 width: 4vw;
-                overflow-x: auto;
-                white-space: nowrap;
+                margin: 5% 1vw;
+                justify-content: center;
+
 
             }
         }

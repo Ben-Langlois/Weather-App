@@ -33,7 +33,7 @@ import * as icons from './icons/icons.js';
 
     Current Task
     - style current and daily cards
-      - styling hourly section 
+      - styling hourlyy section 
 
       RESOURCES    
       - curent cards
