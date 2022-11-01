@@ -141,22 +141,46 @@ body{
             }
         }
 
-        #hourly{
-            border: 1px solid red;
+        #hourly-cont{
+            // border: 1px solid red;
             grid-area: hourly;
             overflow-x: auto;
             white-space: nowrap;
+            display: flex;
+            flex-direction: row;
+            // justify-content: space-evenly;
 
             .hourlyCard{
                 border: 1px solid red;
-                display: inline-flex;
-                height: 90%;
-                width: 4vw;
-                margin: 5% 1vw;
+                // display: inline-flex;
+                height: 85%;
+                width: 5vw;
+                margin: 1% 0.8vw;
                 justify-content: center;
 
+                display: grid;
+                grid-template-rows: 30% 50% 20%;
+                grid-template-areas: 
+                    "temp" 
+                    "icon"
+                    "time";
 
-            }
+                h2{
+                    grid-area: temp;
+
+                }
+
+                img{
+                    grid-area: icon;
+
+                }
+
+                h3{
+                    grid-area: time;
+
+                }
+            }                
+
         }
     }
 

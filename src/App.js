@@ -34,6 +34,9 @@ import * as icons from './icons/icons.js';
     Current Task
     - style current and daily cards
       - styling hourlyy section 
+          - width of card is incorrectly set somehow
+          - must alter weather check to include static icons
+          - must include time
 
       RESOURCES    
       - curent cards
@@ -83,7 +86,7 @@ class Dashboard extends React.Component {
   */
   timeCheck(dt, shift){
     var time = dt + shift;
-    var date = new Date(time * 1000);
+    var date = new Date(time);
     // console.loge(date);
   }
 
@@ -162,12 +165,13 @@ class Dashboard extends React.Component {
             <img src={icons.sunset} alt='...'/>{this.props.sunset}
           </div>  
         </div>
-        <div id='hourly'>
+        <div id='hourly-cont'>
           {
             this.props.hourly.map((currElement) => {
               return(
                 <div className='hourlyCard'>
-                  {currElement.temp}
+                  <h2>{currElement.temp}</h2>
+                  <img src={this.weatherCheck(this.props.id)} alt=''/>
                 </div>
               )
             })
