@@ -33,7 +33,7 @@ import * as icons from './icons/icons.js';
 
     Current Task
     - style current and daily cards
-      - styling hourlyy section 
+      - styling hourly section 
           - width of card is incorrectly set somehow
           - must alter weather check to include static icons
           - must include time
@@ -65,6 +65,8 @@ class Dashboard extends React.Component {
 
       // $('#Dashboard #daily #icon-cont #icon #feelsLike').text('Feels Like ');           // continues to prepend/append (feels like feels like feels like)
       // $('#degree').text(' &#8451;');
+    
+      console.log(this.convertDT(this.props.dt, this.props.zoneShift));
     }
   }
 
@@ -72,6 +74,22 @@ class Dashboard extends React.Component {
       
       // $('#Dashboard #daily #icon-cont #icon #feelsLike').prepend('Feels Like ');           // continues to prepend/append (feels like feels like feels like)
       // $('#degree').append(' &#8451;')
+  }
+
+
+  /*  convertDT
+      params
+        {dt}: unix time thingy
+        {shift}: zone-shift variable 
+      returns
+        {date}: converted date
+
+      - zone shift seems irrellivent???? did I even spell that right?
+  */
+  convertDT(dt, shift){
+    let time = dt * 1000,
+        date = new Date(time );
+    return date.toString();
   }
 
   /*  timeCheck(dt)
@@ -152,26 +170,27 @@ class Dashboard extends React.Component {
           <div id='location'>
             <h2>{this.props.city}&nbsp;<br/><b>{this.props.country}</b></h2>
           </div>
-          <div id='uvi' class='etc'>
+          <div id='uvi' className='etc'>
             <img src={icons.UVI} alt='...' /> {this.props.uvi}
           </div>
-          <div id='hum' class='etc' >
+          <div id='hum' className='etc' >
             <img src={icons.humidity} alt='...'/>{this.props.humidity}  
           </div>      
-          <div id='sunr' class='etc' >
+          <div id='sunr' className='etc' >
             <img src={icons.sunrise} alt='...'/>{this.props.sunrise}
           </div>
-          <div id='suns' class='etc' >
+          <div id='suns' className='etc' >
             <img src={icons.sunset} alt='...'/>{this.props.sunset}
           </div>  
         </div>
         <div id='hourly-cont'>
           {
-            this.props.hourly.map((currElement) => {
+            this.props.hourly.map((currElement, index) => {
               return(
                 <div className='hourlyCard'>
                   <h2>{currElement.temp}</h2>
                   <img src={this.weatherCheck(this.props.id)} alt=''/>
+                  <h3>{currElement.dt}</h3>
                 </div>
               )
             })
