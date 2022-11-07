@@ -23,7 +23,8 @@ import * as icons from './icons/icons.js';
             return night
           }
       https://www.epochconverter.com/programming/#javascript 
-
+      - must alter weather check to include static icons
+    
     Want To Do
     - find way to be more specific in input, ie allow Paris, Texas instead of always getting Paris, France
     - find different API to do whole process in 1 call !2
@@ -34,9 +35,7 @@ import * as icons from './icons/icons.js';
     Current Task
     - style current and daily cards
       - styling hourly section 
-          - width of card is incorrectly set somehow
-          - must alter weather check to include static icons
-          - must include time
+          - if time ends in 0 it wont display the zero (in convertDT)
 
       RESOURCES    
       - curent cards
@@ -49,7 +48,7 @@ class Dashboard extends React.Component {
   constructor(props){
     super(props);
     this.weatherCheck = this.weatherCheck.bind(this);   
-    this.timeCheck = this.timeCheck.bind(this);
+    this.convertDT = this.convertDT.bind(this);
   }
 
   componentDidUpdate(prevProps){
@@ -66,7 +65,7 @@ class Dashboard extends React.Component {
       // $('#Dashboard #daily #icon-cont #icon #feelsLike').text('Feels Like ');           // continues to prepend/append (feels like feels like feels like)
       // $('#degree').text(' &#8451;');
     
-      console.log(this.convertDT(this.props.dt, this.props.zoneShift));
+      console.log(this.convertDT(this.props.dt));
     }
   }
 
@@ -77,36 +76,25 @@ class Dashboard extends React.Component {
   }
 
 
-  /*  convertDT
+  /*  getTime
       params
         {dt}: unix time thingy
         {shift}: zone-shift variable 
       returns
-        {date}: converted date
+        {date}: shortened converted date (11:30, 03:20 etc)
 
       - zone shift seems irrellivent???? did I even spell that right?
   */
   convertDT(dt, shift){
     let time = dt * 1000,
-        date = new Date(time );
-    return date.toString();
+        date = new Date(time),
+        minutes = date.getMinutes().toString();
+
+
+    return (minutes.length == 1 ? `${date.getHours()}:${date.getMinutes()}` : `${date.getHours()}:${date.getMinutes()}`);
   }
 
-  /*  timeCheck(dt)
-      params
-        {dt}: unix time thingy
-      returns
-        {bool}: true = day/false = night
 
-      determines if its day or night based on dt
-
-      - for some reason, the times arent accurate???
-  */
-  timeCheck(dt, shift){
-    var time = dt + shift;
-    var date = new Date(time);
-    // console.loge(date);
-  }
 
   /*  weatherCheck(number)
       param 
@@ -117,7 +105,6 @@ class Dashboard extends React.Component {
       determines svg to return based on inputted number
   */ 
   weatherCheck(daily){   
-    this.timeCheck(this.props.dt, this.props.zoneShift);     
     /* 
       - Since there aren't many options for each category, I decided to use if statementes 
         as a placeholder
@@ -177,10 +164,10 @@ class Dashboard extends React.Component {
             <img src={icons.humidity} alt='...'/>{this.props.humidity}  
           </div>      
           <div id='sunr' className='etc' >
-            <img src={icons.sunrise} alt='...'/>{this.props.sunrise}
+            <img src={icons.sunrise} alt='...'/>{this.convertDT(this.props.sunrise)}
           </div>
           <div id='suns' className='etc' >
-            <img src={icons.sunset} alt='...'/>{this.props.sunset}
+            <img src={icons.sunset} alt='...'/>{this.convertDT(this.props.sunset)}
           </div>  
         </div>
         <div id='hourly-cont'>
@@ -188,7 +175,7 @@ class Dashboard extends React.Component {
             this.props.hourly.map((currElement, index) => {
               return(
                 <div className='hourlyCard'>
-                  <h2>{currElement.temp}</h2>
+                  <h2>{Math.round(currElement.temp)}<p id='degree'>&#8451;</p></h2>
                   <img src={this.weatherCheck(this.props.id)} alt=''/>
                   <h3>{currElement.dt}</h3>
                 </div>
