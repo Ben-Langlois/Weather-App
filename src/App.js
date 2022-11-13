@@ -91,7 +91,7 @@ class Dashboard extends React.Component {
         minutes = date.getMinutes().toString();
 
 
-    return (minutes.length == 1 ? `${date.getHours()}:${date.getMinutes()}` : `${date.getHours()}:${date.getMinutes()}`);
+    return (date.getMinutes() < 10 ? `${date.getHours()}:0${date.getMinutes()}` : `${date.getHours()}:${date.getMinutes()}`);
   }
 
 
