@@ -8,202 +8,228 @@ body{
     
 }
 
-#Dashboard{
-    #daily{
-        background-color: rgb(255, 255, 255);
-        width: 45vw;
-        height: 45vh;
-        margin: 5vh auto 0;
-        border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
-        border-radius: 1rem;
+#container{
+
+    #input-box{
+        margin: 5vh 0;
+        height: 5vh;
+    }
+
+    #Dashboard{
 
         display: grid;
-        grid-template-columns: 50% 50%;
-        grid-template-rows: 65% 35%;
+        grid-template-columns: 25vw 25vw 25vw 25vw;
+        grid-template-rows: auto;
         grid-template-areas: 
-            "icon stats" 
-            "hourly hourly";
+          ". daily daily ."
+          "weekly weekly weekly weekly";
 
-        #icon-cont{
-            // border: 1px solid red;
-            position: relative;
-            grid-area: icon;
-            
-
-            #icon{
-                margin: auto 3vw;
-
-                display: grid;
-                grid-template-columns: 75% 25%;
-                // grid-template-rows: auto;
-                grid-template-areas: 
-                    "icon temp" 
-                    "feelsLike feelsLike";
-
-                img{
-                    grid-area: icon;
-                    place-self: center;
-                }
-
-                p#degree{
-                    margin: 0;
-                    font-size: 3vh;
-                    display: inline;
-                    position: relative;
-                    bottom: 10%
-                }
-
-                #temp{
-                    grid-area: temp;
-                    place-self: center;
-                    margin: 0; // cant disable 'user agent ss' for some reason
-                    font-size: 10vh;
-
-                    p{
-                        position: relative;
-                        bottom: 5vh;
-                    }
-                }      
-                
-                #feelsLike{
-                    grid-area: feelsLike;
-                    place-self: center;
-                    margin: 0;
-                    font-size: 4vh;
-                    font-weight: bold;
-                    position: relative;
-                    bottom: 10%;
-
-                    p{
-                        position: relative;
-                        bottom: 2vh;
-                        font-size: 2vh;
-                    }
-                }
-                
-            }
-        }
-
-        #stats{
-            // display: inline-flex;
-            // width: 50%;
-            // border: 1px solid red;
-            grid-area: stats;
-            margin: auto 3vw;
-            height: 75%;
+        #daily{
+            grid-area: daily;
+            background-color: rgb(255, 255, 255);
+            width: 45vw;
+            height: 45vh;
+            margin: 5vh auto 0;
+            border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
+            border-radius: 1rem;
 
             display: grid;
             grid-template-columns: 50% 50%;
-            grid-template-rows: 50% 25% 25%;
+            grid-template-rows: 65% 35%;
             grid-template-areas: 
-                "location location" 
-                "UVI hum"
-                "sunr suns";
+                "icon stats" 
+                "hourly hourly";
 
-            #location{
-                grid-area: location;
-                display: inline-block;
-                place-self: center;
-                text-align: justify;
-
-                h2{
-                    font-size: 5vh;
-                    // font-weight: bold;
-                    margin: 0;
-                }
-            }
-
-            #uvi{
-                grid-area: UVI;
-            }
-
-            #hum{
-                grid-area: hum;
-            }
-
-            #sunr{
-                grid-area: sunr;
-            }
-
-            #suns{
-                grid-area: suns;
-            }
-
-            .etc{
-                font-weight: bold;
-                display: inline-block;
-
+            #icon-cont{
+                // border: 1px solid red;
                 position: relative;
-                top: 3vh;
-                img{
-                    height: 100%;
+                grid-area: icon;
+                
+
+                #icon{
+                    margin: auto 3vw;
+
+                    display: grid;
+                    grid-template-columns: 75% 25%;
+                    // grid-template-rows: auto;
+                    grid-template-areas: 
+                        "icon temp" 
+                        "feelsLike feelsLike";
+
+                    img{
+                        grid-area: icon;
+                        place-self: center;
+                    }
+
+                    p#degree{
+                        margin: 0;
+                        font-size: 3vh;
+                        display: inline;
+                        position: relative;
+                        bottom: 10%
+                    }
+
+                    #temp{
+                        grid-area: temp;
+                        place-self: center;
+                        margin: 0; // cant disable 'user agent ss' for some reason
+                        font-size: 10vh;
+
+                        p{
+                            position: relative;
+                            bottom: 5vh;
+                        }
+                    }      
+                    
+                    #feelsLike{
+                        grid-area: feelsLike;
+                        place-self: center;
+                        margin: 0;
+                        font-size: 4vh;
+                        font-weight: bold;
+                        position: relative;
+                        bottom: 10%;
+
+                        p{
+                            position: relative;
+                            bottom: 2vh;
+                            font-size: 2vh;
+                        }
+                    }
+                    
                 }
             }
-        }
 
-        #hourly-cont{
-            // border: 1px solid red;
-            grid-area: hourly;
-            overflow-x: auto;
-            white-space: nowrap;
-            display: flex;
-            flex-direction: row;
-            // justify-content: space-evenly;
-
-            .hourlyCard{
-                border: 1px solid red;
+            #stats{
                 // display: inline-flex;
-                height: 85%;
-                min-width: 5vw;
-                margin: 1% 0.8vw;
-                justify-content: center;
+                // width: 50%;
+                // border: 1px solid red;
+                grid-area: stats;
+                margin: auto 3vw;
+                height: 75%;
 
                 display: grid;
-                grid-template-rows: 30% 50% 20%;
+                grid-template-columns: 50% 50%;
+                grid-template-rows: 50% 25% 25%;
                 grid-template-areas: 
-                    "temp" 
-                    "icon"
-                    "time";
+                    "location location" 
+                    "UVI hum"
+                    "sunr suns";
 
-                h2{
-                    grid-area: temp;
+                #location{
+                    grid-area: location;
+                    display: inline-block;
+                    place-self: center;
+                    text-align: justify;
 
+                    h2{
+                        font-size: 5vh;
+                        // font-weight: bold;
+                        margin: 0;
+                    }
                 }
 
-                img{
-                    grid-area: icon;
-
+                #uvi{
+                    grid-area: UVI;
                 }
 
-                h3{
-                    grid-area: time;
-                    overflow: hidden;
+                #hum{
+                    grid-area: hum;
                 }
-            }                
 
+                #sunr{
+                    grid-area: sunr;
+                }
+
+                #suns{
+                    grid-area: suns;
+                }
+
+                .etc{
+                    font-weight: bold;
+                    display: inline-block;
+
+                    position: relative;
+                    top: 3vh;
+                    img{
+                        height: 100%;
+                    }
+                }
+            }
+
+            #hourly-cont{
+                // border: 1px solid red;
+                grid-area: hourly;
+                overflow-x: auto;
+                white-space: nowrap;
+                display: flex;
+                flex-direction: row;
+                // justify-content: space-evenly;
+
+                .hourlyCard{
+                    border: 1px solid red;
+                    // display: inline-flex;
+                    height: 85%;
+                    min-width: 5vw;
+                    margin: 1% 0.8vw;
+                    justify-content: center;
+
+                    display: grid;
+                    grid-template-rows: 30% 50% 20%;
+                    grid-template-areas: 
+                        "temp" 
+                        "icon"
+                        "time";
+
+                    h2{
+                        grid-area: temp;
+
+                        p{
+                            display: inline-block;
+                        }
+                    }
+
+                    img{
+                        grid-area: icon;
+
+                    }
+
+                    h3{
+                        grid-area: time;
+                        overflow: hidden;
+                    }
+                }                
+
+            }
         }
-    }
 
-    #weekly{
-        background-color: rgb(255, 255, 255);
-        display: flex;
-        margin: 5vh auto 0;
+        #weekly{
+            grid-area: weekly;
 
-        justify-content: space-between;
+            background-color: rgb(255, 255, 255);
+            display: flex;
+            margin: 5vh auto 0;
 
-        .card{
-            display: inline-flex;
-            width: clamp(20vw, 300px, 25vw);
-            height: 35vh;
-            margin: 0 0.5vw;
+            justify-content: space-between;
+
+
             
+            .card{
+                display: inline-flex;
+                width: clamp(15vw, 100px, 20vw);
+                height: 35vh;
+                margin: 0 0.5vw;
+                
 
-            flex-direction: row;
-            flex-wrap: wrap;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
         }
-
-    }
+    }    
 }
+
+
 
 
 

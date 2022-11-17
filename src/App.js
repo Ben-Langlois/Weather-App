@@ -145,44 +145,44 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div id='Dashboard'>{/*current={this.props.current} city={this.props.city} country={this.props.country}*/}    
-      <div id='daily'>  
-        <div id='icon-cont'>    {/* Need to update componentDidUpdate with changes to DOM */}
-          <div id='icon'>
-            <img src='...' alt=''/>
-            <p id='temp'>{this.props.temp}<p id='degree'>&#8451;</p></p>
-            <p id='feelsLike'>Feels Like {this.props.feelsLike}<p id='degree'>&#8451;</p></p> {/* Need to include 'Feels Like: ' w/o showing to early */}
-          </div>
-        </div>      
-        <div id='stats'>  
-          <div id='location'>
-            <h2>{this.props.city}&nbsp;<br/><b>{this.props.country}</b></h2>
-          </div>
-          <div id='uvi' className='etc'>
-            <img src={icons.UVI} alt='...' /> {this.props.uvi}
-          </div>
-          <div id='hum' className='etc' >
-            <img src={icons.humidity} alt='...'/>{this.props.humidity}  
+        <div id='daily'>  
+          <div id='icon-cont'>    {/* Need to update componentDidUpdate with changes to DOM */}
+            <div id='icon'>
+              <img src='...' alt=''/>
+              <p id='temp'>{this.props.temp}<p id='degree'>&#8451;</p></p>
+              <p id='feelsLike'>Feels Like {this.props.feelsLike}<p id='degree'>&#8451;</p></p> {/* Need to include 'Feels Like: ' w/o showing to early */}
+            </div>
           </div>      
-          <div id='sunr' className='etc' >
-            <img src={icons.sunrise} alt='...'/>{this.convertDT(this.props.sunrise)}
+          <div id='stats'>  
+            <div id='location'>
+              <h2>{this.props.city}&nbsp;<br/><b>{this.props.country}</b></h2>
+            </div>
+            <div id='uvi' className='etc'>
+              <img src={icons.UVI} alt='...' /> {this.props.uvi}
+            </div>
+            <div id='hum' className='etc' >
+              <img src={icons.humidity} alt='...'/>{this.props.humidity}  
+            </div>      
+            <div id='sunr' className='etc' >
+              <img src={icons.sunrise} alt='...'/>{this.convertDT(this.props.sunrise)}
+            </div>
+            <div id='suns' className='etc' >
+              <img src={icons.sunset} alt='...'/>{this.convertDT(this.props.sunset)}
+            </div>  
           </div>
-          <div id='suns' className='etc' >
-            <img src={icons.sunset} alt='...'/>{this.convertDT(this.props.sunset)}
-          </div>  
-        </div>
-        <div id='hourly-cont'>
-          {
-            this.props.hourly.map((currElement, index) => {
-              return(
-                <div className='hourlyCard'>
-                  <h2>{Math.round(currElement.temp)}<p id='degree'>&#8451;</p></h2>
-                  <img src={this.weatherCheck(this.props.id)} alt=''/>
-                  <h3>{currElement.dt}</h3>
-                </div>
-              )
-            })
-          }
-        </div>
+          <div id='hourly-cont'>
+            {
+              this.props.hourly.map((currElement, index) => {
+                return(
+                  <div className='hourlyCard'>
+                    <h2>{Math.round(currElement.temp)}<p id='degree'>&#8451;</p></h2>
+                    <img src={this.weatherCheck(this.props.id)} alt=''/>
+                    <h3>{this.convertDT(currElement.dt)}</h3>
+                  </div>
+                )
+              })
+            }
+          </div>
       </div>        
       <div id='weekly'>
           { // use the currElement to get the object values
@@ -281,7 +281,7 @@ class App extends React.Component {
 
   render(){
     return (
-      <div>  
+      <div id='container'>  
         <div id='input-box' className="input-group input-group-sm w-50 mb-3 mx-auto my-5">
           <div className="input-group-prepend">
             <span className="input-group-text" id="inputGroup-sizing-sm">Location</span>
