@@ -154,8 +154,13 @@ class Dashboard extends React.Component {
             </div>
           </div>      
           <div id='stats'>  
+            <div id='desc'>
+              <h1>
+                <b>{this.props.main}</b>
+              </h1>
+            </div>
             <div id='location'>
-              <h2>{this.props.city}&nbsp;<br/><b>{this.props.country}</b></h2>
+              <h2>{this.props.city}&nbsp;<b>{this.props.country}</b></h2>
             </div>
             <div id='uvi' className='etc'>
               <img src={icons.UVI} alt='...' /> {this.props.uvi}

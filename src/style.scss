@@ -11,7 +11,9 @@ body{
 #container{
 
     #input-box{
-        margin: 5vh 0;
+        margin-top: 1rem !important;
+        margin-bottom: 1rem !important;
+
         height: 5vh;
     }
 
@@ -28,8 +30,8 @@ body{
             grid-area: daily;
             background-color: rgb(255, 255, 255);
             width: 45vw;
-            height: 45vh;
-            margin: 5vh auto 0;
+            height: 60vh;
+            margin: 0 auto 0;
             border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
             border-radius: 1rem;
 
@@ -110,16 +112,24 @@ body{
 
                 display: grid;
                 grid-template-columns: 50% 50%;
-                grid-template-rows: 50% 25% 25%;
+                grid-template-rows: 30% 20% 25% 25%;
                 grid-template-areas: 
+                    "desc desc"
                     "location location" 
                     "UVI hum"
                     "sunr suns";
 
+                #desc{
+                    grid-area: desc;
+                    display:inline-block;
+                    place-self: start;
+                    
+                }
+
                 #location{
                     grid-area: location;
                     display: inline-block;
-                    place-self: center;
+                    place-self: start;
                     text-align: justify;
 
                     h2{
@@ -208,7 +218,7 @@ body{
 
             background-color: rgb(255, 255, 255);
             display: flex;
-            margin: 5vh auto 0;
+            margin: 1rem auto 0;
 
             justify-content: space-between;
 
