@@ -13,7 +13,7 @@ import * as icons from './icons/icons.js';
     https://openweathermap.org/api/one-call-api    
 
     Must Do
-
+    - make base font heavier but not bold
     - creating timeCheck function to determine icons based on time (Dashboard/timeCheck())
         trying to hoist timezone_offset to determine time of location
           let time = (dt + timezone_offset).convert to real time
@@ -27,10 +27,10 @@ import * as icons from './icons/icons.js';
     
     Want To Do
     - find way to be more specific in input, ie allow Paris, Texas instead of always getting Paris, France
-    - find different API to do whole process in 1 call !2
     - replace card with https://github.com/Yevgenium/weather-chart-card 
+    - find different API to do whole process in 1 call !2
     - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
-
+    - Make convertDT return am/pm values instead of 24hr format
 
     Current Task
     - style current and daily cards
@@ -83,6 +83,7 @@ class Dashboard extends React.Component {
       returns
         {date}: shortened converted date (11:30, 03:20 etc)
 
+      - implement return value formatted as am/pm not 24hr format
       - zone shift seems irrellivent???? did I even spell that right?
   */
   convertDT(dt, shift){
@@ -151,6 +152,7 @@ class Dashboard extends React.Component {
               <img src='...' alt=''/>
               <p id='temp'>{this.props.temp}<p id='degree'>&#8451;</p></p>
               <p id='feelsLike'>Feels Like {this.props.feelsLike}<p id='degree'>&#8451;</p></p> {/* Need to include 'Feels Like: ' w/o showing to early */}
+              <p id='asof'>As Of {this.convertDT(this.props.dt, this.props.zoneShift)}</p>
             </div>
           </div>      
           <div id='stats'>  
