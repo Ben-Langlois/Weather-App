@@ -33,7 +33,7 @@ body{
             height: 60vh;
             margin: 0 auto 0;
             border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
-            border-radius: 1rem;
+            border-radius: 0.25rem;
 
             display: grid;
             grid-template-columns: 50% 50%;
@@ -175,12 +175,15 @@ body{
                 // justify-content: space-evenly;
 
                 .hourlyCard{
-                    border: 1px solid red;
+                    // border: 1px solid red;
                     // display: inline-flex;
                     height: 85%;
                     min-width: 5vw;
                     margin: 1% 0.8vw;
                     justify-content: center;
+
+                    border: 1px solid rgba(0, 0, 0, 0.125);
+                    border-radius: 0.25rem;
 
                     display: grid;
                     grid-template-rows: 25% 50% 25%;
@@ -191,9 +194,12 @@ body{
 
                     h2{
                         grid-area: temp;
+                        place-self: center;
+                        margin: 0;
 
                         p{
                             display: inline-block;
+                            margin: inherit;
                         }
                     }
 
@@ -206,6 +212,8 @@ body{
                         grid-area: time;
                         overflow: hidden;
                         margin: 0;
+                        place-self: center;
+
                     }
                 }                
 
@@ -215,24 +223,24 @@ body{
         #weekly{
             grid-area: weekly;
 
-            background-color: rgb(255, 255, 255);
+            background-color: rgb(249, 250, 251);
             display: flex;
             margin: 1rem auto 0;
-
+            // width: 100vw;
             justify-content: space-between;
 
+            // overflow: hidden;
+                .card{
+                    display: inline-flex;
+                    width: clamp(15vw, 100px, 20vw);
+                    height: 35vh;
+                    margin: 0 0.5vw;
+                    
 
-            
-            .card{
-                display: inline-flex;
-                width: clamp(15vw, 100px, 20vw);
-                height: 35vh;
-                margin: 0 0.5vw;
-                
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                }
 
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
 
         }
     }    

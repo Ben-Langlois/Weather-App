@@ -35,7 +35,8 @@ import * as icons from './icons/icons.js';
     Current Task
     - style current and daily cards
       - styling hourly section 
-          - if time ends in 0 it wont display the zero (in convertDT)
+        - need to get icons for cloud coverage, humidity from desktop (am on laptop rn)
+
 
       RESOURCES    
       - curent cards
@@ -88,9 +89,7 @@ class Dashboard extends React.Component {
   */
   convertDT(dt, shift){
     let time = dt * 1000,
-        date = new Date(time),
-        minutes = date.getMinutes().toString();
-
+        date = new Date(time);
 
     return (date.getMinutes() < 10 ? `${date.getHours()}:0${date.getMinutes()}` : `${date.getHours()}:${date.getMinutes()}`);
   }
@@ -164,16 +163,16 @@ class Dashboard extends React.Component {
             <div id='location'>
               <h2>{this.props.city}&nbsp;<b>{this.props.country}</b></h2>
             </div>
-            <div id='uvi' className='etc'>
-              <img src={icons.UVI} alt='...' /> {this.props.uvi}
+            <div id='uvi' className='etc' title='Cloud Coverage'> {/* should eventually convert css to reflect actual value*/}
+              <img src={icons.UVI} alt='...' /> {this.props.clouds}
             </div>
-            <div id='hum' className='etc' >
+            <div id='hum' className='etc' title='Humidity'> 
               <img src={icons.humidity} alt='...'/>{this.props.humidity}  
             </div>      
-            <div id='sunr' className='etc' >
+            <div id='sunr' className='etc' title='Sunrise'>
               <img src={icons.sunrise} alt='...'/>{this.convertDT(this.props.sunrise)}
             </div>
-            <div id='suns' className='etc' >
+            <div id='suns' className='etc' title='Sunset'>
               <img src={icons.sunset} alt='...'/>{this.convertDT(this.props.sunset)}
             </div>  
           </div>
@@ -190,22 +189,22 @@ class Dashboard extends React.Component {
               })
             }
           </div>
-      </div>        
-      <div id='weekly'>
-          { // use the currElement to get the object values
-            this.props.daily.map((currElement, index) => {
-              return( // using a bootstrap card
-                <div className="card">
-                  <img className="card-img-top" src='...' alt=''></img>
-                  <div className="card-body">
-                    <h5 className="card-title">{index}</h5>
-                    <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+        </div>        
+        <div id='weekly'>
+            { // use the currElement to get the object values
+              this.props.daily.map((currElement, index) => {
+                return( // using a bootstrap card
+                  <div className="card">
+                    <img className="card-img-top" src='...' alt=''></img>
+                    <div className="card-body">
+                      <h5 className="card-title">{index}</h5>
+                      <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                      <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
                   </div>
-                </div>
-              )
-            })
-          }
+                )
+              })
+            }
         </div>
       </div>
     );
@@ -256,7 +255,7 @@ class App extends React.Component {
       })
       .then(response => response.json())
       .then(data => {     // store desired API data in state
-
+        console.log(data.current);
         // pooling values in an object so they're readable and state isnt just a top level eval 
         const propObj = {current: {...data.current}, daily: [...data.daily], hourly: [...data.hourly]};
 
@@ -265,6 +264,7 @@ class App extends React.Component {
           desc: propObj.current.weather[0].desc,
           id: propObj.current.weather[0].id,
           dt: propObj.current.dt,
+          clouds: propObj.current.clouds,
           feelsLike: Math.round(propObj.current.feels_like),
           humidity: propObj.current.humidity,
           pressure: propObj.current.pressure,
