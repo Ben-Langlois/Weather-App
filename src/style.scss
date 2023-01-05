@@ -259,3 +259,16 @@ body{
     font-family: Didact;
     src: url(./fonts/DidactGothic-Regular.ttf);
  }
+
+
+//  Media Queries
+// Small Laptops (mine)
+@media (max-width: 1640px) {
+    #container{
+        #Dashboard{
+            #weekly{
+                 margin-top: 0 !important;
+            }             
+        }
+    }
+}
