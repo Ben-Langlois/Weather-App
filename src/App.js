@@ -198,12 +198,14 @@ class Dashboard extends React.Component {
               this.props.daily.map((currElement, index) => {
                 return( // using a bootstrap card
                   <div className="card">
-                    <img className="card-img-top" src='...' alt=''></img>
-                    <div className="card-body">
-                      <h5 className="card-title">{index}</h5>
-                      <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
+                    <div id='date'>a</div>
+                    <div id='icon'>&nbsp;</div>
+                    <div id='temp'>&nbsp;</div>
+                    <div id='feelsLike'>&nbsp;</div>
+                    <div id='cloud'>&nbsp;</div>
+                    <div id='high'>&nbsp;</div>
+                    <div id='prec'>&nbsp;</div>
+                    <div id='low'>&nbsp;</div>
                   </div>
                 )
               })

@@ -249,15 +249,63 @@ body{
 
             // overflow: hidden;
                 .card{
-                    display: inline-flex;
-                    width: clamp(15vw, 100px, 20vw);
+                    width: 30vw;
                     // height: 35vh;
                     flex: 1 1 auto;
 
                     margin: 0 0.5vw;
                     flex-direction: row;
                     flex-wrap: wrap;
-                }
+
+                    display: grid;
+                    grid-template-columns: 10% 20% 20% 20% 20% 10%;
+                    grid-template-rows: 5% 10% 35% 15% 15% 15% 5%;
+                    grid-template-areas: 
+                        ". . . ."
+                        ". date date date date ." 
+                        ". icon icon temp temp ."
+                        ". feels feels feels feels ."
+                        ". cloud cloud high high ."
+                        ". prec prec low low ."
+                        ". . . .";
+
+                    div{
+                        border: 1px solid red;
+                    }
+
+                    #date{
+                        grid-area: date;
+                    }
+
+                    #icon{
+                        grid-area: icon;
+                    }
+
+                    #temp{
+                        grid-area: temp;
+                    }
+
+                    #feelsLike{
+                        grid-area: feels;
+                    }
+
+                    #cloud{     // will pot. change to humidity
+                        grid-area: cloud;
+                    }
+
+                    #high{
+                        grid-area: high;
+                    }
+
+                    #prec{
+                        grid-area: prec;}
+                    }
+
+                    #low{
+                        grid-area: low;
+                    }
+                
+
 
 
         }
