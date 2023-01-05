@@ -31,11 +31,14 @@ import * as icons from './icons/icons.js';
     - find different API to do whole process in 1 call !2
     - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
     - Make convertDT return am/pm values instead of 24hr format
+    - include more info in hourly section
 
     Current Task
+    - redefining dashboard grid to include input, so I can properly size other elements
+
     - style current and daily cards
-      - styling hourly section 
-        - need to get icons for cloud coverage, humidity from desktop (am on laptop rn)
+      - styling daily section 
+          - defining grid
 
 
       RESOURCES    
@@ -164,7 +167,7 @@ class Dashboard extends React.Component {
               <h2>{this.props.city}&nbsp;<b>{this.props.country}</b></h2>
             </div>
             <div id='uvi' className='etc' title='Cloud Coverage'> {/* should eventually convert css to reflect actual value*/}
-              <img src={icons.UVI} alt='...' /> {this.props.clouds}
+              <img src={icons.clouds} alt='...' /> {this.props.clouds}
             </div>
             <div id='hum' className='etc' title='Humidity'> 
               <img src={icons.humidity} alt='...'/>{this.props.humidity}  
@@ -289,12 +292,14 @@ class App extends React.Component {
   render(){
     return (
       <div id='container'>  
-        <div id='input-box' className="input-group input-group-sm w-50 mb-3 mx-auto my-5">
-          <div className="input-group-prepend">
-            <span className="input-group-text" id="inputGroup-sizing-sm">Location</span>
-          </div>
-          <input id='submit' type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='eg. Toronto, New York, Paris'></input>
-        </div>  
+        <div id='input-container'>
+          <div id='input-box' className="input-group input-group-sm w-50 mx-auto">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="inputGroup-sizing-sm">Location</span>
+            </div>
+            <input id='submit' type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='eg. Toronto, New York, Paris'></input>
+          </div>  
+        </div>
         <Dashboard {...this.state}/>
       </div>
     );

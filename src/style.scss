@@ -4,19 +4,35 @@ body{
 }
 
 /* to allow degree symbol to be dynamically set */
-#degree{
+// #degree{
     
-}
+// }
 
 #container{
+    height: 100vh;
 
-    #input-box{
-        margin-top: 1rem !important;
-        margin-bottom: 1rem !important;
+    #input-container{
+        padding-top: 2.5vh !important;
+        padding-bottom: 2.5vh !important;
 
-        height: 5vh;
+        #input-box{
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            height: 5vh;
+            
+            .input-group-prepend{
+                .input-group-text{
+                    height: 5vh;            // to have it match #input-box height
+                }
+            } 
+            
+            #submit{
+                font-size: 2.5vh;
+            }
+
+        }
     }
-
+    
     #Dashboard{
 
         display: grid;
@@ -225,18 +241,20 @@ body{
 
             background-color: rgb(249, 250, 251);
             display: flex;
-            margin: 1rem auto 0;
+            // margin: 1rem auto 0;
+            padding-top: 2.5vh;
             width: 100vw;
+            height: 30vh;
             justify-content: space-between;
 
             // overflow: hidden;
                 .card{
                     display: inline-flex;
                     width: clamp(15vw, 100px, 20vw);
-                    height: 35vh;
-                    margin: 0 0.5vw;
-                    
+                    // height: 35vh;
+                    flex: 1 1 auto;
 
+                    margin: 0 0.5vw;
                     flex-direction: row;
                     flex-wrap: wrap;
                 }
@@ -250,9 +268,7 @@ body{
 
 
 
-#submit{
-    font: bold 2.3vh/1.5vh;
-}
+
 
 /* Fonts */
 @font-face {
