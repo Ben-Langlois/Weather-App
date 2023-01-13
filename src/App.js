@@ -5,6 +5,9 @@ import $ from 'jquery';
 import * as icons from './icons/icons.js';
 // var ReactDOM = require('react-dom');
 
+// Global variables
+var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
 /*  React Weather App
     A react app, styled with mostly my own CSS/SASS, some Bootstrap components, and an open-source SVG library to display statistics of inputted city. Once city is inputted
     the API is called and returns on object which we pull our desired values from for determination of the icons and display of said values.
@@ -84,17 +87,22 @@ class Dashboard extends React.Component {
       params
         {dt}: unix time thingy
         {shift}: zone-shift variable 
+        {rv}: return value
       returns
         {date}: shortened converted date (11:30, 03:20 etc)
 
       - implement return value formatted as am/pm not 24hr format
       - zone shift seems irrellivent???? did I even spell that right?
   */
-  convertDT(dt, shift){
+  convertDT(dt, rv){
     let time = dt * 1000,
         date = new Date(time);
 
-    return (date.getMinutes() < 10 ? `${date.getHours()}:0${date.getMinutes()}` : `${date.getHours()}:${date.getMinutes()}`);
+    if(rv === 'time'){  // if user requests the time
+      return (date.getMinutes() < 10 ? `${date.getHours()}:0${date.getMinutes()}` : `${date.getHours()}:${date.getMinutes()}`);
+    } else if(rv == 'day'){  // if user requests the day 
+      return weekdays.slice(date.getDay(), date.getDay() + 1) // returns day of the week corresponding to dt
+    }
   }
 
 
@@ -154,7 +162,7 @@ class Dashboard extends React.Component {
               <img src='...' alt=''/>
               <p id='temp'>{this.props.temp}<p id='degree'>&#8451;</p></p>
               <p id='feelsLike'>Feels Like {this.props.feelsLike}<p id='degree'>&#8451;</p></p> {/* Need to include 'Feels Like: ' w/o showing to early */}
-              <p id='asof'>As Of {this.convertDT(this.props.dt, this.props.zoneShift)}</p>
+              <p id='asof'>As Of {this.convertDT(this.props.dt, 'time')}</p>
             </div>
           </div>      
           <div id='stats'>  
@@ -186,7 +194,7 @@ class Dashboard extends React.Component {
                   <div className='hourlyCard'>
                     <h2>{Math.round(currElement.temp)}<p id='degree'>&#8451;</p></h2>
                     <img src={this.weatherCheck(this.props.id)} alt=''/>
-                    <h3>{this.convertDT(currElement.dt)}</h3>
+                    <h3>{this.convertDT(currElement.dt, 'time')}</h3>
                   </div>
                 )
               })
@@ -198,10 +206,12 @@ class Dashboard extends React.Component {
               this.props.daily.map((currElement, index) => {
                 return( // using a bootstrap card
                   <div className="card">
-                    <div id='date'>a</div>
+                    <div id='date'>
+                      <div><b>{this.convertDT(currElement.dt, 'day')}</b></div>
+                    </div>
                     <div id='icon'>&nbsp;</div>
                     <div id='temp'>&nbsp;</div>
-                    <div id='feelsLike'>&nbsp;</div>
+                     <div id='feelsLike'>Feels Like {/*{currElement.feels_like}*/}</div> {/* dont work for some reason */}
                     <div id='cloud'>&nbsp;</div>
                     <div id='high'>&nbsp;</div>
                     <div id='prec'>&nbsp;</div>

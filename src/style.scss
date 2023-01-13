@@ -259,15 +259,13 @@ body{
 
                     display: grid;
                     grid-template-columns: 10% 20% 20% 20% 20% 10%;
-                    grid-template-rows: 5% 10% 35% 15% 15% 15% 5%;
+                    grid-template-rows: 15% 40% 15% 15% 15%;
                     grid-template-areas: 
-                        ". . . ."
                         ". date date date date ." 
                         ". icon icon temp temp ."
                         ". feels feels feels feels ."
                         ". cloud cloud high high ."
-                        ". prec prec low low ."
-                        ". . . .";
+                        ". prec prec low low .";
 
                     div{
                         border: 1px solid red;
@@ -275,6 +273,15 @@ body{
 
                     #date{
                         grid-area: date;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        
+                        div{
+                            // display: inline-block;
+                            font-size: 1.3rem;
+                            border: none;
+                        }
                     }
 
                     #icon{
