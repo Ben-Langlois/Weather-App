@@ -269,6 +269,7 @@ body{
 
                     div{
                         border: 1px solid red;
+
                     }
 
                     #date{
@@ -294,6 +295,21 @@ body{
 
                     #feelsLike{
                         grid-area: feels;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        
+                        div{
+                            // display: inline-block;
+                            font-size: 1.3rem;
+                            border: none;
+
+                            #degree{    // required for something only god knows
+                                display: inline-block;
+                                margin: 0;
+                            }
+                        }
+
                     }
 
                     #cloud{     // will pot. change to humidity

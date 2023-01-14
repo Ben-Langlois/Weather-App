@@ -204,6 +204,8 @@ class Dashboard extends React.Component {
         <div id='weekly'>
             { // use the currElement to get the object values
               this.props.daily.map((currElement, index) => {
+                let feelsLikeObj = currElement.feels_like,
+                    feelsLike = feelsLikeObj.day;
                 return( // using a bootstrap card
                   <div className="card">
                     <div id='date'>
@@ -211,8 +213,11 @@ class Dashboard extends React.Component {
                     </div>
                     <div id='icon'>&nbsp;</div>
                     <div id='temp'>&nbsp;</div>
-                     <div id='feelsLike'>Feels Like {/*{currElement.feels_like}*/}</div> {/* dont work for some reason */}
-                    <div id='cloud'>&nbsp;</div>
+                    <div id='feelsLike'>
+                      <div><b>Feels Like {Math.round(feelsLike)}<p id='degree'>&#8451;</p></b></div>
+                    </div> {/* dont work for some reason */}
+                    <div id='cloud' title='Cloud Coverage'>              
+                      <img src={icons.clouds} alt='...' /> {currElement.clouds}</div>
                     <div id='high'>&nbsp;</div>
                     <div id='prec'>&nbsp;</div>
                     <div id='low'>&nbsp;</div>
@@ -270,7 +275,7 @@ class App extends React.Component {
       })
       .then(response => response.json())
       .then(data => {     // store desired API data in state
-        console.log(data.current);
+        // console.log(data.current);
         // pooling values in an object so they're readable and state isnt just a top level eval 
         const propObj = {current: {...data.current}, daily: [...data.daily], hourly: [...data.hourly]};
 
