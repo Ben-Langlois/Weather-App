@@ -268,7 +268,7 @@ body{
                         ". prec prec low low .";
 
                     div{
-                        border: 1px solid red;
+                        // border: 1px solid red;
 
                     }
 
@@ -287,10 +287,31 @@ body{
 
                     #icon{
                         grid-area: icon;
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                     }
 
                     #temp{
                         grid-area: temp;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+
+                        h2{
+                            margin: 0; // cant disable 'user agent ss' for some reason
+    
+
+                            #degree{
+                                display: inline-block;
+                                margin: 0;
+                            }
+                        }   
+                            h2#temp{
+                                font-size: 2rem;
+                            }
+
                     }
 
                     #feelsLike{
@@ -314,6 +335,10 @@ body{
 
                     #cloud{     // will pot. change to humidity
                         grid-area: cloud;
+
+                        img{
+                            height: 100%;
+                        }
                     }
 
                     #high{

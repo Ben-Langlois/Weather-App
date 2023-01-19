@@ -204,20 +204,22 @@ class Dashboard extends React.Component {
         <div id='weekly'>
             { // use the currElement to get the object values
               this.props.daily.map((currElement, index) => {
-                let feelsLikeObj = currElement.feels_like,
-                    feelsLike = feelsLikeObj.day;
                 return( // using a bootstrap card
                   <div className="card">
                     <div id='date'>
                       <div><b>{this.convertDT(currElement.dt, 'day')}</b></div>
                     </div>
-                    <div id='icon'>&nbsp;</div>
-                    <div id='temp'>&nbsp;</div>
+                    <div id='icon'>                   
+                      <img src={this.weatherCheck(currElement.weather[0].id)} alt=''/>
+                    </div>
+                    <div id='temp'>
+                      <h2 id='temp'>{Math.round(currElement.temp.day)}<p id='degree'>&#8451;</p></h2>
+                    </div>
                     <div id='feelsLike'>
-                      <div><b>Feels Like {Math.round(feelsLike)}<p id='degree'>&#8451;</p></b></div>
+                      <div><b>Feels Like {Math.round(currElement.feels_like.day)}<p id='degree'>&#8451;</p></b></div>
                     </div> {/* dont work for some reason */}
                     <div id='cloud' title='Cloud Coverage'>              
-                      <img src={icons.clouds} alt='...' /> {currElement.clouds}</div>
+                      <img src={icons.clouds} alt='...' /> {currElement.clouds}%</div>
                     <div id='high'>&nbsp;</div>
                     <div id='prec'>&nbsp;</div>
                     <div id='low'>&nbsp;</div>
