@@ -181,10 +181,10 @@ class Dashboard extends React.Component {
               <img src={icons.humidity} alt='...'/>{this.props.humidity}  
             </div>      
             <div id='sunr' className='etc' title='Sunrise'>
-              <img src={icons.sunrise} alt='...'/>{this.convertDT(this.props.sunrise)}
+              <img src={icons.sunrise} alt='...'/>{this.convertDT(this.props.sunrise, 'time')}
             </div>
             <div id='suns' className='etc' title='Sunset'>
-              <img src={icons.sunset} alt='...'/>{this.convertDT(this.props.sunset)}
+              <img src={icons.sunset} alt='...'/>{this.convertDT(this.props.sunset, 'time')}
             </div>  
           </div>
           <div id='hourly-cont'>
@@ -219,10 +219,17 @@ class Dashboard extends React.Component {
                       <div><b>Feels Like {Math.round(currElement.feels_like.day)}<p id='degree'>&#8451;</p></b></div>
                     </div> {/* dont work for some reason */}
                     <div id='cloud' title='Cloud Coverage'>              
-                      <img src={icons.clouds} alt='...' /> {currElement.clouds}%</div>
-                    <div id='high'>&nbsp;</div>
-                    <div id='prec'>&nbsp;</div>
-                    <div id='low'>&nbsp;</div>
+                      <img src={icons.clouds} alt='...' />{currElement.clouds}%
+                    </div>
+                    <div id='high' title='High Temp'>
+                      <img src={icons.high} alt='...'/>{Math.round(currElement.temp.max)}<p id='degree'>&#8451;</p>
+                    </div>
+                    <div id='hum' title='Humidity'>
+                      <img src={icons.humidity} alt='...'/>{currElement.humidity}%
+                    </div>
+                    <div id='low' title='Low Temp'>
+                      <img src={icons.low} alt='...'/>{Math.round(currElement.temp.min)}<p id='degree'>&#8451;</p>
+                    </div>
                   </div>
                 )
               })

@@ -4,9 +4,10 @@ body{
 }
 
 /* to allow degree symbol to be dynamically set */
-// #degree{
-    
-// }
+#degree{    // required for something only god knows
+    display: inline-block;
+    margin: 0;
+}
 
 #container{
     height: 100vh;
@@ -46,6 +47,7 @@ body{
             grid-area: daily;
             background-color: rgb(255, 255, 255);
             width: 45vw;
+            min-width: 730px;
             height: 60vh;
             margin: 0 auto 0;
             border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
@@ -247,113 +249,114 @@ body{
             height: 30vh;
             justify-content: space-between;
 
-            // overflow: hidden;
-                .card{
-                    width: 30vw;
-                    // height: 35vh;
-                    flex: 1 1 auto;
+            overflow: scroll;
 
-                    margin: 0 0.5vw;
-                    flex-direction: row;
-                    flex-wrap: wrap;
+            .card:nth-child(1){
+                border-color: black;
+            }
 
-                    display: grid;
-                    grid-template-columns: 10% 20% 20% 20% 20% 10%;
-                    grid-template-rows: 15% 40% 15% 15% 15%;
-                    grid-template-areas: 
-                        ". date date date date ." 
-                        ". icon icon temp temp ."
-                        ". feels feels feels feels ."
-                        ". cloud cloud high high ."
-                        ". prec prec low low .";
+            .card{
+                min-width: 235px;
+                // height: 35vh;
+                flex: 1 1 auto;
 
+                margin: 0 0.5vw;
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                display: grid;
+                grid-template-columns: 10% 20% 20% 20% 20% 10%;
+                grid-template-rows: 15% 40% 15% 15% 15%;
+                grid-template-areas: 
+                    ". date date date date ." 
+                    ". icon icon temp temp ."
+                    ". feels feels feels feels ."
+                    ". cloud cloud high high ."
+                    ". hum hum low low .";
+
+                div{
+                    // border: 1px solid red;
+
+                }
+
+                #date{
+                    grid-area: date;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    
                     div{
-                        // border: 1px solid red;
-
+                        // display: inline-block;
+                        font-size: 1.3rem;
+                        border: none;
                     }
+                }
 
-                    #date{
-                        grid-area: date;
+                #icon{
+                    grid-area: icon;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                #temp{
+                    grid-area: temp;
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        
-                        div{
-                            // display: inline-block;
-                            font-size: 1.3rem;
-                            border: none;
-                        }
-                    }
 
-                    #icon{
-                        grid-area: icon;
+                    h2{
+                        margin: 0; // cant disable 'user agent ss' for some reason
 
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                    }
 
-                    #temp{
-                        grid-area: temp;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-
-                        h2{
-                            margin: 0; // cant disable 'user agent ss' for some reason
-    
-
-                            #degree{
-                                display: inline-block;
-                                margin: 0;
-                            }
-                        }   
-                            h2#temp{
-                                font-size: 2rem;
-                            }
-
-                    }
-
-                    #feelsLike{
-                        grid-area: feels;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        
-                        div{
-                            // display: inline-block;
-                            font-size: 1.3rem;
-                            border: none;
-
-                            #degree{    // required for something only god knows
-                                display: inline-block;
-                                margin: 0;
-                            }
+                    }   
+                        h2#temp{
+                            font-size: 2rem;
                         }
 
+                }
+
+                #feelsLike{
+                    grid-area: feels;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    
+                    div{
+                        // display: inline-block;
+                        font-size: 1.3rem;
+                        border: none;
                     }
 
-                    #cloud{     // will pot. change to humidity
-                        grid-area: cloud;
-
-                        img{
-                            height: 100%;
-                        }
-                    }
-
-                    #high{
-                        grid-area: high;
-                    }
-
-                    #prec{
-                        grid-area: prec;}
-                    }
-
-                    #low{
-                        grid-area: low;
-                    }
+                }
                 
+                img{
+                    height: 100%;
+                }
 
+                #cloud{     // will pot. change to humidity
+                    grid-area: cloud;
+
+
+                }
+
+                #high{
+                    grid-area: high;
+                }
+
+                #hum{
+                    grid-area: hum;
+                }
+
+                #low{
+                    grid-area: low;
+                }
+
+                transition: transform 300ms ease-in-out;
+            }:hover{
+                transform: scale(1.1, 1.1);
+            }
 
 
         }
