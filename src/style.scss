@@ -250,6 +250,7 @@ body{
             justify-content: space-between;
 
             overflow: scroll;
+            overflow-y: hidden;
 
             .card:nth-child(1){
                 border-color: black;
@@ -354,11 +355,17 @@ body{
                 }
 
                 transition: transform 300ms ease-in-out;
-            }:hover{
-                transform: scale(1.1, 1.1);
+            }
+            
+            .card:hover{
+                transform: scale(1.05, 1.05);
             }
 
 
+        }::-webkit-scrollbar{
+            // height: 1.5rem;
+        }::-webkit-scrollbar-track{
+            display: none;
         }
     }    
 }
