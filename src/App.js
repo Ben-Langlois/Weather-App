@@ -37,11 +37,9 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
     - include more info in hourly section
 
     Current Task
-    - redefining dashboard grid to include input, so I can properly size other elements
-
-    - style current and daily cards
-      - styling daily section 
-          - defining grid
+    - working on media queries
+      - for second query:
+        - center input AND daily so its all in middle of page with margins
 
 
       RESOURCES    

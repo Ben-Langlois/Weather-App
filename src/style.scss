@@ -19,7 +19,8 @@ body{
         #input-box{
             margin-top: 0 !important;
             margin-bottom: 0 !important;
-            height: 5vh;
+
+            height: clamps(5vh, 5vh, 5vh);
             min-width: 730px;
             
             .input-group-prepend{
@@ -47,9 +48,12 @@ body{
         #daily{
             grid-area: daily;
             background-color: rgb(255, 255, 255);
-            width: 45vw;
-            min-width: 730px;
+
+
+            width: clamp(730px, 45vw, 45vw);
+            // min-width: 730px;
             height: 60vh;
+
             margin: 0 auto 0;
             border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
             border-radius: 0.25rem;
@@ -400,7 +404,24 @@ body{
 }
 
 
+@media (max-height: 820px), (max-width: 865px){
+    #container{
+        margin: auto;
 
+        #Dashboard{  
+            grid-template-rows: 90vh;
+
+            #daily{
+                height: 80vh;
+                // margin: auto;
+            }
+
+            #weekly{
+                display: none;
+            }  
+        }
+    }
+}
 
 
 /* Fonts */
