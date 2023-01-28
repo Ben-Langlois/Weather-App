@@ -20,7 +20,7 @@ body{
             margin-top: 0 !important;
             margin-bottom: 0 !important;
 
-            height: clamps(5vh, 5vh, 5vh);
+            height: clamp(5vh, 5vh, 5vh);
             min-width: 730px;
             
             .input-group-prepend{
@@ -89,7 +89,7 @@ body{
 
                     p#degree{
                         margin: 0;
-                        font-size: 3vh;
+                        font-size: 3vw;
                         display: inline;
                         position: relative;
                         bottom: 10%
@@ -112,6 +112,10 @@ body{
                         margin: 0 0 0 1rem;
                         font-size: 4vh;
                         font-weight: bold;
+
+                        p#degree{
+                            font-size: 2.5vh
+                        }
                     }
 
                     #asof{
@@ -403,13 +407,16 @@ body{
 
 }
 
-
-@media (max-height: 820px), (max-width: 865px){
+@media (max-height: 820px){
     #container{
-        margin: auto;
+        // margin: 1vh 0;
+
+        #input-container{
+            padding: 1.75vh 0 !important;
+        }
 
         #Dashboard{  
-            grid-template-rows: 90vh;
+            // grid-template-rows: 90vh;
 
             #daily{
                 height: 80vh;
@@ -423,6 +430,26 @@ body{
     }
 }
 
+// Mobile
+@media (max-width: 425px){
+    #container{
+
+        #input-container{
+
+        }
+
+        #dashboard{
+
+            #daily{
+
+            }
+
+            #weekly{
+                width: 100vw;
+            }
+        }
+    }
+}
 
 /* Fonts */
 @font-face {

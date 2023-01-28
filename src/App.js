@@ -37,9 +37,9 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
     - include more info in hourly section
 
     Current Task
+    - changing all rem units to vw
     - working on media queries
-      - for second query:
-        - center input AND daily so its all in middle of page with margins
+      - mobile
 
 
       RESOURCES    
