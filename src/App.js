@@ -16,7 +16,6 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
     https://openweathermap.org/api/one-call-api    
 
     Must Do
-    - make base font heavier but not bold
     - creating timeCheck function to determine icons based on time (Dashboard/timeCheck())
         trying to hoist timezone_offset to determine time of location
           let time = (dt + timezone_offset).convert to real time
@@ -27,7 +26,7 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
           }
       https://www.epochconverter.com/programming/#javascript 
       - must alter weather check to include static icons
-    
+    - combine max/min, font etc css attributes to shorthands
     Want To Do
     - find way to be more specific in input, ie allow Paris, Texas instead of always getting Paris, France
     - replace card with https://github.com/Yevgenium/weather-chart-card 
@@ -37,7 +36,7 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
     - include more info in hourly section
 
     Current Task
-    - changing all rem units to vw
+    - changing all rem units to more responsive units
     - working on media queries
       - mobile
 
@@ -303,7 +302,7 @@ class App extends React.Component {
           zoneShift: data.timezone_offset,          
 
           daily: propObj.daily,
-          hourly: propObj.hourly.slice(0, 23)                   // limiting to 24 hours
+          hourly: propObj.hourly.slice(0, 24)                   // limiting to 24 hours
         })
 
         // console.log(this.state);        // state is successfully stored with complete values

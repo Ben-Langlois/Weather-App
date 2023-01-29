@@ -50,9 +50,10 @@ body{
             background-color: rgb(255, 255, 255);
 
 
-            width: clamp(730px, 45vw, 45vw);
+            width: clamp(730px, 45vw, 900px);
             // min-width: 730px;
             height: 60vh;
+            min-height: 575px;
 
             margin: 0 auto 0;
             border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
@@ -69,6 +70,7 @@ body{
                 // border: 1px solid red;
                 position: relative;
                 grid-area: icon;
+                font-size: 4vh;
                 
 
                 #icon{
@@ -82,14 +84,16 @@ body{
                         "feelsLike feelsLike"
                         "asof asof";
 
+
                     img{
                         grid-area: icon;
                         place-self: center;
+                        min-width: 230px;
                     }
 
                     p#degree{
                         margin: 0;
-                        font-size: 3vw;
+                        font-size: 5vh;
                         display: inline;
                         position: relative;
                         bottom: 10%
@@ -98,9 +102,8 @@ body{
                     #temp{
                         grid-area: temp;
                         place-self: center;
-                        margin: 0; // cant disable 'user agent ss' for some reason
-                        font-size: 10vh;
-
+                        margin: 0 0 0 2vw; // cant disable 'user agent ss' for some reason
+                        font-size: 9vh;
                         p{
                             position: relative;
                             bottom: 5vh;
@@ -110,7 +113,6 @@ body{
                     #feelsLike{
                         grid-area: feelsLike;
                         margin: 0 0 0 1rem;
-                        font-size: 4vh;
                         font-weight: bold;
 
                         p#degree{
@@ -121,7 +123,6 @@ body{
                     #asof{
                         grid-area: asof;
                         margin: 0 0 0 1rem;
-                        font-size: 4vh;
                     }
                     
                 }
@@ -148,7 +149,11 @@ body{
                     grid-area: desc;
                     display:inline-block;
                     place-self: start;
-                    
+                    font-size: 4vh !important;
+
+                    h1{
+                        font-size: 4vh !important;
+                    }
                 }
 
                 #location{
@@ -180,8 +185,9 @@ body{
                     grid-area: suns;
                 }
 
-                .etc{
+                .etc{   // combine font selectors to shorthand
                     font-weight: bold;
+                    font-size: 3vh;
                     display: inline-block;
 
                     position: relative;
