@@ -53,7 +53,7 @@ body{
             width: clamp(730px, 45vw, 900px);
             // min-width: 730px;
             height: 60vh;
-            min-height: 575px;
+            min-height: 500px;
 
             margin: 0 auto 0;
             border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
@@ -149,7 +149,6 @@ body{
                     grid-area: desc;
                     display:inline-block;
                     place-self: start;
-                    font-size: 4vh !important;
 
                     h1{
                         font-size: 4vh !important;
@@ -413,7 +412,7 @@ body{
 
 }
 
-@media (max-height: 820px){
+@media (max-height: 820px){ // I think all the font sizes can be resolved by using clamp in the originating spots
     #container{
         // margin: 1vh 0;
 
@@ -427,6 +426,31 @@ body{
             #daily{
                 height: 80vh;
                 // margin: auto;
+                font-size: 20px !important;
+            
+            #icon-cont{
+                #icon{
+                    p{
+                        font-size: 30px !important;
+                        #degree{
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+            #stats{     // maybe a way to do this differently aka not so stupid
+                #desc{
+                    h1{
+                        font-size: 30px !important;
+                    }   
+                }
+                #location{
+                    h2{
+                        font-size: 30px !important;
+                    }   
+                }                   
+            }
+            
             }
 
             #weekly{

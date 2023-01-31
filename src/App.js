@@ -37,6 +37,7 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
 
     Current Task
     - changing all rem units to more responsive units
+      - change all media query font sizes to use clamp in origins
     - working on media queries
       - mobile
 
