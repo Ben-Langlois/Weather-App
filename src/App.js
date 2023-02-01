@@ -36,8 +36,7 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
     - include more info in hourly section
 
     Current Task
-    - changing all rem units to more responsive units
-      - change all media query font sizes to use clamp in origins
+    - change font values to shorthands where needed
     - working on media queries
       - mobile
 

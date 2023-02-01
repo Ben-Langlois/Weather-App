@@ -20,12 +20,12 @@ body{
             margin-top: 0 !important;
             margin-bottom: 0 !important;
 
-            height: clamp(5vh, 5vh, 5vh);
+            height: clamp(40px, 5vh, 70px);
             min-width: 730px;
             
             .input-group-prepend{
                 .input-group-text{
-                    height: 5vh;            // to have it match #input-box height
+                    height: clamp(40px, 5vh, 70px);                    // to have it match #input-box height
                 }
             } 
             
@@ -50,9 +50,9 @@ body{
             background-color: rgb(255, 255, 255);
 
 
-            width: clamp(730px, 45vw, 900px);
+            width: clamp(700px, 45vw, 900px);
             // min-width: 730px;
-            height: 60vh;
+            height: clamp(500px, 60vh, 625px);
             min-height: 500px;
 
             margin: 0 auto 0;
@@ -70,7 +70,7 @@ body{
                 // border: 1px solid red;
                 position: relative;
                 grid-area: icon;
-                font-size: 4vh;
+                font-size: clamp(30px, 4vh, 40px);
                 
 
                 #icon{
@@ -85,10 +85,12 @@ body{
                         "asof asof";
 
 
-                    img{
+                    img{        // make width responsive
                         grid-area: icon;
                         place-self: center;
                         min-width: 230px;
+                        // height: clamp(230px, 30vh, 270px);
+                        // // width: clamp()
                     }
 
                     p#degree{
@@ -103,10 +105,10 @@ body{
                         grid-area: temp;
                         place-self: center;
                         margin: 0 0 0 2vw; // cant disable 'user agent ss' for some reason
-                        font-size: 9vh;
+                        font-size: clamp(70px, 9vh, 95px);
                         p{
                             position: relative;
-                            bottom: 5vh;
+                            bottom: clamp(15px, 5vh, 20px);
                         }
                     }      
                     
@@ -144,6 +146,7 @@ body{
                     "location location" 
                     "UVI hum"
                     "sunr suns";
+                font-size: clamp(30px, 4vh, 40px);
 
                 #desc{
                     grid-area: desc;
@@ -151,7 +154,7 @@ body{
                     place-self: start;
 
                     h1{
-                        font-size: 4vh !important;
+                        font-size: clamp(30px, 4vh, 40px); // sadly
                     }
                 }
 
@@ -162,7 +165,7 @@ body{
                     text-align: justify;
 
                     h2{
-                        font-size: 5vh;
+                        font-size: clamp(30px, 4vh, 40px);
                         // font-weight: bold;
                         margin: 0;
                     }
@@ -186,7 +189,7 @@ body{
 
                 .etc{   // combine font selectors to shorthand
                     font-weight: bold;
-                    font-size: 3vh;
+                    font-size: clamp(15px, 3vh, 25px);
                     display: inline-block;
 
                     position: relative;
@@ -423,35 +426,34 @@ body{
         #Dashboard{  
             // grid-template-rows: 90vh;
 
-            #daily{
-                height: 80vh;
-                // margin: auto;
-                font-size: 20px !important;
+            // #daily{
+            //     height: 80vh;
+            //     // margin: auto;
+            //     font-size: 20px !important;
             
-            #icon-cont{
-                #icon{
-                    p{
-                        font-size: 30px !important;
-                        #degree{
-                            font-size: 20px;
-                        }
-                    }
-                }
-            }
-            #stats{     // maybe a way to do this differently aka not so stupid
-                #desc{
-                    h1{
-                        font-size: 30px !important;
-                    }   
-                }
-                #location{
-                    h2{
-                        font-size: 30px !important;
-                    }   
-                }                   
-            }
-            
-            }
+            //     #icon-cont{
+            //         #icon{
+            //             p{
+            //                 font-size: 30px !important;
+            //                 #degree{
+            //                     font-size: 20px;
+            //                 }
+            //             }
+            //         }
+            //     }
+            //     #stats{     // maybe a way to do this differently aka not so stupid
+            //         #desc{
+            //             h1{
+            //                 font-size: 30px !important;
+            //             }   
+            //         }
+            //         #location{
+            //             h2{
+            //                 font-size: 30px !important;
+            //             }   
+            //         }                   
+            //     }
+            // }
 
             #weekly{
                 display: none;
@@ -461,25 +463,25 @@ body{
 }
 
 // Mobile
-@media (max-width: 425px){
-    #container{
+// @media (max-width: 425px){
+//     #container{
 
-        #input-container{
+//         #input-container{
 
-        }
+//         }
 
-        #dashboard{
+//         #dashboard{
 
-            #daily{
+//             #daily{
 
-            }
+//             }
 
-            #weekly{
-                width: 100vw;
-            }
-        }
-    }
-}
+//             #weekly{
+//                 width: 100vw;
+//             }
+//         }
+//     }
+// }
 
 /* Fonts */
 @font-face {
