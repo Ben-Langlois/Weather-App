@@ -5,6 +5,9 @@ import $ from 'jquery';
 import * as icons from './icons/icons.js';
 // var ReactDOM = require('react-dom');
 
+// Global variables
+var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
 /*  React Weather App
     A react app, styled with mostly my own CSS/SASS, some Bootstrap components, and an open-source SVG library to display statistics of inputted city. Once city is inputted
     the API is called and returns on object which we pull our desired values from for determination of the icons and display of said values.
@@ -13,7 +16,6 @@ import * as icons from './icons/icons.js';
     https://openweathermap.org/api/one-call-api    
 
     Must Do
-    - make base font heavier but not bold
     - creating timeCheck function to determine icons based on time (Dashboard/timeCheck())
         trying to hoist timezone_offset to determine time of location
           let time = (dt + timezone_offset).convert to real time
@@ -24,18 +26,19 @@ import * as icons from './icons/icons.js';
           }
       https://www.epochconverter.com/programming/#javascript 
       - must alter weather check to include static icons
-    
+    - combine max/min, font etc css attributes to shorthands
     Want To Do
     - find way to be more specific in input, ie allow Paris, Texas instead of always getting Paris, France
     - replace card with https://github.com/Yevgenium/weather-chart-card 
     - find different API to do whole process in 1 call !2
     - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
     - Make convertDT return am/pm values instead of 24hr format
+    - include more info in hourly section
 
     Current Task
-    - style current and daily cards
-      - styling hourly section 
-        - need to get icons for cloud coverage, humidity from desktop (am on laptop rn)
+    - change font values to shorthands where needed
+    - working on media queries
+      - mobile
 
 
       RESOURCES    
@@ -81,17 +84,22 @@ class Dashboard extends React.Component {
       params
         {dt}: unix time thingy
         {shift}: zone-shift variable 
+        {rv}: return value
       returns
         {date}: shortened converted date (11:30, 03:20 etc)
 
       - implement return value formatted as am/pm not 24hr format
       - zone shift seems irrellivent???? did I even spell that right?
   */
-  convertDT(dt, shift){
+  convertDT(dt, rv){
     let time = dt * 1000,
         date = new Date(time);
 
-    return (date.getMinutes() < 10 ? `${date.getHours()}:0${date.getMinutes()}` : `${date.getHours()}:${date.getMinutes()}`);
+    if(rv === 'time'){  // if user requests the time
+      return (date.getMinutes() < 10 ? `${date.getHours()}:0${date.getMinutes()}` : `${date.getHours()}:${date.getMinutes()}`);
+    } else if(rv == 'day'){  // if user requests the day 
+      return weekdays.slice(date.getDay(), date.getDay() + 1) // returns day of the week corresponding to dt
+    }
   }
 
 
@@ -151,7 +159,7 @@ class Dashboard extends React.Component {
               <img src='...' alt=''/>
               <p id='temp'>{this.props.temp}<p id='degree'>&#8451;</p></p>
               <p id='feelsLike'>Feels Like {this.props.feelsLike}<p id='degree'>&#8451;</p></p> {/* Need to include 'Feels Like: ' w/o showing to early */}
-              <p id='asof'>As Of {this.convertDT(this.props.dt, this.props.zoneShift)}</p>
+              <p id='asof'>As Of {this.convertDT(this.props.dt, 'time')}</p>
             </div>
           </div>      
           <div id='stats'>  
@@ -164,16 +172,16 @@ class Dashboard extends React.Component {
               <h2>{this.props.city}&nbsp;<b>{this.props.country}</b></h2>
             </div>
             <div id='uvi' className='etc' title='Cloud Coverage'> {/* should eventually convert css to reflect actual value*/}
-              <img src={icons.UVI} alt='...' /> {this.props.clouds}
+              <img src={icons.clouds} alt='...' /> {this.props.clouds}
             </div>
             <div id='hum' className='etc' title='Humidity'> 
               <img src={icons.humidity} alt='...'/>{this.props.humidity}  
             </div>      
             <div id='sunr' className='etc' title='Sunrise'>
-              <img src={icons.sunrise} alt='...'/>{this.convertDT(this.props.sunrise)}
+              <img src={icons.sunrise} alt='...'/>{this.convertDT(this.props.sunrise, 'time')}
             </div>
             <div id='suns' className='etc' title='Sunset'>
-              <img src={icons.sunset} alt='...'/>{this.convertDT(this.props.sunset)}
+              <img src={icons.sunset} alt='...'/>{this.convertDT(this.props.sunset, 'time')}
             </div>  
           </div>
           <div id='hourly-cont'>
@@ -183,7 +191,7 @@ class Dashboard extends React.Component {
                   <div className='hourlyCard'>
                     <h2>{Math.round(currElement.temp)}<p id='degree'>&#8451;</p></h2>
                     <img src={this.weatherCheck(this.props.id)} alt=''/>
-                    <h3>{this.convertDT(currElement.dt)}</h3>
+                    <h3>{this.convertDT(currElement.dt, 'time')}</h3>
                   </div>
                 )
               })
@@ -195,11 +203,29 @@ class Dashboard extends React.Component {
               this.props.daily.map((currElement, index) => {
                 return( // using a bootstrap card
                   <div className="card">
-                    <img className="card-img-top" src='...' alt=''></img>
-                    <div className="card-body">
-                      <h5 className="card-title">{index}</h5>
-                      <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                      <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+                    <div id='date'>
+                      <div><b>{this.convertDT(currElement.dt, 'day')}</b></div>
+                    </div>
+                    <div id='icon'>                   
+                      <img src={this.weatherCheck(currElement.weather[0].id)} alt=''/>
+                    </div>
+                    <div id='temp'>
+                      <h2 id='temp'>{Math.round(currElement.temp.day)}<p id='degree'>&#8451;</p></h2>
+                    </div>
+                    <div id='feelsLike'>
+                      <div><b>Feels Like {Math.round(currElement.feels_like.day)}<p id='degree'>&#8451;</p></b></div>
+                    </div> {/* dont work for some reason */}
+                    <div id='cloud' title='Cloud Coverage'>              
+                      <img src={icons.clouds} alt='...' />{currElement.clouds}%
+                    </div>
+                    <div id='high' title='High Temp'>
+                      <img src={icons.high} alt='...'/>{Math.round(currElement.temp.max)}<p id='degree'>&#8451;</p>
+                    </div>
+                    <div id='hum' title='Humidity'>
+                      <img src={icons.humidity} alt='...'/>{currElement.humidity}%
+                    </div>
+                    <div id='low' title='Low Temp'>
+                      <img src={icons.low} alt='...'/>{Math.round(currElement.temp.min)}<p id='degree'>&#8451;</p>
                     </div>
                   </div>
                 )
@@ -255,7 +281,7 @@ class App extends React.Component {
       })
       .then(response => response.json())
       .then(data => {     // store desired API data in state
-        console.log(data.current);
+        // console.log(data.current);
         // pooling values in an object so they're readable and state isnt just a top level eval 
         const propObj = {current: {...data.current}, daily: [...data.daily], hourly: [...data.hourly]};
 
@@ -276,7 +302,7 @@ class App extends React.Component {
           zoneShift: data.timezone_offset,          
 
           daily: propObj.daily,
-          hourly: propObj.hourly.slice(0, 23)                   // limiting to 24 hours
+          hourly: propObj.hourly.slice(0, 24)                   // limiting to 24 hours
         })
 
         // console.log(this.state);        // state is successfully stored with complete values
@@ -289,12 +315,14 @@ class App extends React.Component {
   render(){
     return (
       <div id='container'>  
-        <div id='input-box' className="input-group input-group-sm w-50 mb-3 mx-auto my-5">
-          <div className="input-group-prepend">
-            <span className="input-group-text" id="inputGroup-sizing-sm">Location</span>
-          </div>
-          <input id='submit' type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='eg. Toronto, New York, Paris'></input>
-        </div>  
+        <div id='input-container'>
+          <div id='input-box' className="input-group input-group-sm w-50 mx-auto">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="inputGroup-sizing-sm">Location</span>
+            </div>
+            <input id='submit' type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='eg. Toronto, New York, Paris'></input>
+          </div>  
+        </div>
         <Dashboard {...this.state}/>
       </div>
     );

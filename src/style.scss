@@ -4,19 +4,38 @@ body{
 }
 
 /* to allow degree symbol to be dynamically set */
-#degree{
-    
+#degree{    // required for something only god knows
+    display: inline-block;
+    margin: 0;
 }
 
 #container{
+    height: 100vh;
 
-    #input-box{
-        margin-top: 1rem !important;
-        margin-bottom: 1rem !important;
+    #input-container{
+        padding-top: 2.5vh !important;
+        padding-bottom: 2.5vh !important;
 
-        height: 5vh;
+        #input-box{
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+
+            height: clamp(40px, 5vh, 70px);
+            min-width: 730px;
+            
+            .input-group-prepend{
+                .input-group-text{
+                    height: clamp(40px, 5vh, 70px);                    // to have it match #input-box height
+                }
+            } 
+            
+            #submit{
+                font-size: 2.5vh;
+            }
+
+        }
     }
-
+    
     #Dashboard{
 
         display: grid;
@@ -29,8 +48,13 @@ body{
         #daily{
             grid-area: daily;
             background-color: rgb(255, 255, 255);
-            width: 45vw;
-            height: 60vh;
+
+
+            width: clamp(700px, 45vw, 900px);
+            // min-width: 730px;
+            height: clamp(500px, 60vh, 625px);
+            min-height: 500px;
+
             margin: 0 auto 0;
             border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
             border-radius: 0.25rem;
@@ -46,6 +70,7 @@ body{
                 // border: 1px solid red;
                 position: relative;
                 grid-area: icon;
+                font-size: clamp(30px, 4vh, 40px);
                 
 
                 #icon{
@@ -59,14 +84,18 @@ body{
                         "feelsLike feelsLike"
                         "asof asof";
 
-                    img{
+
+                    img{        // make width responsive
                         grid-area: icon;
                         place-self: center;
+                        min-width: 230px;
+                        // height: clamp(230px, 30vh, 270px);
+                        // // width: clamp()
                     }
 
                     p#degree{
                         margin: 0;
-                        font-size: 3vh;
+                        font-size: 5vh;
                         display: inline;
                         position: relative;
                         bottom: 10%
@@ -75,26 +104,27 @@ body{
                     #temp{
                         grid-area: temp;
                         place-self: center;
-                        margin: 0; // cant disable 'user agent ss' for some reason
-                        font-size: 10vh;
-
+                        margin: 0 0 0 2vw; // cant disable 'user agent ss' for some reason
+                        font-size: clamp(70px, 9vh, 95px);
                         p{
                             position: relative;
-                            bottom: 5vh;
+                            bottom: clamp(15px, 5vh, 20px);
                         }
                     }      
                     
                     #feelsLike{
                         grid-area: feelsLike;
                         margin: 0 0 0 1rem;
-                        font-size: 4vh;
                         font-weight: bold;
+
+                        p#degree{
+                            font-size: 2.5vh
+                        }
                     }
 
                     #asof{
                         grid-area: asof;
                         margin: 0 0 0 1rem;
-                        font-size: 4vh;
                     }
                     
                 }
@@ -116,12 +146,16 @@ body{
                     "location location" 
                     "UVI hum"
                     "sunr suns";
+                font-size: clamp(30px, 4vh, 40px);
 
                 #desc{
                     grid-area: desc;
                     display:inline-block;
                     place-self: start;
-                    
+
+                    h1{
+                        font-size: clamp(30px, 4vh, 40px); // sadly
+                    }
                 }
 
                 #location{
@@ -131,7 +165,7 @@ body{
                     text-align: justify;
 
                     h2{
-                        font-size: 5vh;
+                        font-size: clamp(30px, 4vh, 40px);
                         // font-weight: bold;
                         margin: 0;
                     }
@@ -153,8 +187,9 @@ body{
                     grid-area: suns;
                 }
 
-                .etc{
+                .etc{   // combine font selectors to shorthand
                     font-weight: bold;
+                    font-size: clamp(15px, 3vh, 25px);
                     display: inline-block;
 
                     position: relative;
@@ -178,7 +213,7 @@ body{
                     // border: 1px solid red;
                     // display: inline-flex;
                     height: 85%;
-                    min-width: 5vw;
+                    min-width: 80px;
                     margin: 1% 0.8vw;
                     justify-content: center;
 
@@ -215,8 +250,13 @@ body{
                         place-self: center;
 
                     }
-                }                
+                    transition: box-shadow 300ms;
 
+                    &:hover{
+                        box-shadow: 0 10px 7px -4px;
+                    }
+
+                }                      
             }
         }
 
@@ -225,34 +265,223 @@ body{
 
             background-color: rgb(249, 250, 251);
             display: flex;
-            margin: 1rem auto 0;
+            // margin: 1rem auto 0;
+            padding-top: 2.5vh;
             width: 100vw;
+            height: 30vh;
             justify-content: space-between;
 
-            // overflow: hidden;
-                .card{
-                    display: inline-flex;
-                    width: clamp(15vw, 100px, 20vw);
-                    height: 35vh;
-                    margin: 0 0.5vw;
-                    
+            overflow: scroll;
+            overflow-y: hidden;
 
-                    flex-direction: row;
-                    flex-wrap: wrap;
+            .card:nth-child(1){
+                border-color: black;
+            }
+
+            .card{
+                min-width: 235px;
+                // height: 35vh;
+                flex: 1 1 auto;
+
+                margin: 0 0.5vw;
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                display: grid;
+                grid-template-columns: 10% 20% 20% 20% 20% 10%;
+                grid-template-rows: 15% 40% 15% 15% 15%;
+                grid-template-areas: 
+                    ". date date date date ." 
+                    ". icon icon temp temp ."
+                    ". feels feels feels feels ."
+                    ". cloud cloud high high ."
+                    ". hum hum low low .";
+
+                div{
+                    // border: 1px solid red;
+
                 }
 
+                #date{
+                    grid-area: date;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    
+                    div{
+                        // display: inline-block;
+                        font-size: 1.3rem;
+                        border: none;
+                    }
+                }
 
+                #icon{
+                    grid-area: icon;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                #temp{
+                    grid-area: temp;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                    h2{
+                        margin: 0; // cant disable 'user agent ss' for some reason
+
+
+                    }   
+                        h2#temp{
+                            font-size: 2rem;
+                        }
+
+                }
+
+                #feelsLike{
+                    grid-area: feels;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    
+                    div{
+                        // display: inline-block;
+                        font-size: 1.3rem;
+                        border: none;
+                    }
+
+                }
+                
+                img{
+                    height: 100%;
+                }
+
+                #cloud{     // will pot. change to humidity
+                    grid-area: cloud;
+
+
+                }
+
+                #high{
+                    grid-area: high;
+                }
+
+                #hum{
+                    grid-area: hum;
+                }
+
+                #low{
+                    grid-area: low;
+                }
+
+                transition: transform 300ms ease-in-out;
+                transition: box-shadow 300ms;
+
+                &:hover{
+                    transform: scale(1.05, 1.05);
+                    box-shadow: 0 8px 8px -4px;
+                }
+
+            }
+            
+
+
+
+        }::-webkit-scrollbar{
+            // height: 1.5rem;
+        }::-webkit-scrollbar-track{
+            display: none;
         }
     }    
 }
 
+// Media Queries
+@media (max-width: 1456px) {
+    #container{
+        #Dashboard{
+            grid-template-columns: 0 50vw 50vw 0;
+        }
+
+        #input-container{
+            #input-box{
+                margin: 0 auto !important;
+                width: 50vw !important;            
+            }
+        }
+    }
 
 
-
-
-#submit{
-    font: bold 2.3vh/1.5vh;
 }
+
+@media (max-height: 820px){ // I think all the font sizes can be resolved by using clamp in the originating spots
+    #container{
+        // margin: 1vh 0;
+
+        #input-container{
+            padding: 1.75vh 0 !important;
+        }
+
+        #Dashboard{  
+            // grid-template-rows: 90vh;
+
+            // #daily{
+            //     height: 80vh;
+            //     // margin: auto;
+            //     font-size: 20px !important;
+            
+            //     #icon-cont{
+            //         #icon{
+            //             p{
+            //                 font-size: 30px !important;
+            //                 #degree{
+            //                     font-size: 20px;
+            //                 }
+            //             }
+            //         }
+            //     }
+            //     #stats{     // maybe a way to do this differently aka not so stupid
+            //         #desc{
+            //             h1{
+            //                 font-size: 30px !important;
+            //             }   
+            //         }
+            //         #location{
+            //             h2{
+            //                 font-size: 30px !important;
+            //             }   
+            //         }                   
+            //     }
+            // }
+
+            #weekly{
+                display: none;
+            }  
+        }
+    }
+}
+
+// Mobile
+// @media (max-width: 425px){
+//     #container{
+
+//         #input-container{
+
+//         }
+
+//         #dashboard{
+
+//             #daily{
+
+//             }
+
+//             #weekly{
+//                 width: 100vw;
+//             }
+//         }
+//     }
+// }
 
 /* Fonts */
 @font-face {

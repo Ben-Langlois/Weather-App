@@ -45,7 +45,9 @@ import UVI from './stats/uv-index.svg';
 import humidity from './stats/humidity.svg';
 import sunrise from './stats/sunrise.svg';
 import sunset from './stats/sunset.svg';
-
+import clouds from './stats/cloudy.svg';
+import high from './stats/thermometer-warmer.svg';
+import low from './stats/thermometer-colder.svg';
 // Static icons
 
-export {clearDay, clearNight, cloudyDefault, drizzle, rainDefault, heavyRain, thunderstormsDefault, rainThunderstorm, overcastThunderstorm, snowDefault, fogDay, fogNight, UVI, humidity, sunrise, sunset};
+export {clearDay, clearNight, cloudyDefault, drizzle, rainDefault, heavyRain, thunderstormsDefault, rainThunderstorm, overcastThunderstorm, snowDefault, fogDay, fogNight, UVI, humidity, sunrise, sunset, clouds, high, low};
