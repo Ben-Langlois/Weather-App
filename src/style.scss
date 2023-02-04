@@ -397,7 +397,8 @@ body{
     }    
 }
 
-// Media Queries
+/* Media Queries */
+//#region Misc-queries
 @media (max-width: 1456px) {
     #container{
         #Dashboard{
@@ -461,27 +462,44 @@ body{
         }
     }
 }
+//#endregion Misc-queries
+
+// Tablet 
+@media (max-width: 768px){
+    #container{
+        #input-container{
+            #input-box{
+                .input-group-prepend{
+                    display: none;
+                }
+                #submit{
+                    width: 100vw;
+                }
+            }
+        }
+    }
+}
 
 // Mobile
-// @media (max-width: 425px){
-//     #container{
+@media (max-width: 600px){
+    #container{
 
-//         #input-container{
+        #input-container{
 
-//         }
+        }
 
-//         #dashboard{
+        #Dashboard{
 
-//             #daily{
+            #daily{
+                width: clamp(50px, 100vw, 600px);
+            }
 
-//             }
-
-//             #weekly{
-//                 width: 100vw;
-//             }
-//         }
-//     }
-// }
+            #weekly{
+                width: 100vw;
+            }
+        }
+    }
+}
 
 /* Fonts */
 @font-face {
@@ -490,14 +508,14 @@ body{
  }
 
 
-//  Media Queries
+//  Media Queries DELETING SOON I THINK
 // Small Laptops (mine)
-@media (max-width: 1640px) {
-    #container{
-        #Dashboard{
-            #weekly{
-                 margin-top: 0 !important;
-            }             
-        }
-    }
-}
+// @media (max-width: 1640px) {
+//     #container{
+//         #Dashboard{
+//             #weekly{
+//                  margin-top: 0 !important;
+//             }             
+//         }
+//     }
+// }

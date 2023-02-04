@@ -27,6 +27,7 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
       https://www.epochconverter.com/programming/#javascript 
       - must alter weather check to include static icons
     - combine max/min, font etc css attributes to shorthands
+    - style scroll bar (hourly, daily)
     Want To Do
     - find way to be more specific in input, ie allow Paris, Texas instead of always getting Paris, France
     - replace card with https://github.com/Yevgenium/weather-chart-card 
@@ -35,10 +36,16 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
     - Make convertDT return am/pm values instead of 24hr format
     - include more info in hourly section
 
-    Current Task
+    Current Task(s)
     - change font values to shorthands where needed
     - working on media queries
-      - mobile
+      - Tablet
+        - need to decide if this is even necessary, it already scales decently well
+        - maybe should only change if I come up with design changes
+      - Mobile
+        - need to remap whole dashboard grid + grid areas for children etc
+        - restyle input bar, daily
+        - organize daily(weekly) cards in portrait/mobile friendly manner
 
 
       RESOURCES    
