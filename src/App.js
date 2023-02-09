@@ -16,6 +16,7 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
     https://openweathermap.org/api/one-call-api    
 
     Must Do
+    - consolidate 1456 query
     - creating timeCheck function to determine icons based on time (Dashboard/timeCheck())
         trying to hoist timezone_offset to determine time of location
           let time = (dt + timezone_offset).convert to real time

@@ -47,6 +47,7 @@ body{
 
         #daily{
             grid-area: daily;
+            align-self: center;
             background-color: rgb(255, 255, 255);
 
 
@@ -399,7 +400,7 @@ body{
 
 /* Media Queries */
 //#region Misc-queries
-@media (max-width: 1456px) {
+@media (max-width: 1456px), (min-width: 601px) {
     #container{
         #Dashboard{
             grid-template-columns: 0 50vw 50vw 0;
@@ -491,7 +492,9 @@ body{
         #Dashboard{
 
             #daily{
-                width: clamp(50px, 100vw, 600px);
+                // width: 80vw;
+                // margin: 0 auto;
+
             }
 
             #weekly{
