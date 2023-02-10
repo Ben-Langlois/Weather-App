@@ -400,7 +400,7 @@ body{
 
 /* Media Queries */
 //#region Misc-queries
-@media (max-width: 1456px), (min-width: 601px) {
+@media(min-width: 601px) and (max-width: 1456px) {
     #container{
         #Dashboard{
             grid-template-columns: 0 50vw 50vw 0;
@@ -490,9 +490,14 @@ body{
         }
 
         #Dashboard{
+            grid-template-columns: 40vw 40vw;
+            grid-template-rows: auto;
+            grid-template-areas:
+                ". daily daily ."
+                "weekly weekly weekly weekly";
 
             #daily{
-                // width: 80vw;
+                width: auto;
                 // margin: 0 auto;
 
             }
