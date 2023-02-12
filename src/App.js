@@ -61,7 +61,6 @@ class Dashboard extends React.Component {
     super(props);
     this.weatherCheck = this.weatherCheck.bind(this);   
     this.convertDT = this.convertDT.bind(this);
-    this.convertTime = this.convertTime.bind(this);
   }
 
   componentDidUpdate(prevProps){
@@ -88,7 +87,6 @@ class Dashboard extends React.Component {
       // $('#degree').append(' &#8451;')
   }
 
-
   /*  getTime
       params
         {dt}: unix time thingy
@@ -103,7 +101,6 @@ class Dashboard extends React.Component {
   convertDT(dt, rv){
     let time = dt * 1000,
         date = new Date(time);
-
 /*
     if(date.getHours() > 12){
       return (date.getMinutes() < 10 ? `${date.getHours() - 12}:0${date.getMinutes()}` : `${date.getHours()}:${date.getMinutes()} am`)
@@ -112,21 +109,15 @@ class Dashboard extends React.Component {
     }
 */      
     if(rv === 'time'){  // if user requests the time
-      this.convertTime(date.getHours(), date.getMinutes())
+      if(date.getHours() > 12){
+        return (date.getMinutes() < 10 ? `${date.getHours() - 12}:0${date.getMinutes()} pm` : `${date.getHours() - 12}:${date.getMinutes()} pm`)
+      } else {
+        return (date.getMinutes() < 10 ? `${date.getHours()}:0${date.getMinutes()} am` : `${date.getHours()}:${date.getMinutes()} am`)
+      }
     } else if(rv == 'day'){  // if user requests the day 
       return weekdays.slice(date.getDay(), date.getDay() + 1) // returns day of the week corresponding to dt
     }
   }
-
-
-  convertTime(hours, minutes){
-    if(hours > 12){   // if pm
-      return (minutes < 10 ? `${hours - 12}:0${minutes}` : `${hours - 12}:${minutes} pm`)      // return  12:40pm etc
-    } else {    // if am
-      return (minutes < 10 ? `${hours}:0${minutes}` : `${hours}:${minutes} am`)           // return 12:40am etc
-    };
-  }
-
 
   /*  weatherCheck(number)
       param 

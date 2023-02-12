@@ -186,6 +186,7 @@ body{
 
                 #suns{
                     grid-area: suns;
+                    overflow: visible;
                 }
 
                 .etc{   // combine font selectors to shorthand
@@ -214,8 +215,8 @@ body{
                     // border: 1px solid red;
                     // display: inline-flex;
                     height: 85%;
-                    min-width: 80px;
-                    margin: 1% 0.8vw;
+                    width: clamp(50px, 5vw, 100px);
+                    margin: 1% 0.5vw;
                     justify-content: center;
 
                     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -246,7 +247,6 @@ body{
 
                     h3{
                         grid-area: time;
-                        overflow: hidden;
                         margin: 0;
                         place-self: center;
 
