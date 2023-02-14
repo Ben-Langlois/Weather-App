@@ -16,19 +16,9 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
     https://openweathermap.org/api/one-call-api    
 
     Must Do
-    - consolidate 1456 query
-    - creating timeCheck function to determine icons based on time (Dashboard/timeCheck())
-        trying to hoist timezone_offset to determine time of location
-          let time = (dt + timezone_offset).convert to real time
-          if(time >= 6am && time <= 7pm){
-            return day
-          } else {
-            return night
-          }
-      https://www.epochconverter.com/programming/#javascript 
-      - must alter weather check to include static icons
+    - consolidate 1456px query
     - combine max/min, font etc css attributes to shorthands
-    - style scroll bar (hourly, daily)
+    - make card to cover empty daily section (before input)
     Want To Do
     - find way to be more specific in input, ie allow Paris, Texas instead of always getting Paris, France
     - replace card with https://github.com/Yevgenium/weather-chart-card 
@@ -36,6 +26,9 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
     - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
     - Make convertDT return am/pm values instead of 24hr format
     - include more info in hourly section
+    - style scroll bar (hourly, daily)
+    - expand on weatherChecks variety of icons
+    - have hourly & weekly cards have isDay checked icons based on relevant times
 
     Current Task(s)
     - change font values to shorthands where needed
@@ -60,7 +53,7 @@ class Dashboard extends React.Component {
   constructor(props){
     super(props);
     this.weatherCheck = this.weatherCheck.bind(this);   
-    this.convertDT = this.convertDT.bind(this);
+    this.isDay = this.isDay.bind(this);
   }
 
   componentDidUpdate(prevProps){
@@ -68,8 +61,7 @@ class Dashboard extends React.Component {
       console.log(this.props);
 
       // Determining proper SVG
-      let id = this.props.id,
-          mySVG = this.weatherCheck(id);
+      let mySVG = this.weatherCheck(this.props.id, this.props.dt);
 
       // Assorted JQ
       $('#Dashboard #daily #icon-cont #icon img').prop('src', mySVG);    // change src to returned svg
@@ -77,7 +69,7 @@ class Dashboard extends React.Component {
       // $('#Dashboard #daily #icon-cont #icon #feelsLike').text('Feels Like ');           // continues to prepend/append (feels like feels like feels like)
       // $('#degree').text(' &#8451;');
     
-      console.log(this.convertDT(this.props.dt));
+      // console.log(this.convertDT(this.props.dt));
     }
   }
 
@@ -95,10 +87,9 @@ class Dashboard extends React.Component {
       returns
         {date}: shortened converted date (11:30, 03:20 etc)
 
-      - implement return value formatted as am/pm not 24hr format
       - zone shift seems irrellivent???? did I even spell that right?
   */
-  convertDT(dt, rv){
+  getTime(dt, rv){
     let time = dt * 1000,
         date = new Date(time);
 /*
@@ -119,6 +110,23 @@ class Dashboard extends React.Component {
     }
   }
 
+  /*  isDay
+      params
+        {dt}: unix time thingy
+      returns
+        {bool}: day = true, night = false
+  */
+  isDay(dt){
+    let time = dt * 1000,       
+    date = new Date(time);    // getting date object
+
+    if (date.getHours >= 7 && date.getHours <= 19){ // if between 7am and 7pm
+      return true;    // true == day
+    }
+
+    return false;     // false == night
+  }
+
   /*  weatherCheck(number)
       param 
         {number}: props.main, >=1 digit number
@@ -127,7 +135,7 @@ class Dashboard extends React.Component {
       
       determines svg to return based on inputted number
   */ 
-  weatherCheck(daily){   
+  weatherCheck(daily, dt){   
     /* 
       - Since there aren't many options for each category, I decided to use if statementes 
         as a placeholder
@@ -157,9 +165,15 @@ class Dashboard extends React.Component {
     } else if (/^6/.test(daily.toString())){
       return icons.snowDefault;
     } else if (/^7/.test(daily.toString())){    // need to incorporate time check to differentiate
-      return icons.fogDay;
+      if(this.isDay(dt)){
+        return icons.fogDay;
+      }
+      return icons.fogNight;
     } else if (daily === 800){
-      return icons.clearDay;
+      if(this.isDay(dt)){
+        return icons.clearDay;
+      }
+      return icons.clearNight;
     } else if (/^8/.test(daily.toString())){
       return icons.cloudyDefault;
     }
@@ -174,7 +188,7 @@ class Dashboard extends React.Component {
               <img src='...' alt=''/>
               <p id='temp'>{this.props.temp}<p id='degree'>&#8451;</p></p>
               <p id='feelsLike'>Feels Like {this.props.feelsLike}<p id='degree'>&#8451;</p></p> {/* Need to include 'Feels Like: ' w/o showing to early */}
-              <p id='asof'>As Of {this.convertDT(this.props.dt, 'time')}</p>
+              <p id='asof'>As Of {this.getTime(this.props.dt, 'time')}</p>
             </div>
           </div>      
           <div id='stats'>  
@@ -193,10 +207,10 @@ class Dashboard extends React.Component {
               <img src={icons.humidity} alt='...'/>{this.props.humidity}  
             </div>      
             <div id='sunr' className='etc' title='Sunrise'>
-              <img src={icons.sunrise} alt='...'/>{this.convertDT(this.props.sunrise, 'time')}
+              <img src={icons.sunrise} alt='...'/>{this.getTime(this.props.sunrise, 'time')}
             </div>
             <div id='suns' className='etc' title='Sunset'>
-              <img src={icons.sunset} alt='...'/>{this.convertDT(this.props.sunset, 'time')}
+              <img src={icons.sunset} alt='...'/>{this.getTime(this.props.sunset, 'time')}
             </div>  
           </div>
           <div id='hourly-cont'>
@@ -205,8 +219,8 @@ class Dashboard extends React.Component {
                 return(
                   <div className='hourlyCard'>
                     <h2>{Math.round(currElement.temp)}<p id='degree'>&#8451;</p></h2>
-                    <img src={this.weatherCheck(this.props.id)} alt=''/>
-                    <h3>{this.convertDT(currElement.dt, 'time')}</h3>
+                    <img src={this.weatherCheck(this.props.id, currElement.dt)} alt=''/>
+                    <h3>{this.getTime(currElement.dt, 'time')}</h3>
                   </div>
                 )
               })
@@ -219,10 +233,10 @@ class Dashboard extends React.Component {
                 return( // using a bootstrap card
                   <div className="card">
                     <div id='date'>
-                      <div><b>{this.convertDT(currElement.dt, 'day')}</b></div>
+                      <div><b>{this.getTime(currElement.dt, 'day')}</b></div>
                     </div>
                     <div id='icon'>                   
-                      <img src={this.weatherCheck(currElement.weather[0].id)} alt=''/>
+                      <img src={this.weatherCheck(currElement.weather[0].id, currElement.weather[0].dt)} alt=''/>
                     </div>
                     <div id='temp'>
                       <h2 id='temp'>{Math.round(currElement.temp.day)}<p id='degree'>&#8451;</p></h2>
