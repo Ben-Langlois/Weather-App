@@ -19,6 +19,8 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
     - consolidate 1456px query
     - combine max/min, font etc css attributes to shorthands
     - make card to cover empty daily section (before input)
+    - change font values to shorthands where needed
+
     Want To Do
     - find way to be more specific in input, ie allow Paris, Texas instead of always getting Paris, France
     - replace card with https://github.com/Yevgenium/weather-chart-card 
@@ -31,7 +33,6 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
     - have hourly & weekly cards have isDay checked icons based on relevant times
 
     Current Task(s)
-    - change font values to shorthands where needed
     - working on media queries
       - Tablet
         - need to decide if this is even necessary, it already scales decently well
