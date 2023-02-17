@@ -486,20 +486,22 @@ body{
     #container{
 
         #input-container{
-
+            #input-box{
+                width: 100%;
+                min-width: auto;
+            }
         }
 
         #Dashboard{
-            grid-template-columns: 40vw 40vw;
-            grid-template-rows: auto;
-            grid-template-areas:
-                ". daily daily ."
-                "weekly weekly weekly weekly";
-
+            display: inline;
             #daily{
                 width: auto;
                 // margin: 0 auto;
 
+
+                #hourly-cont{
+                    display: none;
+                }
             }
 
             #weekly{
