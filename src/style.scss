@@ -496,11 +496,18 @@ body{
             display: inline;
             #daily{
                 width: auto;
+                height: auto;
                 // margin: 0 auto;
-
+                display: grid;
+                grid-template-columns: 80%;
+                grid-template-rows: 40vh 20vh 20vh;
+                grid-template-areas: 
+                    "icon"
+                    "stats"
+                    "hourly";
 
                 #hourly-cont{
-                    display: none;
+                    // display: none;
                 }
             }
 
