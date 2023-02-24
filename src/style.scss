@@ -526,15 +526,19 @@ body{
                 }
 
                 #stats{
-                    margin: auto 5vw;
+                    margin: auto 10vw;
 
                     .etc{
-                        place-self: stretch center;
+                        // place-self: stretch center;
                     }
                 }
 
                 #hourly-cont{
                     // display: none;
+                    .hourlyCard{
+                        width: clamp(150px, 5vw, 100px);
+                        margin: 4% 1vw;
+                    }
                 }
             }
 
