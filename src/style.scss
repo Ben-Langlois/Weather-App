@@ -215,7 +215,7 @@ body{
                     // border: 1px solid red;
                     // display: inline-flex;
                     height: 85%;
-                    width: clamp(50px, 5vw, 100px);
+                    width: clamp(150px, 5vw, 100px);
                     margin: 1% 0.5vw;
                     justify-content: center;
 
@@ -536,7 +536,7 @@ body{
                 #hourly-cont{
                     // display: none;
                     .hourlyCard{
-                        width: clamp(150px, 5vw, 100px);
+                        // width: clamp(150px, 5vw, 100px);
                         margin: 4% 1vw;
                     }
                 }
