@@ -33,7 +33,8 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
     - have hourly & weekly cards have isDay checked icons based on relevant times
 
     Current Task(s)
-    - working on media queries
+    - working on placeholder div to cover daily/act intro for user displaying how to use
+    - working on media queries (DONE I think)
       - Tablet
         - need to decide if this is even necessary, it already scales decently well
         - maybe should only change if I come up with design changes
