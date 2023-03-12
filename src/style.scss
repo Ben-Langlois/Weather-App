@@ -46,6 +46,7 @@ body{
           "weekly weekly weekly weekly";
 
         #daily{
+            // display: none !important;
             grid-area: daily;
             align-self: center;
             background-color: rgb(255, 255, 255);
@@ -60,7 +61,7 @@ body{
             border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
             border-radius: 0.25rem;
 
-            display: grid;
+            display: none;
             grid-template-columns: 50% 50%;
             grid-template-rows: 65% 35%;
             grid-template-areas: 
@@ -260,6 +261,24 @@ body{
                 }                      
             }
         }
+        #defaultDaily{
+            // display: none;
+            z-index: 1;
+            grid-area: daily;
+            align-self: center;
+            background-color: rgb(255, 255, 255);
+
+
+            width: clamp(700px, 45vw, 900px);
+            // min-width: 730px;
+            height: clamp(500px, 60vh, 625px);
+            min-height: 500px;
+
+            margin: 0 auto 0;
+            border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
+            border-radius: 0.25rem;
+        }
+
 
         #weekly{
             grid-area: weekly;

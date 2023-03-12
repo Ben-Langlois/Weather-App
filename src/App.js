@@ -72,6 +72,10 @@ class Dashboard extends React.Component {
       // $('#degree').text(' &#8451;');
     
       // console.log(this.convertDT(this.props.dt));
+
+      
+      $('#Dashboard #daily').css('display', 'grid');            // display daily card
+      $('#Dashboard #defaultDaily').css('display', 'none');     // hide default card
     }
   }
 
@@ -183,7 +187,10 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div id='Dashboard'>{/*current={this.props.current} city={this.props.city} country={this.props.country}*/}    
+      <div id='Dashboard'>{/*current={this.props.current} city={this.props.city} country={this.props.country}*/} 
+        <div id='defaultDaily'>
+          <h1>aaaaaaaa</h1>
+        </div>   
         <div id='daily'>  
           <div id='icon-cont'>    {/* Need to update componentDidUpdate with changes to DOM */}
             <div id='icon'>
