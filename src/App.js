@@ -189,7 +189,11 @@ class Dashboard extends React.Component {
     return (
       <div id='Dashboard'>{/*current={this.props.current} city={this.props.city} country={this.props.country}*/} 
         <div id='defaultDaily'>
-          <h1>aaaaaaaa</h1>
+          <div id='icon'></div>
+          <div id='title'>
+            <h1>Weather<br/>Application</h1>
+          </div>
+          <div id='desc'><p>This app uses the OpenWeather API to retrieve a weather object which blah blah blah blah</p></div>
         </div>   
         <div id='daily'>  
           <div id='icon-cont'>    {/* Need to update componentDidUpdate with changes to DOM */}

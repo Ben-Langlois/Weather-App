@@ -262,7 +262,7 @@ body{
             }
         }
         #defaultDaily{
-            // display: none;
+            display: grid;
             z-index: 1;
             grid-area: daily;
             align-self: center;
@@ -277,6 +277,32 @@ body{
             margin: 0 auto 0;
             border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
             border-radius: 0.25rem;
+        
+            grid-template-columns: 10% 40% 40% 10%;
+            grid-template-rows: auto;
+            grid-template-areas: 
+              ". icon title ."
+              "desc desc desc desc";
+    
+            #icon{
+                grid-area: icon;
+            }
+
+            #title{
+                grid-area: title;
+
+                h1{
+                    display: inline-block;
+                    margin: 0;
+                }
+            }
+            
+            #desc{
+                grid-area: desc;
+
+                padding: 0 5%;
+
+            }
         }
 
 
