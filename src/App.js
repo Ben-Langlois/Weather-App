@@ -193,7 +193,23 @@ class Dashboard extends React.Component {
           <div id='title'>
             <h1>Weather<br/>Application</h1>
           </div>
-          <div id='desc'><p>This app uses the OpenWeather API to retrieve a weather object which blah blah blah blah</p></div>
+          <div id='desc'>
+            <p>
+              The Weather-App repository on GitHub, created by Ben-Langlois, is a web-based weather
+              application built using HTML, CSS, and JavaScript. The application uses the OpenWeatherMap 
+              API to retrieve weather data for a given location and display it to the user in a visually appealing way. 
+              The application is designed to be responsive and mobile-friendly, adapting to different screen sizes and devices.<br/>
+              <br/>
+              The Weather-App has a clean and simple user interface, with a search bar where users can enter 
+              their location to get the current weather conditions. The application displays the current temperature, humidity,
+              wind speed, and weather description, as well as a background image that changes depending on the current weather conditions.<br/>
+              <br/>
+              The repository contains several files, including the HTML and CSS files for the user interface, as well as a JavaScript 
+              file for the application logic. The repository also includes a package.json file, indicating that the project uses Node.js and npm to manage dependencies.<br/>
+              <br/>
+              Overall, the Weather-App is a well-designed and functional weather application that demonstrates the use of APIs and front-end web development skills.
+            </p>
+          </div>
         </div>   
         <div id='daily'>  
           <div id='icon-cont'>    {/* Need to update componentDidUpdate with changes to DOM */}

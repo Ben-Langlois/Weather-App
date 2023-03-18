@@ -279,7 +279,7 @@ body{
             border-radius: 0.25rem;
         
             grid-template-columns: 10% 40% 40% 10%;
-            grid-template-rows: auto;
+            grid-template-rows: 50% 50%;
             grid-template-areas: 
               ". icon title ."
               "desc desc desc desc";
@@ -301,7 +301,12 @@ body{
                 grid-area: desc;
 
                 padding: 0 5%;
+                overflow: scroll;
 
+                p{
+                    font-size: 2vh;
+                    line-height: 1.5vh;
+                }
             }
         }
 
