@@ -34,6 +34,7 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
 
     Current Task(s)
     - working on placeholder div to cover daily/act intro for user displaying how to use
+      - doign final styling
     - working on media queries (DONE I think)
       - Tablet
         - need to decide if this is even necessary, it already scales decently well
@@ -189,7 +190,9 @@ class Dashboard extends React.Component {
     return (
       <div id='Dashboard'>{/*current={this.props.current} city={this.props.city} country={this.props.country}*/} 
         <div id='defaultDaily'>
-          <div id='icon'></div>
+          <div id='icon'>
+            <img src={icons.clearDay} alt=''/>
+          </div>
           <div id='title'>
             <h1>Weather<br/>Application</h1>
           </div>

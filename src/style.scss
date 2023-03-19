@@ -286,14 +286,28 @@ body{
     
             #icon{
                 grid-area: icon;
+
+                img{
+                    width: 80%;
+                }
             }
 
             #title{
                 grid-area: title;
+                position: relative;
 
                 h1{
                     display: inline-block;
+
                     margin: 0;
+                    position: absolute;
+                    top: 50%;
+                    -ms-transform: translateY(-50%);
+                    transform: translateY(-50%);
+
+                    font-weight: bold;          // shorthand dis
+                    font-size: 3.5rem;
+
                 }
             }
             
@@ -303,9 +317,11 @@ body{
                 padding: 0 5%;
                 overflow: scroll;
 
+                
+
                 p{
-                    font-size: 2vh;
-                    line-height: 1.5vh;
+                    font-size: 2.3vh;
+                    // line-height: 1.5vh;
                 }
             }
         }
@@ -599,6 +615,28 @@ body{
     }
 }
 
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: none;
+    scrollbar-color: #b0b0b0 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #b0b0b0;
+    border-radius: 15px;
+    border: 3px solid #ffffff;
+  }
 /* Fonts */
 @font-face {
     font-family: Didact;
