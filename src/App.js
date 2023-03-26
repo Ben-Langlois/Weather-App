@@ -198,7 +198,7 @@ class Dashboard extends React.Component {
           </div>
           <div id='desc'>
             <p>
-              The Weather-App repository on GitHub, created by Ben-Langlois, is a web-based weather
+              {/* The Weather-App repository on GitHub, created by Ben-Langlois, is a web-based weather
               application built using HTML, CSS, and JavaScript. The application uses the OpenWeatherMap 
               API to retrieve weather data for a given location and display it to the user in a visually appealing way. 
               The application is designed to be responsive and mobile-friendly, adapting to different screen sizes and devices.<br/>
@@ -210,7 +210,14 @@ class Dashboard extends React.Component {
               The repository contains several files, including the HTML and CSS files for the user interface, as well as a JavaScript 
               file for the application logic. The repository also includes a package.json file, indicating that the project uses Node.js and npm to manage dependencies.<br/>
               <br/>
-              Overall, the Weather-App is a well-designed and functional weather application that demonstrates the use of APIs and front-end web development skills.
+              Overall, the Weather-App is a well-designed and functional weather application that demonstrates the use of APIs and front-end web development skills. */}
+
+              The Weather-App repository on GitHub, created by Ben Langlois, is a project aimed at creating a weather application. The application is
+              built using HTML, CSS, and JavaScript, and it utilizes the OpenWeatherMap API to retrieve weather data for various cities around the world.<br/><br/>
+              The application allows users to search for the weather in a specific city and displays the current weather conditions along with a five-day 
+              forecast. It also includes features such as the ability to switch between Celsius and Fahrenheit temperature units and the use of icons to represent
+              the weather conditions.<br/><br/>The project demonstrates the use of various web development technologies and the integration of external APIs to build a
+              functional and useful application.
             </p>
           </div>
         </div>   
