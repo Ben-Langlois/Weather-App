@@ -33,8 +33,13 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
     - have hourly & weekly cards have isDay checked icons based on relevant times
 
     Current Task(s)
+    - Integrating auto fill in search bar
+
+    Will Return
     - working on placeholder div to cover daily/act intro for user displaying how to use
-      - doign final styling
+      - editing bio
+      - maybe add github, linkedin link
+
     - working on media queries (DONE I think)
       - Tablet
         - need to decide if this is even necessary, it already scales decently well
@@ -198,26 +203,10 @@ class Dashboard extends React.Component {
           </div>
           <div id='desc'>
             <p>
-              {/* The Weather-App repository on GitHub, created by Ben-Langlois, is a web-based weather
-              application built using HTML, CSS, and JavaScript. The application uses the OpenWeatherMap 
-              API to retrieve weather data for a given location and display it to the user in a visually appealing way. 
-              The application is designed to be responsive and mobile-friendly, adapting to different screen sizes and devices.<br/>
-              <br/>
-              The Weather-App has a clean and simple user interface, with a search bar where users can enter 
-              their location to get the current weather conditions. The application displays the current temperature, humidity,
-              wind speed, and weather description, as well as a background image that changes depending on the current weather conditions.<br/>
-              <br/>
-              The repository contains several files, including the HTML and CSS files for the user interface, as well as a JavaScript 
-              file for the application logic. The repository also includes a package.json file, indicating that the project uses Node.js and npm to manage dependencies.<br/>
-              <br/>
-              Overall, the Weather-App is a well-designed and functional weather application that demonstrates the use of APIs and front-end web development skills. */}
-
-              The Weather-App repository on GitHub, created by Ben Langlois, is a project aimed at creating a weather application. The application is
-              built using HTML, CSS, and JavaScript, and it utilizes the OpenWeatherMap API to retrieve weather data for various cities around the world.<br/><br/>
-              The application allows users to search for the weather in a specific city and displays the current weather conditions along with a five-day 
-              forecast. It also includes features such as the ability to switch between Celsius and Fahrenheit temperature units and the use of icons to represent
-              the weather conditions.<br/><br/>The project demonstrates the use of various web development technologies and the integration of external APIs to build a
-              functional and useful application.
+              A Weather Dashboard application, created by <a href='https://ben-langlois.github.io/'>Ben Langlois</a>, aimed to display weather statistics for inputted city. The application is
+              built in React and SASS, it utilizes multiple APIs such as: <a href='https://openweathermap.org/api/one-call-3'>OpenWeatherMap API</a>, and <a href=''>Google Places</a>.<br/><br/>
+              The application allows users to search for the weather in a specific city and displays the current weather conditions along with hourly and weekly 
+              forecasts. Cards display temperatures and various stats such as: humidity, precipitation, sunrise/set etc
             </p>
           </div>
         </div>   
