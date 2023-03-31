@@ -3,10 +3,15 @@ import './style.scss';
 import React from 'react';
 import $ from 'jquery';
 import * as icons from './icons/icons.js';
+import { GeocoderAutocomplete } from '@geoapify/geocoder-autocomplete';
+
 // var ReactDOM = require('react-dom');
 
 // Global variables
 var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+// API keys
+var autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
 
 /*  React Weather App
     A react app, styled with mostly my own CSS/SASS, some Bootstrap components, and an open-source SVG library to display statistics of inputted city. Once city is inputted
@@ -34,6 +39,8 @@ var weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
 
     Current Task(s)
     - Integrating auto fill in search bar
+      - https://apidocs.geoapify.com/docs/geocoding/address-autocomplete/#autocomplete
+      - https://www.npmjs.com/package/@geoapify/geocoder-autocomplete
 
     Will Return
     - working on placeholder div to cover daily/act intro for user displaying how to use
@@ -316,6 +323,19 @@ class App extends React.Component {
         this.handleSubmit();                                          // find lat & long
       }
     });
+
+    const autocomplete = new GeocoderAutocomplete(
+      document.getElementById("autocomplete"), 
+      autocompleteKey, 
+      { /* Geocoder options */ });
+
+    autocomplete.on('select', (location) => {
+    // check selected location here 
+    });
+
+    autocomplete.on('suggestions', (suggestions) => {
+    // process suggestions here
+    });
   }
 
   handleSubmit = () => {
@@ -377,7 +397,10 @@ class App extends React.Component {
             <div className="input-group-prepend">
               <span className="input-group-text" id="inputGroup-sizing-sm">Location</span>
             </div>
-            <input id='submit' type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='eg. Toronto, New York, Paris'></input>
+              <div id="autocomplete" class="autocomplete-container"></div>
+
+
+            {/* <input id='submit' type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='eg. Toronto, New York, Paris'></input> */}
           </div>  
         </div>
         <Dashboard {...this.state}/>
