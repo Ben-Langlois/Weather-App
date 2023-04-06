@@ -329,13 +329,6 @@ class App extends React.Component {
       autocompleteKey, 
       { /* Geocoder options */ });
 
-    autocomplete.on('select', (location) => {
-    // check selected location here 
-    });
-
-    autocomplete.on('suggestions', (suggestions) => {
-    // process suggestions here
-    });
   }
 
   handleSubmit = () => {
