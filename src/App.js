@@ -41,6 +41,7 @@ var autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
     - Integrating auto fill in search bar
       - https://apidocs.geoapify.com/docs/geocoding/address-autocomplete/#autocomplete
       - https://www.npmjs.com/package/@geoapify/geocoder-autocomplete
+      - working on passing selected location to dashboard, pref lat/long
 
     Will Return
     - working on placeholder div to cover daily/act intro for user displaying how to use
@@ -328,6 +329,8 @@ class App extends React.Component {
       document.getElementById("autocomplete"), 
       autocompleteKey, 
       { /* Geocoder options */ });
+
+      console.log(autocomplete.value);
 
   }
 
