@@ -42,6 +42,7 @@ var autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
       - https://apidocs.geoapify.com/docs/geocoding/address-autocomplete/#autocomplete
       - https://www.npmjs.com/package/@geoapify/geocoder-autocomplete
       - working on passing selected location to dashboard, pref lat/long
+        - have it working just working on smoothing out
 
     Will Return
     - working on placeholder div to cover daily/act intro for user displaying how to use
@@ -310,6 +311,8 @@ class App extends React.Component {
     this.state = {    // is it necessary to init these values?? if i dont have to for main etc...
       city: '',
       country: '',
+      lat: '',
+      lon: '',
       daily: [],
       hourly: []
     };
@@ -318,71 +321,73 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    $('#submit').keypress((event) => {
+    $('html').keypress((event) => {
       var keycode = (event.keyCode ? event.keyCode : event.which);    // **** seeing if its the enter key??? I gotta do somthn diff
       if(keycode == '13'){
-        this.handleSubmit();                                          // find lat & long
+        if($('input.geoapify-autocomplete-input').val == null){ // if location hasnt been selected
+
+        }else{
+          this.handleSubmit();                                          
+        }
       }
     });
 
+    // Autocomplete mumbo jumbo
     const autocomplete = new GeocoderAutocomplete(
       document.getElementById("autocomplete"), 
       autocompleteKey, 
       { /* Geocoder options */ });
 
-      console.log(autocomplete.value);
+      // console.log(autocomplete.value);
 
+    // When location is selected
+    autocomplete.on('select', (location) => {
+      // console.log(location);
+      this.setState({
+        city: location.properties.city,
+        country: location.properties.country,
+        lat: location.properties.lat,
+        lon: location.properties.lon
+      });
+      // console.log(this.state)
+    });
   }
 
   handleSubmit = () => {
-    // Gather input
-    let location = $('#submit').val();                            // gather inputted city
-
-    // handling first API call
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=ad46bca0cb15937504da590a8559bbae`)
+    console.log('aaa')
+    // fetching API with lat and long from submit
+    fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${this.state.lat}&lon=${this.state.lon}&units=metric&exclude=alerts&appid=ad46bca0cb15937504da590a8559bbae`)
       .then(response => response.json())
       .then(data => {     // storing desired API data in state
-          this.setState({
-            city: data[0].name,
-            country: data[0].country
+          // console.log(data.current);
+          // pooling values in an object so they're readable and state isnt just a top level eval 
+          const propObj = {current: {...data.current}, daily: [...data.daily], hourly: [...data.hourly]};
+
+          this.setState({     // pulling from obj above 
+            main: propObj.current.weather[0].main,
+            desc: propObj.current.weather[0].desc,
+            id: propObj.current.weather[0].id,
+            dt: propObj.current.dt,
+            clouds: propObj.current.clouds,
+            feelsLike: Math.round(propObj.current.feels_like),
+            humidity: propObj.current.humidity,
+            pressure: propObj.current.pressure,
+            sunrise: propObj.current.sunrise,
+            sunset: propObj.current.sunset,
+            temp: Math.round(propObj.current.temp),
+            uvi: propObj.current.uvi,
+            windspeed: propObj.current.windspeed,
+            zoneShift: data.timezone_offset,          
+
+            daily: propObj.daily,
+            hourly: propObj.hourly.slice(0, 24)                   // limiting to 24 hours
           })
 
-          return fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${data[0].lat}&lon=${data[0].lon}&units=metric&exclude=alerts&appid=ad46bca0cb15937504da590a8559bbae`)
-      }) // Handling second API call
-      .catch(err => {
-        console.error('Call Failed', err)
-      })
-      .then(response => response.json())
-      .then(data => {     // store desired API data in state
-        // console.log(data.current);
-        // pooling values in an object so they're readable and state isnt just a top level eval 
-        const propObj = {current: {...data.current}, daily: [...data.daily], hourly: [...data.hourly]};
-
-        this.setState({     // pulling from obj above 
-          main: propObj.current.weather[0].main,
-          desc: propObj.current.weather[0].desc,
-          id: propObj.current.weather[0].id,
-          dt: propObj.current.dt,
-          clouds: propObj.current.clouds,
-          feelsLike: Math.round(propObj.current.feels_like),
-          humidity: propObj.current.humidity,
-          pressure: propObj.current.pressure,
-          sunrise: propObj.current.sunrise,
-          sunset: propObj.current.sunset,
-          temp: Math.round(propObj.current.temp),
-          uvi: propObj.current.uvi,
-          windspeed: propObj.current.windspeed,
-          zoneShift: data.timezone_offset,          
-
-          daily: propObj.daily,
-          hourly: propObj.hourly.slice(0, 24)                   // limiting to 24 hours
+          // console.log(this.state);        // state is successfully stored with complete values
         })
-
-        // console.log(this.state);        // state is successfully stored with complete values
-      })
-      .catch(err => {
-        console.error('Call Failed', err)
-      })
+        .catch(err => {
+          console.error('Call Failed', err)
+        })
   };
 
   render(){
