@@ -321,16 +321,16 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    $('html').keypress((event) => {
-      var keycode = (event.keyCode ? event.keyCode : event.which);    // **** seeing if its the enter key??? I gotta do somthn diff
-      if(keycode == '13'){
-        if($('input.geoapify-autocomplete-input').val == null){ // if location hasnt been selected
+    // $('html').keypress((event) => {
+    //   var keycode = (event.keyCode ? event.keyCode : event.which);    // **** seeing if its the enter key??? I gotta do somthn diff
+    //   if(keycode == '13'){
+    //     if($('input.geoapify-autocomplete-input').val == null){ // if location hasnt been selected
 
-        }else{
-          this.handleSubmit();                                          
-        }
-      }
-    });
+    //     }else{
+    //       this.handleSubmit();                                          
+    //     }
+    //   }
+    // });
 
     // Autocomplete mumbo jumbo
     const autocomplete = new GeocoderAutocomplete(
@@ -350,6 +350,9 @@ class App extends React.Component {
         lon: location.properties.lon
       });
       // console.log(this.state)
+
+      this.handleSubmit();                                          
+
     });
   }
 

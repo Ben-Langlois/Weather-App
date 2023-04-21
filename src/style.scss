@@ -29,6 +29,7 @@ body{
             .input-group-prepend{
                 .input-group-text{
                     height: clamp(40px, 5vh, 70px);                    // to have it match #input-box height
+                    font-size: clamp(15px, 3vh, 25px);
                 }
             } 
             
@@ -41,7 +42,8 @@ body{
                 // width: auto;
 
                 input{
-                    width: 100%;
+                    width: 90%;
+                    // display: inline;
                 }
             }
 
