@@ -213,12 +213,18 @@ class Dashboard extends React.Component {
           <div id='desc'>
             <p>
               A Weather Dashboard application, created by <a href='https://ben-langlois.github.io/'>Ben Langlois</a>, aimed to display weather statistics for inputted city. The application is
-              built in React and SASS, it utilizes multiple APIs such as: <a href='https://openweathermap.org/api/one-call-3'>OpenWeatherMap API</a>, and <a href=''>Google Places</a>.<br/><br/>
+              built in React and SASS, it utilizes multiple APIs such as: <a href=''>GeoApify</a>, and <a href='https://openweathermap.org/api/one-call-3'>OpenWeatherMap API</a>.<br/><br/>
               The application allows users to search for the weather in a specific city and displays the current weather conditions along with hourly and weekly 
               forecasts. Cards display temperatures and various stats such as: humidity, precipitation, sunrise/set etc
             </p>
+            <div id='socials'>
+              <img src={icons.github}/>
+              <img src={icons.linkedin}/>
+          </div>
+
           </div>
         </div>   
+
         <div id='daily'>  
           <div id='icon-cont'>    {/* Need to update componentDidUpdate with changes to DOM */}
             <div id='icon'>
@@ -398,12 +404,7 @@ class App extends React.Component {
       <div id='container'>  
         <div id='input-container'>
           <div id='input-box' className="input-group input-group-sm w-50 mx-auto">
-            <div className="input-group-prepend">
-              <span className="input-group-text" id="inputGroup-sizing-sm">Location</span>
-            </div>
               <div id="autocomplete" class="autocomplete-container"></div>
-
-
             {/* <input id='submit' type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='eg. Toronto, New York, Paris'></input> */}
           </div>  
         </div>

@@ -50,4 +50,8 @@ import high from './stats/thermometer-warmer.svg';
 import low from './stats/thermometer-colder.svg';
 // Static icons
 
-export {clearDay, clearNight, cloudyDefault, drizzle, rainDefault, heavyRain, thunderstormsDefault, rainThunderstorm, overcastThunderstorm, snowDefault, fogDay, fogNight, UVI, humidity, sunrise, sunset, clouds, high, low};
+// Social Icons
+import github from './socials/iconmonstr-github-3.svg';
+import linkedin from './socials/iconmonstr-linkedin-3.svg';
+
+export {clearDay, clearNight, cloudyDefault, drizzle, rainDefault, heavyRain, thunderstormsDefault, rainThunderstorm, overcastThunderstorm, snowDefault, fogDay, fogNight, UVI, humidity, sunrise, sunset, clouds, high, low, linkedin, github};

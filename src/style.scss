@@ -39,10 +39,11 @@ body{
 
             #autocomplete{
                 font-size: 2.5vh;
-                // width: auto;
+                width: 100%;
 
                 input{
-                    width: 90%;
+                    width: 100%;
+                    text-align: center;
                     // display: inline;
                 }
             }
