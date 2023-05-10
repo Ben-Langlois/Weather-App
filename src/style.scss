@@ -61,7 +61,6 @@ body{
           "weekly weekly weekly weekly";
 
         #daily{
-            // display: none !important;
             grid-area: daily;
             align-self: center;
             background-color: rgb(255, 255, 255);
@@ -347,6 +346,21 @@ body{
                         font-weight: bold;
                     }
                 }
+
+                #socials{
+                    display: flex;
+                    justify-content: center;
+                    gap: 1vw;
+                    position: relative;
+                    top: 10%;
+
+                    a{  
+                        img{
+                            width: clamp(30px, 2vw, 80px);
+                        }       
+                    }
+                }
+
             }
         }
 
@@ -506,53 +520,6 @@ body{
 
 
 }
-
-@media (max-height: 820px){ // I think all the font sizes can be resolved by using clamp in the originating spots
-    #container{
-        // margin: 1vh 0;
-
-        #input-container{
-            padding: 1.75vh 0 !important;
-        }
-
-        #Dashboard{  
-            // grid-template-rows: 90vh;
-
-            // #daily{
-            //     height: 80vh;
-            //     // margin: auto;
-            //     font-size: 20px !important;
-            
-            //     #icon-cont{
-            //         #icon{
-            //             p{
-            //                 font-size: 30px !important;
-            //                 #degree{
-            //                     font-size: 20px;
-            //                 }
-            //             }
-            //         }
-            //     }
-            //     #stats{     // maybe a way to do this differently aka not so stupid
-            //         #desc{
-            //             h1{
-            //                 font-size: 30px !important;
-            //             }   
-            //         }
-            //         #location{
-            //             h2{
-            //                 font-size: 30px !important;
-            //             }   
-            //         }                   
-            //     }
-            // }
-
-            #weekly{
-                display: none;
-            }  
-        }
-    }
-}
 //#endregion Misc-queries
 
 // Tablet 
@@ -577,7 +544,7 @@ body{
 
         #input-container{
             #input-box{
-                width: 70% !important;
+                width: 100% !important;
                 min-width: auto;
             }
         }
@@ -588,7 +555,7 @@ body{
                 width: 100vw;
                 height: 91vh;
                 // margin: 0 auto;
-                display: grid;
+                display: none;
                 grid-template-columns: 100%;
                 grid-template-rows: 30vh 30vh 30vh;
                 grid-template-areas: 
@@ -665,17 +632,4 @@ body{
 @font-face {
     font-family: Didact;
     src: url(./fonts/DidactGothic-Regular.ttf);
- }
-
-
-//  Media Queries DELETING SOON I THINK
-// Small Laptops (mine)
-// @media (max-width: 1640px) {
-//     #container{
-//         #Dashboard{
-//             #weekly{
-//                  margin-top: 0 !important;
-//             }             
-//         }
-//     }
-// }
+}

@@ -21,28 +21,20 @@ var autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
     https://openweathermap.org/api/one-call-api    
 
     Must Do
-    - consolidate 1456px query
     - combine max/min, font etc css attributes to shorthands
-    - make card to cover empty daily section (before input)
     - change font values to shorthands where needed
 
     Want To Do
-    - find way to be more specific in input, ie allow Paris, Texas instead of always getting Paris, France
     - replace card with https://github.com/Yevgenium/weather-chart-card 
-    - find different API to do whole process in 1 call !2
     - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
     - Make convertDT return am/pm values instead of 24hr format
     - include more info in hourly section
-    - style scroll bar (hourly, daily)
     - expand on weatherChecks variety of icons
     - have hourly & weekly cards have isDay checked icons based on relevant times
 
     Current Task(s)
-    - Integrating auto fill in search bar
-      - https://apidocs.geoapify.com/docs/geocoding/address-autocomplete/#autocomplete
-      - https://www.npmjs.com/package/@geoapify/geocoder-autocomplete
-      - working on passing selected location to dashboard, pref lat/long
-        - have it working just working on smoothing out
+    - working on final touches
+      - going through todo lists 
 
     Will Return
     - working on placeholder div to cover daily/act intro for user displaying how to use
@@ -215,11 +207,11 @@ class Dashboard extends React.Component {
               A Weather Dashboard application, created by <a href='https://ben-langlois.github.io/'>Ben Langlois</a>, aimed to display weather statistics for inputted city. The application is
               built in React and SASS, it utilizes multiple APIs such as: <a href=''>GeoApify</a>, and <a href='https://openweathermap.org/api/one-call-3'>OpenWeatherMap API</a>.<br/><br/>
               The application allows users to search for the weather in a specific city and displays the current weather conditions along with hourly and weekly 
-              forecasts. Cards display temperatures and various stats such as: humidity, precipitation, sunrise/set etc
+              forecasts. Cards display temperatures and various stats such as: humidity, precipitation, sunrise/set etc.
             </p>
             <div id='socials'>
-              <img src={icons.github}/>
-              <img src={icons.linkedin}/>
+              <a href='https://github.com/Ben-Langlois/Weather-App'><img src={icons.github}/></a>
+              <a href='https://www.linkedin.com/in/benjaminlanglois/'><img src={icons.linkedin}/></a>
           </div>
 
           </div>
