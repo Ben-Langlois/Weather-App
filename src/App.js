@@ -73,7 +73,7 @@ class Dashboard extends React.Component {
       let mySVG = this.weatherCheck(this.props.id, this.props.dt);
 
       // Assorted JQ
-      $('#Dashboard #daily #icon-cont #icon img').prop('src', mySVG);    // change src to returned svg
+      $('#Dashboard #daily #icon img').prop('src', mySVG);    // change src to returned svg
 
       // $('#Dashboard #daily #icon-cont #icon #feelsLike').text('Feels Like ');           // continues to prepend/append (feels like feels like feels like)
       // $('#degree').text(' &#8451;');
@@ -136,7 +136,6 @@ class Dashboard extends React.Component {
     if (date.getHours >= 7 && date.getHours <= 19){ // if between 7am and 7pm
       return true;    // true == day
     }
-
     return false;     // false == night
   }
 
@@ -216,16 +215,11 @@ class Dashboard extends React.Component {
 
           </div>
         </div>   
-
         <div id='daily'>  
-          <div id='icon-cont'>    {/* Need to update componentDidUpdate with changes to DOM */}
-            <div id='icon'>
-              <img src='...' alt=''/>
-              <p id='temp'>{this.props.temp}<p id='degree'>&#8451;</p></p>
-              <p id='feelsLike'>Feels Like {this.props.feelsLike}<p id='degree'>&#8451;</p></p> {/* Need to include 'Feels Like: ' w/o showing to early */}
-              <p id='asof'>As Of {this.getTime(this.props.dt, 'time')}</p>
-            </div>
-          </div>      
+          <div id='icon'>
+            <img src='...' alt=''/>
+            <p id='temp'>{this.props.temp}<p class='degree'>&#8451;</p></p>
+          </div>
           <div id='stats'>  
             <div id='desc'>
               <h1>
@@ -235,25 +229,35 @@ class Dashboard extends React.Component {
             <div id='location'>
               <h2>{this.props.city}&nbsp;<b>{this.props.country}</b></h2>
             </div>
-            <div id='uvi' className='etc' title='Cloud Coverage'> {/* should eventually convert css to reflect actual value*/}
-              <img src={icons.clouds} alt='...' /> {this.props.clouds}
+          </div>
+          <div id="details">
+            <p id='feelsLike'>Feels Like {this.props.feelsLike}<p class='degree'>&#8451;</p></p> {/* Need to include 'Feels Like: ' w/o showing to early */}
+            <p id='asof'>As Of {this.getTime(this.props.dt, 'time')}</p>
+            <div id='etc'>
+              <div id='uvi' className='etc' title='Cloud Coverage'> {/* should eventually convert css to reflect actual value*/}
+                <img src={icons.clouds} alt='...' />
+                <p>{this.props.clouds} % </p>
+              </div>
+              <div id='hum' className='etc' title='Humidity'> 
+                <img src={icons.humidity} alt='...'/>
+                <p>{this.props.humidity} % </p> 
+              </div>      
+              <div id='sunr' className='etc' title='Sunrise'>
+                <img src={icons.sunrise} alt='...'/>
+                <p>{this.getTime(this.props.sunrise, 'time')}</p>
+              </div>
+              <div id='suns' className='etc' title='Sunset'>
+                <img src={icons.sunset} alt='...'/>
+                <p>{this.getTime(this.props.sunset, 'time')}</p>
+              </div>   
             </div>
-            <div id='hum' className='etc' title='Humidity'> 
-              <img src={icons.humidity} alt='...'/>{this.props.humidity}  
-            </div>      
-            <div id='sunr' className='etc' title='Sunrise'>
-              <img src={icons.sunrise} alt='...'/>{this.getTime(this.props.sunrise, 'time')}
-            </div>
-            <div id='suns' className='etc' title='Sunset'>
-              <img src={icons.sunset} alt='...'/>{this.getTime(this.props.sunset, 'time')}
-            </div>  
           </div>
           <div id='hourly-cont'>
             {
               this.props.hourly.map((currElement, index) => {
                 return(
                   <div className='hourlyCard'>
-                    <h2>{Math.round(currElement.temp)}<p id='degree'>&#8451;</p></h2>
+                    <h2>{Math.round(currElement.temp)}<p class='degree'>&#8451;</p></h2>
                     <img src={this.weatherCheck(this.props.id, currElement.dt)} alt=''/>
                     <h3>{this.getTime(currElement.dt, 'time')}</h3>
                   </div>
@@ -268,28 +272,30 @@ class Dashboard extends React.Component {
                 return( // using a bootstrap card
                   <div className="card">
                     <div id='date'>
-                      <div><b>{this.getTime(currElement.dt, 'day')}</b></div>
+                      <div>{this.getTime(currElement.dt, 'day')}</div>
                     </div>
                     <div id='icon'>                   
                       <img src={this.weatherCheck(currElement.weather[0].id, currElement.weather[0].dt)} alt=''/>
                     </div>
                     <div id='temp'>
-                      <h2 id='temp'>{Math.round(currElement.temp.day)}<p id='degree'>&#8451;</p></h2>
+                      <h2 id='temp'>{Math.round(currElement.temp.day)}<p class='degree'>&#8451;</p></h2>
                     </div>
                     <div id='feelsLike'>
-                      <div><b>Feels Like {Math.round(currElement.feels_like.day)}<p id='degree'>&#8451;</p></b></div>
+                      <div>Feels Like {Math.round(currElement.feels_like.day)}<p class='degree'>&#8451;</p></div>
                     </div> {/* dont work for some reason */}
-                    <div id='cloud' title='Cloud Coverage'>              
+                    <div id='cloud' class='etc' title='Cloud Coverage'>              
                       <img src={icons.clouds} alt='...' />{currElement.clouds}%
                     </div>
-                    <div id='high' title='High Temp'>
-                      <img src={icons.high} alt='...'/>{Math.round(currElement.temp.max)}<p id='degree'>&#8451;</p>
-                    </div>
-                    <div id='hum' title='Humidity'>
+                    <div id='hum' class='etc' title='Humidity'>
                       <img src={icons.humidity} alt='...'/>{currElement.humidity}%
+                    </div>                    
+                    <div id='high' class='etc' title='High Temp'>
+                      <img src={icons.high} alt='...'/>
+                      <p>{Math.round(currElement.temp.max)}<p class='degree'>&#8451;</p></p>
                     </div>
-                    <div id='low' title='Low Temp'>
-                      <img src={icons.low} alt='...'/>{Math.round(currElement.temp.min)}<p id='degree'>&#8451;</p>
+                    <div id='low' class='etc' title='Low Temp'>
+                      <img src={icons.low} alt='...'/>
+                      <p>{Math.round(currElement.temp.min)}<p class='degree'>&#8451;</p></p>
                     </div>
                   </div>
                 )
@@ -299,14 +305,12 @@ class Dashboard extends React.Component {
       </div>
     );
   }
-
 }
 
 class App extends React.Component {
   constructor(props){
     super(props);
-
-    this.state = {    // is it necessary to init these values?? if i dont have to for main etc...
+    this.state = {   
       city: '',
       country: '',
       lat: '',
@@ -319,24 +323,11 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    // $('html').keypress((event) => {
-    //   var keycode = (event.keyCode ? event.keyCode : event.which);    // **** seeing if its the enter key??? I gotta do somthn diff
-    //   if(keycode == '13'){
-    //     if($('input.geoapify-autocomplete-input').val == null){ // if location hasnt been selected
-
-    //     }else{
-    //       this.handleSubmit();                                          
-    //     }
-    //   }
-    // });
-
     // Autocomplete mumbo jumbo
     const autocomplete = new GeocoderAutocomplete(
       document.getElementById("autocomplete"), 
       autocompleteKey, 
       { /* Geocoder options */ });
-
-      // console.log(autocomplete.value);
 
     // When location is selected
     autocomplete.on('select', (location) => {

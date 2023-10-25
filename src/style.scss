@@ -6,32 +6,33 @@ body{
     font-family: Didact;
 }
 
-/* to allow degree symbol to be dynamically set */
-#degree{    // required for something only god knows
+.degree{    // Parent div must be flex
     display: inline-block;
-    margin: 0;
+    font-size: 70% !important;
+    margin: 0 !important;
+    place-self: start;
 }
 
 #container{
-    height: 100vh;
-
     #input-container{
         padding-top: 2.5vh !important;
         padding-bottom: 2.5vh !important;
 
         #input-box{
-            margin-top: 0 !important;
-            margin-bottom: 0 !important;
-
+            display: flex;
+            margin: 0 auto !important;
+            // margin-top: 0 !important;
+            // margin-bottom: 0 !important;
             height: clamp(40px, 5vh, 70px);
-            min-width: 730px;
+            width: clamp(730px, 45vw, 900px) !important;
+            // padding: 0 !important;
             
-            .input-group-prepend{
-                .input-group-text{
-                    height: clamp(40px, 5vh, 70px);                    // to have it match #input-box height
-                    font-size: clamp(15px, 3vh, 25px);
-                }
-            } 
+            // .input-group-prepend{
+            //     .input-group-text{
+            //         height: clamp(40px, 5vh, 70px);                    // to have it match #input-box height
+            //         font-size: clamp(15px, 3vh, 25px);
+            //     }
+            // } 
             
             // #submit{
             //     font-size: 2.5vh;
@@ -52,98 +53,62 @@ body{
     }
     
     #Dashboard{
-
         display: grid;
-        grid-template-columns: 25vw 25vw 25vw 25vw;
         grid-template-rows: auto;
         grid-template-areas: 
-          ". daily daily ."
-          "weekly weekly weekly weekly";
+          "daily daily"
+          "weekly weekly";
+        justify-content: center;
 
         #daily{
             grid-area: daily;
             align-self: center;
             background-color: rgb(255, 255, 255);
-
-
-            width: clamp(700px, 45vw, 900px);
-            // min-width: 730px;
+            width: clamp(760px, 50vw, 1200px);
             height: clamp(500px, 60vh, 625px);
-            min-height: 500px;
-
             margin: 0 auto 0;
             border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
-            border-radius: 0.25rem;
+            border-radius: 2%;
 
             display: none;
             grid-template-columns: 50% 50%;
-            grid-template-rows: 65% 35%;
+            grid-template-rows: 45% 20% 35%;
             grid-template-areas: 
                 "icon stats" 
+                "details details"
                 "hourly hourly";
 
-            #icon-cont{
-                // border: 1px solid red;
-                position: relative;
+            #icon{
                 grid-area: icon;
-                font-size: clamp(30px, 4vh, 40px);
-                
+                margin: 0 auto;
 
-                #icon{
-                    margin: auto 3vw;
-
-                    display: grid;
-                    grid-template-columns: 75% 25%;
-                    grid-template-rows: auto 20% 20%;
-                    grid-template-areas: 
-                        "icon temp" 
-                        "feelsLike feelsLike"
-                        "asof asof";
+                display: grid;
+                grid-template-columns: 65% 35%;
+                grid-template-areas: "icon temp";
+                height: 100%;
 
 
-                    img{        // make width responsive
-                        grid-area: icon;
-                        place-self: center;
-                        min-width: 230px;
-                        // height: clamp(230px, 30vh, 270px);
-                        // // width: clamp()
-                    }
-
-                    p#degree{
-                        margin: 0;
-                        font-size: 5vh;
-                        display: inline;
-                        position: relative;
-                        bottom: 10%
-                    }
-
-                    #temp{
-                        grid-area: temp;
-                        place-self: center;
-                        margin: 0 0 0 2vw; // cant disable 'user agent ss' for some reason
-                        font-size: clamp(70px, 9vh, 95px);
-                        p{
-                            position: relative;
-                            bottom: clamp(15px, 5vh, 20px);
-                        }
-                    }      
-                    
-                    #feelsLike{
-                        grid-area: feelsLike;
-                        margin: 0 0 0 1rem;
-                        font-weight: bold;
-
-                        p#degree{
-                            font-size: 2.5vh
-                        }
-                    }
-
-                    #asof{
-                        grid-area: asof;
-                        margin: 0 0 0 1rem;
-                    }
-                    
+                img{       
+                    grid-area: icon;
+                    place-self: center;
+                    height: 100%;
                 }
+
+                p#degree{
+                    // margin: 0;
+                    // font-size: 5vh;
+                    // display: inline;
+                    // position: relative;
+                    // bottom: 10%
+                }
+
+                #temp{
+                    display: flex;
+                    grid-area: temp;
+                    place-self: center;
+                    margin: 0 !important; // cant disable 'user agent ss' for some reason
+                    font-size: 5rem;
+                }            
             }
 
             #stats{
@@ -155,22 +120,19 @@ body{
                 height: 75%;
 
                 display: grid;
-                grid-template-columns: 50% 50%;
-                grid-template-rows: 30% 20% 25% 25%;
+                grid-template-rows: 60% 40%;
                 grid-template-areas: 
-                    "desc desc"
-                    "location location" 
-                    "UVI hum"
-                    "sunr suns";
-                font-size: clamp(30px, 4vh, 40px);
+                    "desc"
+                    "location";
+                // font-size: clamp(30px, 4vh, 40px);
 
                 #desc{
                     grid-area: desc;
                     display:inline-block;
-                    place-self: start;
+                    place-self: center start;
 
                     h1{
-                        font-size: clamp(30px, 4vh, 40px); // sadly
+                        // font-size: clamp(30px, 4vh, 40px); // sadly
                     }
                 }
 
@@ -181,40 +143,85 @@ body{
                     text-align: justify;
 
                     h2{
-                        font-size: clamp(30px, 4vh, 40px);
+                        // font-size: clamp(30px, 4vh, 40px);
                         // font-weight: bold;
                         margin: 0;
                     }
                 }
 
-                #uvi{
-                    grid-area: UVI;
+
+            }
+
+            #details{
+                grid-area: details;
+                display: grid;
+                grid-template: 
+                    "feelsLike etc"
+                    "asof etc";
+                grid-template-columns: 50% 50%;
+                grid-template-rows: 50% 50%;
+
+                p{
+                    margin: 0 0 0 10%;
+                    font-size: 2rem;
+                    display: flex;
                 }
 
-                #hum{
-                    grid-area: hum;
-                }
-
-                #sunr{
-                    grid-area: sunr;
-                }
-
-                #suns{
-                    grid-area: suns;
-                    overflow: visible;
-                }
-
-                .etc{   // combine font selectors to shorthand
+                #feelsLike{
+                    grid-area: feelsLike;
                     font-weight: bold;
-                    font-size: clamp(15px, 3vh, 25px);
-                    display: inline-block;
-
-                    position: relative;
-                    top: 3vh;
-                    img{
-                        height: 100%;
-                    }
+                    flex-wrap: wrap;
+                    align-content: center;
                 }
+
+                #asof{
+                    grid-area: asof;
+                    flex-wrap: wrap;
+                    align-content: center;
+                }                
+
+                #etc{
+                    grid-area: etc;
+                    display: grid;
+                    grid-template: 
+                        "uvi hum"
+                        "sunr suns";
+                    grid-template-columns: 50% 50%;
+                    grid-template-rows: 50% 50%;
+
+
+                    #uvi{
+                        grid-area: uvi;
+                    }
+
+                    #hum{
+                        grid-area: hum;
+                    }
+
+                    #sunr{
+                        grid-area: sunr;
+                    }
+
+                    #suns{
+                        grid-area: suns;
+                    }
+
+                    .etc{   // combine font selectors to shorthand
+                        display: flex;
+                        flex-direction: row;
+                        font-size: clamp(15px, 3vh, 25px);
+
+                        p{
+                            margin: 0;
+                            height: fit-content;
+                            align-self: center;
+                        }
+                        img{
+                            height: 100%;
+                        }
+                    }                    
+                }
+
             }
 
             #hourly-cont{
@@ -224,19 +231,14 @@ body{
                 white-space: nowrap;
                 display: flex;
                 flex-direction: row;
-                // justify-content: space-evenly;
 
                 .hourlyCard{
-                    // border: 1px solid red;
-                    // display: inline-flex;
-                    height: 85%;
                     width: clamp(150px, 5vw, 100px);
-                    margin: 1% 0.5vw;
+                    margin: 1%;
+                    padding: 1%;
                     justify-content: center;
-
                     border: 1px solid rgba(0, 0, 0, 0.125);
-                    border-radius: 0.25rem;
-
+                    border-radius: 3%;
                     display: grid;
                     grid-template-rows: 25% 50% 25%;
                     grid-template-areas: 
@@ -246,6 +248,7 @@ body{
 
                     h2{
                         grid-area: temp;
+                        display: flex;
                         place-self: center;
                         margin: 0;
 
@@ -257,7 +260,9 @@ body{
 
                     img{
                         grid-area: icon;
-
+                        height: 100%;
+                        display: flex;
+                        margin: 0 auto;
                     }
 
                     h3{
@@ -275,50 +280,39 @@ body{
                 }                      
             }
         }
+
         #defaultDaily{
             display: grid;
             z-index: 1;
             grid-area: daily;
-            align-self: center;
-            background-color: rgb(255, 255, 255);
-
-
-            width: clamp(700px, 45vw, 900px);
-            // min-width: 730px;
-            height: clamp(500px, 60vh, 625px);
-            min-height: 500px;
-
+            width: clamp(730px, 45vw, 900px);
             margin: 0 auto 0;
             border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
-            border-radius: 0.25rem;
-        
-            grid-template-columns: 10% 40% 40% 10%;
-            grid-template-rows: 50% 50%;
+            border-radius: 2%;
+            background-color: rgb(255, 255, 255);
+            grid-template-columns: 50% 50%;
             grid-template-areas: 
-              ". icon title ."
-              "desc desc desc desc";
+              "icon title"
+              "desc desc";
     
             #icon{
                 grid-area: icon;
 
                 img{
                     width: 80%;
+                    display: flex;
+                    margin: 0 auto;
                 }
             }
 
             #title{
                 grid-area: title;
-                position: relative;
+                display: flex;
+                align-items: center;
 
                 h1{
                     display: inline-block;
-
                     margin: 0;
-                    position: absolute;
-                    top: 50%;
-                    -ms-transform: translateY(-50%);
-                    transform: translateY(-50%);
-
                     font-weight: bold;          // shorthand dis
                     font-size: 3.5rem;
 
@@ -334,7 +328,7 @@ body{
                 
 
                 p{
-                    font-size: 2.3vh;
+                    font-size: 1.5rem;
                     // line-height: 1.5vh;
 
                 }
@@ -352,7 +346,7 @@ body{
                     justify-content: center;
                     gap: 1vw;
                     position: relative;
-                    top: 10%;
+                    top: 15%;
 
                     a{  
                         img{
@@ -364,18 +358,13 @@ body{
             }
         }
 
-
         #weekly{
             grid-area: weekly;
-
             background-color: rgb(249, 250, 251);
             display: flex;
-            // margin: 1rem auto 0;
             padding-top: 2.5vh;
-            width: 100vw;
-            height: 30vh;
+            height: clamp(290px, 30vh, 450px);
             justify-content: space-between;
-
             overflow: scroll;
             overflow-y: hidden;
 
@@ -384,37 +373,31 @@ body{
             }
 
             .card{
+                // width: clamp(235px, 30vw, 400px);
                 min-width: 235px;
-                // height: 35vh;
-                flex: 1 1 auto;
-
+                // min-height: 210px;
+                height: clamp(210px, 100%, 400px);
                 margin: 0 0.5vw;
-                flex-direction: row;
-                flex-wrap: wrap;
-
                 display: grid;
-                grid-template-columns: 10% 20% 20% 20% 20% 10%;
+                grid-template-columns: 40% 40%;
                 grid-template-rows: 15% 40% 15% 15% 15%;
                 grid-template-areas: 
-                    ". date date date date ." 
-                    ". icon icon temp temp ."
-                    ". feels feels feels feels ."
-                    ". cloud cloud high high ."
-                    ". hum hum low low .";
-
-                div{
-                    // border: 1px solid red;
-
-                }
+                    "date date" 
+                    "icon temp"
+                    "feels feels"
+                    "cloud high"
+                    "hum low";
+                justify-content: center;
+                transition: box-shadow 300ms;
 
                 #date{
                     grid-area: date;
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    font-weight: bold;
                     
                     div{
-                        // display: inline-block;
                         font-size: 1.3rem;
                         border: none;
                     }
@@ -436,13 +419,8 @@ body{
 
                     h2{
                         margin: 0; // cant disable 'user agent ss' for some reason
-
-
+                        font-size: 2.8rem;
                     }   
-                        h2#temp{
-                            font-size: 2rem;
-                        }
-
                 }
 
                 #feelsLike{
@@ -452,7 +430,8 @@ body{
                     justify-content: center;
                     
                     div{
-                        // display: inline-block;
+                        display: flex;
+                        font-weight: bold;
                         font-size: 1.3rem;
                         border: none;
                     }
@@ -465,35 +444,37 @@ body{
 
                 #cloud{     // will pot. change to humidity
                     grid-area: cloud;
-
-
-                }
-
-                #high{
-                    grid-area: high;
                 }
 
                 #hum{
                     grid-area: hum;
                 }
 
+                #high{
+                    grid-area: high;
+                    display: flex; 
+                }    
+
                 #low{
                     grid-area: low;
+                    display: flex;
                 }
 
-                transition: transform 1000ms ease-in-out;
-                transition: box-shadow 300ms;
+                .etc{
+                    font-size: 1.4rem;
+
+                    p{
+                        margin: 0;
+                        display: flex;
+                        align-items: center;                           
+                    }
+                }
 
                 &:hover{
                     transform: scale(1.05, 1.05);
                     box-shadow: 0 8px 8px -4px;
                 }
-
             }
-            
-
-
-
         }::-webkit-scrollbar{
             // height: 1.5rem;
         }::-webkit-scrollbar-track{
@@ -505,34 +486,28 @@ body{
 /* Media Queries */
 //#region Misc-queries
 @media(min-width: 601px) and (max-width: 1456px) {
-    #container{
-        #Dashboard{
-            grid-template-columns: 0 50vw 50vw 0;
-        }
+    // #container{
+    //     #Dashboard{
+    //         grid-template-columns: 0 50vw 50vw 0;
+    //     }
 
-        #input-container{
-            #input-box{
-                margin: 0 auto !important;
-                width: 50vw !important;            
-            }
-        }
-    }
-
+    //     #input-container{
+    //         #input-box{
+    //             margin: 0 auto !important;
+    //             width: 50vw !important;            
+    //         }
+    //     }
+    // }
 
 }
 //#endregion Misc-queries
 
 // Tablet 
-@media (max-width: 768px){
+@media (max-width: 960px){
     #container{
         #input-container{
             #input-box{
-                .input-group-prepend{
-                    display: none;
-                }
-                #submit{
-                    width: 100vw;
-                }
+                width: 80% !important;
             }
         }
     }
@@ -540,70 +515,70 @@ body{
 
 // Mobile
 @media (max-width: 600px){
-    #container{
+    // #container{
 
-        #input-container{
-            #input-box{
-                width: 100% !important;
-                min-width: auto;
-            }
-        }
+    //     #input-container{
+    //         #input-box{
+    //             width: 100% !important;
+    //             min-width: auto;
+    //         }
+    //     }
 
-        #Dashboard{
-            display: inline;
-            #daily{
-                width: 100vw;
-                height: 91vh;
-                // margin: 0 auto;
-                display: none;
-                grid-template-columns: 100%;
-                grid-template-rows: 30vh 30vh 30vh;
-                grid-template-areas: 
-                    "icon"
-                    "stats"
-                    "hourly";
+    //     #Dashboard{
+    //         display: inline;
+    //         #daily{
+    //             width: 100vw;
+    //             height: 91vh;
+    //             // margin: 0 auto;
+    //             display: none;
+    //             grid-template-columns: 100%;
+    //             grid-template-rows: 30vh 30vh 30vh;
+    //             grid-template-areas: 
+    //                 "icon"
+    //                 "stats"
+    //                 "hourly";
 
-                #icon-cont{
-                    #icon{
-                        margin: auto 20vw;
-                        grid-template-columns: 30vw 30vw;
+    //             #icon-cont{
+    //                 #icon{
+    //                     margin: auto 20vw;
+    //                     grid-template-columns: 30vw 30vw;
 
-                        img{
-                            width: 30vw;
-                        }
+    //                     img{
+    //                         width: 30vw;
+    //                     }
 
-                        #feelsLike{
-                            display: none;
-                        }
+    //                     #feelsLike{
+    //                         display: none;
+    //                     }
 
-                        #asof{
-                            display: none;
-                        }
-                    }
-                }
+    //                     #asof{
+    //                         display: none;
+    //                     }
+    //                 }
+    //             }
 
-                #stats{
-                    margin: auto 10vw;
+    //             #stats{
+    //                 margin: auto 10vw;
 
-                    .etc{
-                        // place-self: stretch center;
-                    }
-                }
+    //                 .etc{
+    //                     // place-self: stretch center;
+    //                 }
+    //             }
 
-                #hourly-cont{
-                    // display: none;
-                    .hourlyCard{
-                        // width: clamp(150px, 5vw, 100px);
-                        margin: 4% 1vw;
-                    }
-                }
-            }
+    //             #hourly-cont{
+    //                 // display: none;
+    //                 .hourlyCard{
+    //                     // width: clamp(150px, 5vw, 100px);
+    //                     margin: 4% 1vw;
+    //                 }
+    //             }
+    //         }
 
-            #weekly{
-                width: 100vw;
-            }
-        }
-    }
+    //         #weekly{
+    //             width: 100vw;
+    //         }
+    //     }
+    // }
 }
 
 
