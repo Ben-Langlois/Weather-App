@@ -100,19 +100,11 @@ class Dashboard extends React.Component {
         {rv}: return value
       returns
         {date}: shortened converted date (11:30, 03:20 etc)
-
-      - zone shift seems irrellivent???? did I even spell that right?
   */
   getTime(dt, rv){
     let time = dt * 1000,
         date = new Date(time);
-/*
-    if(date.getHours() > 12){
-      return (date.getMinutes() < 10 ? `${date.getHours() - 12}:0${date.getMinutes()}` : `${date.getHours()}:${date.getMinutes()} am`)
-    } else {
-      return (date.getMinutes() < 10 ? `${date.getHours()}:0${date.getMinutes()}` : `${date.getHours()}:${date.getMinutes()} pm`)
-    }
-*/      
+
     if(rv === 'time'){  // if user requests the time
       if(date.getHours() > 12){
         return (date.getMinutes() < 10 ? `${date.getHours() - 12}:0${date.getMinutes()} pm` : `${date.getHours() - 12}:${date.getMinutes()} pm`)
@@ -149,17 +141,6 @@ class Dashboard extends React.Component {
       determines svg to return based on inputted number
   */ 
   weatherCheck(daily, dt){   
-    /* 
-      - Since there aren't many options for each category, I decided to use if statementes 
-        as a placeholder
-      
-      - is there a better way than this 'two-tiered' 
-        (id, idObjects) => {
-          if(idObjects.map(() => {
-            
-          }))
-        }
-    */ 
     // use regex to determine what number daily starts with
     if(/^2/.test(daily.toString())){              // Thunderstorms  
       if(daily === 201){
@@ -177,7 +158,7 @@ class Dashboard extends React.Component {
       }
     } else if (/^6/.test(daily.toString())){
       return icons.snowDefault;
-    } else if (/^7/.test(daily.toString())){    // need to incorporate time check to differentiate
+    } else if (/^7/.test(daily.toString())){
       if(this.isDay(dt)){
         return icons.fogDay;
       }
@@ -342,7 +323,7 @@ class App extends React.Component {
         lat: location.properties.lat,
         lon: location.properties.lon
       });
-      console.log(this.state)
+      // console.log(this.state)
 
       this.handleSubmit();                                          
 
@@ -378,7 +359,7 @@ class App extends React.Component {
             hourly: propObj.hourly.slice(0, 24)                   // limiting to 24 hours
           })
 
-          // console.log(this.state);        // state is successfully stored with complete values
+          console.log(this.state);        // state is successfully stored with complete values
         })
         .catch(err => {
           console.error('Call Failed', err)
