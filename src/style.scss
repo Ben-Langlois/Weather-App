@@ -329,9 +329,8 @@ body{
             }
 
             .card{
-                // width: clamp(235px, 30vw, 400px);
-                min-width: 235px;
-                // min-height: 210px;
+                min-width: 200px;
+                max-width: 300px;
                 height: 100%;
                 margin: 0 0.5vw;
                 display: grid;
@@ -456,11 +455,9 @@ body{
 
                 #autocomplete{
                         font-size: 2rem;
-
                     input{
                         font-size: inherit;
                     }
-
                     .geoapify-autocomplete-items{
                         font-size: inherit;
 
@@ -473,25 +470,20 @@ body{
                 }
             }
         }
-
         #Dashboard{
             #defaultDaily{
                 width: 90%;
-
                 #title{
                     h1{
                         font-size: 4rem;
                     }
                 }
-
                 #desc{    
                     p{
                         font-size: 2rem;    
                     }
-    
                     #socials{
                         gap: 10%;
-    
                         a{  
                             img{
                                 width: 4.5rem;
@@ -500,10 +492,8 @@ body{
                     }
                 }
             }
-
             #daily{
                 width: 90%;
-
                 #stats{
                     div{
                         h1{
@@ -514,13 +504,11 @@ body{
                         }
                     }
                 }
-
                 #hourly-cont{
                     .hourlyCard{
                         h2{
                             font-size: 2.2rem;
                         }
-
                         h3{
                             font-size: 2rem;
                         }
@@ -531,10 +519,6 @@ body{
             #weekly{
                 .card{
                     grid-template-columns: 50% 50%;
-
-                    #date{
-
-                    }
                 }
             }
         }
@@ -547,20 +531,16 @@ body{
         #input-container{
             #input-box{
                 width: 90% !important;
-
             }
         }
-
         #Dashboard{
             #defaultDaily{
                 width: 90%;
-
                 #title{
                     h1{
                         font-size: 2rem;
                     }
                 }
-
                 #desc{
                     
                     p{
@@ -568,7 +548,6 @@ body{
                     }
                 }
             }
-
             #daily{
                 width: 90%;
                 grid-template-columns: 100%;
@@ -606,16 +585,11 @@ body{
                     }
                 }
             }
-
             #weekly{
                 padding: 0;
 
                 .card{
                     grid-template-columns: 50% 50%;
-
-                    #date{
-
-                    }
                 }
             }
         }

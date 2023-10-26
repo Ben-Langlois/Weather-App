@@ -4,6 +4,7 @@ import React from 'react';
 import $ from 'jquery';
 import * as icons from './icons/icons.js';
 import { GeocoderAutocomplete } from '@geoapify/geocoder-autocomplete';
+import {Helmet} from "react-helmet";
 
 // var ReactDOM = require('react-dom');
 
@@ -370,6 +371,10 @@ class App extends React.Component {
   render(){
     return (
       <div id='container'>  
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Ben's Weather App</title>
+        </Helmet>
         <div id='input-container'>
           <div id='input-box' className="input-group input-group-sm w-50 mx-auto">
               <div id="autocomplete" class="autocomplete-container"></div>
