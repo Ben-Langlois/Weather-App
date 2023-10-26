@@ -82,6 +82,7 @@ class Dashboard extends React.Component {
 
       
       $('#Dashboard #daily').css('display', 'grid');            // display daily card
+      $('#Dashboard #weekly').css('display', 'flex');           // display weekly
       $('#Dashboard #defaultDaily').css('display', 'none');     // hide default card
     }
   }
@@ -204,7 +205,7 @@ class Dashboard extends React.Component {
           <div id='desc'>
             <p>
               A Weather Dashboard application, created by <a href='https://ben-langlois.github.io/'>Ben Langlois</a>, aimed to display weather statistics for inputted city. The application is
-              built in React and SASS, it utilizes multiple APIs such as: <a href=''>GeoApify</a>, and <a href='https://openweathermap.org/api/one-call-3'>OpenWeatherMap API</a>.<br/><br/>
+              built in React and SASS, it utilizes multiple APIs such as: <a href='https://www.geoapify.com/address-autocomplete'>GeoApify</a>, and <a href='https://openweathermap.org/api/one-call-3'>OpenWeatherMap API</a>.<br/><br/>
               The application allows users to search for the weather in a specific city and displays the current weather conditions along with hourly and weekly 
               forecasts. Cards display temperatures and various stats such as: humidity, precipitation, sunrise/set etc.
             </p>
@@ -227,7 +228,7 @@ class Dashboard extends React.Component {
               </h1>
             </div>
             <div id='location'>
-              <h2>{this.props.city}&nbsp;<b>{this.props.country}</b></h2>
+              <h2>{this.props.formatted}</h2>
             </div>
           </div>
           <div id="details">
@@ -272,7 +273,7 @@ class Dashboard extends React.Component {
                 return( // using a bootstrap card
                   <div className="card">
                     <div id='date'>
-                      <div>{this.getTime(currElement.dt, 'day')}</div>
+                      <h3>{this.getTime(currElement.dt, 'day')}</h3>
                     </div>
                     <div id='icon'>                   
                       <img src={this.weatherCheck(currElement.weather[0].id, currElement.weather[0].dt)} alt=''/>
@@ -281,13 +282,15 @@ class Dashboard extends React.Component {
                       <h2 id='temp'>{Math.round(currElement.temp.day)}<p class='degree'>&#8451;</p></h2>
                     </div>
                     <div id='feelsLike'>
-                      <div>Feels Like {Math.round(currElement.feels_like.day)}<p class='degree'>&#8451;</p></div>
+                      <h4>Feels Like {Math.round(currElement.feels_like.day)}<p class='degree'>&#8451;</p></h4>
                     </div> {/* dont work for some reason */}
                     <div id='cloud' class='etc' title='Cloud Coverage'>              
-                      <img src={icons.clouds} alt='...' />{currElement.clouds}%
+                      <img src={icons.clouds} alt='...' />
+                      <p>{currElement.clouds}%</p>
                     </div>
                     <div id='hum' class='etc' title='Humidity'>
-                      <img src={icons.humidity} alt='...'/>{currElement.humidity}%
+                      <img src={icons.humidity} alt='...'/>
+                      <p>{currElement.humidity}%</p>
                     </div>                    
                     <div id='high' class='etc' title='High Temp'>
                       <img src={icons.high} alt='...'/>
@@ -334,11 +337,12 @@ class App extends React.Component {
       // console.log(location);
       this.setState({
         city: location.properties.city,
+        formatted: location.properties.formatted,
         country: location.properties.country,
         lat: location.properties.lat,
         lon: location.properties.lon
       });
-      // console.log(this.state)
+      console.log(this.state)
 
       this.handleSubmit();                                          
 
@@ -346,7 +350,6 @@ class App extends React.Component {
   }
 
   handleSubmit = () => {
-    console.log('aaa')
     // fetching API with lat and long from submit
     fetch(`http://api.openweathermap.org/data/2.5/onecall?lat=${this.state.lat}&lon=${this.state.lon}&units=metric&exclude=alerts&appid=ad46bca0cb15937504da590a8559bbae`)
       .then(response => response.json())

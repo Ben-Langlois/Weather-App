@@ -1,6 +1,5 @@
 @import "~@geoapify/geocoder-autocomplete/styles/minimal.css";
 
-
 body{
     background-color: rgb(249 250 251);
     font-family: Didact;
@@ -21,31 +20,18 @@ body{
         #input-box{
             display: flex;
             margin: 0 auto !important;
-            // margin-top: 0 !important;
-            // margin-bottom: 0 !important;
-            height: clamp(40px, 5vh, 70px);
-            width: clamp(730px, 45vw, 900px) !important;
-            // padding: 0 !important;
-            
-            // .input-group-prepend{
-            //     .input-group-text{
-            //         height: clamp(40px, 5vh, 70px);                    // to have it match #input-box height
-            //         font-size: clamp(15px, 3vh, 25px);
-            //     }
-            // } 
-            
-            // #submit{
-            //     font-size: 2.5vh;
-            // }
+            width: clamp(730px, 50vw, 900px) !important;
+
 
             #autocomplete{
-                font-size: 2.5vh;
                 width: 100%;
 
                 input{
                     width: 100%;
                     text-align: center;
-                    // display: inline;
+                    font-size: 1.4rem;
+                    border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
+                    height: clamp(35px, 5vh, 50px);
                 }
             }
 
@@ -56,8 +42,8 @@ body{
         display: grid;
         grid-template-rows: auto;
         grid-template-areas: 
-          "daily daily"
-          "weekly weekly";
+          "daily"
+          "weekly";
         justify-content: center;
 
         #daily{
@@ -65,11 +51,10 @@ body{
             align-self: center;
             background-color: rgb(255, 255, 255);
             width: clamp(760px, 50vw, 1200px);
-            height: clamp(500px, 60vh, 625px);
+            height: clamp(500px, 60vh, 900px);
             margin: 0 auto 0;
             border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
-            border-radius: 2%;
-
+            // border-radius: 2%;
             display: none;
             grid-template-columns: 50% 50%;
             grid-template-rows: 45% 20% 35%;
@@ -81,25 +66,14 @@ body{
             #icon{
                 grid-area: icon;
                 margin: 0 auto;
-
                 display: grid;
                 grid-template-columns: 65% 35%;
                 grid-template-areas: "icon temp";
-                height: 100%;
-
 
                 img{       
                     grid-area: icon;
                     place-self: center;
-                    height: 100%;
-                }
-
-                p#degree{
-                    // margin: 0;
-                    // font-size: 5vh;
-                    // display: inline;
-                    // position: relative;
-                    // bottom: 10%
+                    width: 100%;
                 }
 
                 #temp{
@@ -108,43 +82,26 @@ body{
                     place-self: center;
                     margin: 0 !important; // cant disable 'user agent ss' for some reason
                     font-size: 5rem;
+                    font-weight: bold;
                 }            
             }
 
             #stats{
-                // display: inline-flex;
-                // width: 50%;
-                // border: 1px solid red;
+                display: flex;
+                flex-direction: column;
                 grid-area: stats;
-                margin: auto 2vw;
-                height: 75%;
-
-                display: grid;
-                grid-template-rows: 60% 40%;
-                grid-template-areas: 
-                    "desc"
-                    "location";
-                // font-size: clamp(30px, 4vh, 40px);
+                margin: auto 3vw;
+                justify-content: start;
 
                 #desc{
-                    grid-area: desc;
                     display:inline-block;
-                    place-self: center start;
-
-                    h1{
-                        // font-size: clamp(30px, 4vh, 40px); // sadly
-                    }
                 }
 
                 #location{
-                    grid-area: location;
                     display: inline-block;
-                    place-self: start;
-                    text-align: justify;
+                    margin: 0;
 
                     h2{
-                        // font-size: clamp(30px, 4vh, 40px);
-                        // font-weight: bold;
                         margin: 0;
                     }
                 }
@@ -223,7 +180,6 @@ body{
                 }
 
             }
-
             #hourly-cont{
                 // border: 1px solid red;
                 grid-area: hourly;
@@ -233,7 +189,7 @@ body{
                 flex-direction: row;
 
                 .hourlyCard{
-                    width: clamp(150px, 5vw, 100px);
+                    width: clamp(150px, 15vw, 250px);
                     margin: 1%;
                     padding: 1%;
                     justify-content: center;
@@ -251,6 +207,7 @@ body{
                         display: flex;
                         place-self: center;
                         margin: 0;
+                        font-weight: bold;
 
                         p{
                             display: inline-block;
@@ -285,10 +242,10 @@ body{
             display: grid;
             z-index: 1;
             grid-area: daily;
-            width: clamp(730px, 45vw, 900px);
+            width: clamp(730px, 50vw, 900px);
             margin: 0 auto 0;
             border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
-            border-radius: 2%;
+            // border-radius: 2%;
             background-color: rgb(255, 255, 255);
             grid-template-columns: 50% 50%;
             grid-template-areas: 
@@ -345,12 +302,11 @@ body{
                     display: flex;
                     justify-content: center;
                     gap: 1vw;
-                    position: relative;
-                    top: 15%;
+                    margin-bottom: 1rem;                
 
                     a{  
                         img{
-                            width: clamp(30px, 2vw, 80px);
+                            width: 3rem;
                         }       
                     }
                 }
@@ -361,9 +317,9 @@ body{
         #weekly{
             grid-area: weekly;
             background-color: rgb(249, 250, 251);
-            display: flex;
+            display: none;
             padding-top: 2.5vh;
-            height: clamp(290px, 30vh, 450px);
+            height: clamp(290px, 30vh, 350px);
             justify-content: space-between;
             overflow: scroll;
             overflow-y: hidden;
@@ -376,7 +332,7 @@ body{
                 // width: clamp(235px, 30vw, 400px);
                 min-width: 235px;
                 // min-height: 210px;
-                height: clamp(210px, 100%, 400px);
+                height: 100%;
                 margin: 0 0.5vw;
                 display: grid;
                 grid-template-columns: 40% 40%;
@@ -397,9 +353,9 @@ body{
                     justify-content: center;
                     font-weight: bold;
                     
-                    div{
-                        font-size: 1.3rem;
-                        border: none;
+                    h3{
+                        margin: 0;
+                        font-weight: bold;
                     }
                 }
 
@@ -429,11 +385,11 @@ body{
                     align-items: center;
                     justify-content: center;
                     
-                    div{
+                    h4{
                         display: flex;
                         font-weight: bold;
-                        font-size: 1.3rem;
-                        border: none;
+                        // font-size: 1.3rem;
+                        // border: none;
                     }
 
                 }
@@ -442,12 +398,14 @@ body{
                     height: 100%;
                 }
 
-                #cloud{     // will pot. change to humidity
+                #cloud{     
                     grid-area: cloud;
+                    justify-content: end;
                 }
 
                 #hum{
                     grid-area: hum;
+                    justify-content: end;
                 }
 
                 #high{
@@ -461,14 +419,19 @@ body{
                 }
 
                 .etc{
-                    font-size: 1.4rem;
+                    font-size: 1.5rem;
+                    display: flex;
+
 
                     p{
+                    font-size: 1.5rem;
+
                         margin: 0;
                         display: flex;
                         align-items: center;                           
                     }
                 }
+
 
                 &:hover{
                     transform: scale(1.05, 1.05);
@@ -484,30 +447,95 @@ body{
 }
 
 /* Media Queries */
-//#region Misc-queries
-@media(min-width: 601px) and (max-width: 1456px) {
-    // #container{
-    //     #Dashboard{
-    //         grid-template-columns: 0 50vw 50vw 0;
-    //     }
-
-    //     #input-container{
-    //         #input-box{
-    //             margin: 0 auto !important;
-    //             width: 50vw !important;            
-    //         }
-    //     }
-    // }
-
-}
-//#endregion Misc-queries
-
 // Tablet 
-@media (max-width: 960px){
+@media (min-width: 601px) and (max-width: 960px){
     #container{
         #input-container{
             #input-box{
-                width: 80% !important;
+                width: 90% !important;
+
+                #autocomplete{
+                        font-size: 2rem;
+
+                    input{
+                        font-size: inherit;
+                    }
+
+                    .geoapify-autocomplete-items{
+                        font-size: inherit;
+
+                        .address{
+                            .secondary-part{
+                                font-size: 1.5rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        #Dashboard{
+            #defaultDaily{
+                width: 90%;
+
+                #title{
+                    h1{
+                        font-size: 4rem;
+                    }
+                }
+
+                #desc{    
+                    p{
+                        font-size: 2rem;    
+                    }
+    
+                    #socials{
+                        gap: 10%;
+    
+                        a{  
+                            img{
+                                width: 4.5rem;
+                            }       
+                        }
+                    }
+                }
+            }
+
+            #daily{
+                width: 90%;
+
+                #stats{
+                    div{
+                        h1{
+                            font-size: 2.8rem;
+                        }
+                        h2{
+                            font-size: 2.5rem;
+                        }
+                    }
+                }
+
+                #hourly-cont{
+                    .hourlyCard{
+                        h2{
+                            font-size: 2.2rem;
+                        }
+
+                        h3{
+                            font-size: 2rem;
+                        }
+                    }
+                }
+            }
+
+            #weekly{
+                .card{
+                    grid-template-columns: 50% 50%;
+
+                    #date{
+
+                    }
+                }
             }
         }
     }
@@ -515,70 +543,83 @@ body{
 
 // Mobile
 @media (max-width: 600px){
-    // #container{
+    #container{
+        #input-container{
+            #input-box{
+                width: 90% !important;
 
-    //     #input-container{
-    //         #input-box{
-    //             width: 100% !important;
-    //             min-width: auto;
-    //         }
-    //     }
+            }
+        }
 
-    //     #Dashboard{
-    //         display: inline;
-    //         #daily{
-    //             width: 100vw;
-    //             height: 91vh;
-    //             // margin: 0 auto;
-    //             display: none;
-    //             grid-template-columns: 100%;
-    //             grid-template-rows: 30vh 30vh 30vh;
-    //             grid-template-areas: 
-    //                 "icon"
-    //                 "stats"
-    //                 "hourly";
+        #Dashboard{
+            #defaultDaily{
+                width: 90%;
 
-    //             #icon-cont{
-    //                 #icon{
-    //                     margin: auto 20vw;
-    //                     grid-template-columns: 30vw 30vw;
+                #title{
+                    h1{
+                        font-size: 2rem;
+                    }
+                }
 
-    //                     img{
-    //                         width: 30vw;
-    //                     }
+                #desc{
+                    
+                    p{
+                        font-size: 140%;
+                    }
+                }
+            }
 
-    //                     #feelsLike{
-    //                         display: none;
-    //                     }
+            #daily{
+                width: 90%;
+                grid-template-columns: 100%;
+                grid-template-rows: 20% 30% 20% 30%;
+                grid-template-areas: 
+                    "stats" 
+                    "icon"
+                    "details"
+                    "hourly";
 
-    //                     #asof{
-    //                         display: none;
-    //                     }
-    //                 }
-    //             }
+                #stats{
+                    margin: auto 10%;
+                }
 
-    //             #stats{
-    //                 margin: auto 10vw;
+                #details{
+                    grid-template-columns: 40% 60%;
 
-    //                 .etc{
-    //                     // place-self: stretch center;
-    //                 }
-    //             }
+                    p{
+                        font-size: 1.2rem;
+                        margin-left: 10%;
+                    }
+                    
+                    img{
+                        height: 75% !important;
+                        align-self: center;
+                    }
+                }
 
-    //             #hourly-cont{
-    //                 // display: none;
-    //                 .hourlyCard{
-    //                     // width: clamp(150px, 5vw, 100px);
-    //                     margin: 4% 1vw;
-    //                 }
-    //             }
-    //         }
+                #icon{
+                    grid-template-columns: auto;
 
-    //         #weekly{
-    //             width: 100vw;
-    //         }
-    //     }
-    // }
+                    img{
+                        height: 100%;
+                        width: auto;
+                    }
+                }
+            }
+
+            #weekly{
+                padding: 0;
+
+                .card{
+                    grid-template-columns: 50% 50%;
+
+                    #date{
+
+                    }
+                }
+            }
+        }
+    }
 }
 
 
