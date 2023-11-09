@@ -21,10 +21,6 @@ var autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
     APIs Used
     https://openweathermap.org/api/one-call-api    
 
-    Must Do
-    - combine max/min, font etc css attributes to shorthands
-    - change font values to shorthands where needed
-
     Want To Do
     - replace card with https://github.com/Yevgenium/weather-chart-card 
     - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
@@ -32,10 +28,6 @@ var autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
     - include more info in hourly section
     - expand on weatherChecks variety of icons
     - have hourly & weekly cards have isDay checked icons based on relevant times
-
-    Current Task(s)
-    - working on final touches
-      - going through todo lists 
 
     Will Return
     - working on placeholder div to cover daily/act intro for user displaying how to use
@@ -50,7 +42,6 @@ var autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
         - need to remap whole dashboard grid + grid areas for children etc
         - restyle input bar, daily
         - organize daily(weekly) cards in portrait/mobile friendly manner
-
 
       RESOURCES    
       - curent cards
@@ -189,8 +180,7 @@ class Dashboard extends React.Component {
               A Weather Dashboard application, created by <a href='https://ben-langlois.github.io/'>Ben Langlois</a>, aimed to display weather statistics for inputted city. The application is
               built in React and SASS, it utilizes multiple APIs such as: <a href='https://www.geoapify.com/address-autocomplete'>GeoApify</a>, and <a href='https://openweathermap.org/api/one-call-3'>OpenWeatherMap API</a>.<br/><br/>
               The application allows users to search for the weather in a specific city and displays the current weather conditions along with hourly and weekly 
-              forecasts. Cards display temperatures and various stats such as: humidity, precipitation, sunrise/set etc.<br/><br/>
-              Unfortunately, Github Pages only allows static react apps (something I failed to notice), so until I find another hosting service please check out the repo on Github and/or try it out on your computer!
+              forecasts. Cards display temperatures and various stats such as: humidity, precipitation, sunrise/set etc.
             </p>
             <div id='socials'>
               <a href='https://github.com/Ben-Langlois/Weather-App'><img src={icons.github}/></a>
