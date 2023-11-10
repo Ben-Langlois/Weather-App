@@ -177,7 +177,7 @@ class Dashboard extends React.Component {
           </div>
           <div id='desc'>
             <p>
-              A Weather Dashboard application, created by <a href='https://ben-langlois.github.io/'>Ben Langlois</a>, aimed to display weather statistics for inputted city. The application is
+              A Weather Dashboard application, created by <a href='https://ben-langlois.github.io/Portfolio/'>Ben Langlois</a>, aimed to display weather statistics for inputted city. The application is
               built in React and SASS, it utilizes multiple APIs such as: <a href='https://www.geoapify.com/address-autocomplete'>GeoApify</a>, and <a href='https://openweathermap.org/api/one-call-3'>OpenWeatherMap API</a>.<br/><br/>
               The application allows users to search for the weather in a specific city and displays the current weather conditions along with hourly and weekly 
               forecasts. Cards display temperatures and various stats such as: humidity, precipitation, sunrise/set etc.
