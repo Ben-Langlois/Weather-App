@@ -24,29 +24,11 @@ var autocompleteKey = '62e93b34c2ee4337b92e9b81d777029a';
     Want To Do
     - replace card with https://github.com/Yevgenium/weather-chart-card 
     - Figure out function comment convention https://google.github.io/styleguide/jsguide.html#jsdoc-general-form 
-    - Make convertDT return am/pm values instead of 24hr format
-    - include more info in hourly section
-    - expand on weatherChecks variety of icons
-    - have hourly & weekly cards have isDay checked icons based on relevant times
 
-    Will Return
-    - working on placeholder div to cover daily/act intro for user displaying how to use
-      - editing bio
-      - maybe add github, linkedin link
-
-    - working on media queries (DONE I think)
-      - Tablet
-        - need to decide if this is even necessary, it already scales decently well
-        - maybe should only change if I come up with design changes
-      - Mobile
-        - need to remap whole dashboard grid + grid areas for children etc
-        - restyle input bar, daily
-        - organize daily(weekly) cards in portrait/mobile friendly manner
-
-      RESOURCES    
-      - curent cards
-        - for hourly div 
-        https://stackoverflow.com/questions/443700/div-with-horizontal-scrolling-only 
+    RESOURCES    
+    - curent cards
+      - for hourly div 
+      https://stackoverflow.com/questions/443700/div-with-horizontal-scrolling-only 
   */
 
 // Perhaps should be function since no state
@@ -66,23 +48,10 @@ class Dashboard extends React.Component {
 
       // Assorted JQ
       $('#Dashboard #daily #icon img').prop('src', mySVG);    // change src to returned svg
-
-      // $('#Dashboard #daily #icon-cont #icon #feelsLike').text('Feels Like ');           // continues to prepend/append (feels like feels like feels like)
-      // $('#degree').text(' &#8451;');
-    
-      // console.log(this.convertDT(this.props.dt));
-
-      
       $('#Dashboard #daily').css('display', 'grid');            // display daily card
       $('#Dashboard #weekly').css('display', 'flex');           // display weekly
       $('#Dashboard #defaultDaily').css('display', 'none');     // hide default card
     }
-  }
-
-  componentDidMount(){
-      
-      // $('#Dashboard #daily #icon-cont #icon #feelsLike').prepend('Feels Like ');           // continues to prepend/append (feels like feels like feels like)
-      // $('#degree').append(' &#8451;')
   }
 
   /*  getTime
@@ -140,27 +109,27 @@ class Dashboard extends React.Component {
       } else {
         return icons.thunderstormsDefault;
       }
-    } else if (/^3/.test(daily.toString())){
+    } else if (/^3/.test(daily.toString())){      // Drizzle
       return icons.drizzle;
-    } else if (/^5/.test(daily.toString())){
+    } else if (/^5/.test(daily.toString())){      // Rain
       if(daily === 502){
         return icons.heavyRain;
       } else {
         return icons.rainDefault;
       }
-    } else if (/^6/.test(daily.toString())){
+    } else if (/^6/.test(daily.toString())){      // Snow
       return icons.snowDefault;
-    } else if (/^7/.test(daily.toString())){
+    } else if (/^7/.test(daily.toString())){      // Fog
       if(this.isDay(dt)){
         return icons.fogDay;
       }
       return icons.fogNight;
-    } else if (daily === 800){
+    } else if (daily === 800){                    // Clear
       if(this.isDay(dt)){
         return icons.clearDay;
       }
       return icons.clearNight;
-    } else if (/^8/.test(daily.toString())){
+    } else if (/^8/.test(daily.toString())){      // Cloudy
       return icons.cloudyDefault;
     }
   }
@@ -205,10 +174,10 @@ class Dashboard extends React.Component {
             </div>
           </div>
           <div id="details">
-            <p id='feelsLike'>Feels Like {this.props.feelsLike}<p class='degree'>&#8451;</p></p> {/* Need to include 'Feels Like: ' w/o showing to early */}
+            <p id='feelsLike'>Feels Like {this.props.feelsLike}<p class='degree'>&#8451;</p></p> 
             <p id='asof'>As Of {this.getTime(this.props.dt, 'time')}</p>
             <div id='etc'>
-              <div id='uvi' className='etc' title='Cloud Coverage'> {/* should eventually convert css to reflect actual value*/}
+              <div id='uvi' className='etc' title='Cloud Coverage'> 
                 <img src={icons.clouds} alt='...' />
                 <p>{this.props.clouds} % </p>
               </div>
@@ -243,7 +212,7 @@ class Dashboard extends React.Component {
         <div id='weekly'>
             { // use the currElement to get the object values
               this.props.daily.map((currElement, index) => {
-                return( // using a bootstrap card
+                return( 
                   <div className="card">
                     <div id='date'>
                       <h3>{this.getTime(currElement.dt, 'day')}</h3>
@@ -256,7 +225,7 @@ class Dashboard extends React.Component {
                     </div>
                     <div id='feelsLike'>
                       <h4>Feels Like {Math.round(currElement.feels_like.day)}<p class='degree'>&#8451;</p></h4>
-                    </div> {/* dont work for some reason */}
+                    </div> 
                     <div id='cloud' class='etc' title='Cloud Coverage'>              
                       <img src={icons.clouds} alt='...' />
                       <p>{currElement.clouds}%</p>
@@ -350,7 +319,6 @@ class App extends React.Component {
             daily: propObj.daily,
             hourly: propObj.hourly.slice(0, 24)                   // limiting to 24 hours
           })
-
           console.log(this.state);        // state is successfully stored with complete values
         })
         .catch(err => {
@@ -368,7 +336,6 @@ class App extends React.Component {
         <div id='input-container'>
           <div id='input-box' className="input-group input-group-sm w-50 mx-auto">
               <div id="autocomplete" class="autocomplete-container"></div>
-            {/* <input id='submit' type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder='eg. Toronto, New York, Paris'></input> */}
           </div>  
         </div>
         <Dashboard {...this.state}/>

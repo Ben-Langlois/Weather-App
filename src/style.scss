@@ -30,7 +30,7 @@ body{
                     width: 100%;
                     text-align: center;
                     font-size: 1.4rem;
-                    border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
+                    border: 1px solid rgba(0,0,0,.125);             
                     height: clamp(35px, 5vh, 50px);
                 }
             }
@@ -53,8 +53,7 @@ body{
             width: clamp(760px, 50vw, 1200px);
             height: clamp(500px, 60vh, 900px);
             margin: 0 auto 0;
-            border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
-            // border-radius: 2%;
+            border: 1px solid rgba(0,0,0,.125);             
             display: none;
             grid-template-columns: 50% 50%;
             grid-template-rows: 45% 20% 35%;
@@ -80,7 +79,7 @@ body{
                     display: flex;
                     grid-area: temp;
                     place-self: center;
-                    margin: 0 !important; // cant disable 'user agent ss' for some reason
+                    margin: 0 !important; 
                     font-size: 5rem;
                     font-weight: bold;
                 }            
@@ -181,7 +180,6 @@ body{
 
             }
             #hourly-cont{
-                // border: 1px solid red;
                 grid-area: hourly;
                 overflow-x: auto;
                 white-space: nowrap;
@@ -244,8 +242,7 @@ body{
             grid-area: daily;
             width: clamp(730px, 50vw, 900px);
             margin: 0 auto 0;
-            border: 1px solid rgba(0,0,0,.125);             // shorten to shorthand ?
-            // border-radius: 2%;
+            border: 1px solid rgba(0,0,0,.125);             
             background-color: rgb(255, 255, 255);
             grid-template-columns: 50% 50%;
             grid-template-areas: 
@@ -270,7 +267,7 @@ body{
                 h1{
                     display: inline-block;
                     margin: 0;
-                    font-weight: bold;          // shorthand dis
+                    font-weight: bold;          
                     font-size: 3.5rem;
 
                 }
@@ -278,16 +275,10 @@ body{
             
             #desc{
                 grid-area: desc;
-
                 padding: 0 5%;
-                // overflow: scroll;
-
-                
 
                 p{
                     font-size: 1.5rem;
-                    // line-height: 1.5vh;
-
                 }
 
                 a{
@@ -373,7 +364,7 @@ body{
                         justify-content: center;
 
                     h2{
-                        margin: 0; // cant disable 'user agent ss' for some reason
+                        margin: 0; 
                         font-size: 2.8rem;
                     }   
                 }
@@ -387,8 +378,6 @@ body{
                     h4{
                         display: flex;
                         font-weight: bold;
-                        // font-size: 1.3rem;
-                        // border: none;
                     }
 
                 }
@@ -437,8 +426,6 @@ body{
                     box-shadow: 0 8px 8px -4px;
                 }
             }
-        }::-webkit-scrollbar{
-            // height: 1.5rem;
         }::-webkit-scrollbar-track{
             display: none;
         }

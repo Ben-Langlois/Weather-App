@@ -2,7 +2,7 @@
     Icons           https://github.com/basmilius/weather-icons
     ID Codes        https://openweathermap.org/weather-conditions#Weather-Condition-Codes-2 
 
-    - There are some pointless-potential additions, but for now I think having more than the basics is enough
+    - There are some pointless & potential additions, but for now I think having more than the basics is enough
 
 */
 // (id)
